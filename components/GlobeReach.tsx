@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { LOCATIONS } from "@/lib/geo";
+import { useInViewOnce } from "@/lib/useInViewOnce";
 import { usePreferences } from "./Preferences";
 
 const GlobeCanvas = dynamic(() => import("./globe/GlobeCanvas").then((mod) => mod.GlobeCanvas), {
@@ -23,6 +24,7 @@ export function GlobeReach({
 }) {
   const { t, theme } = usePreferences();
   const [colors, setColors] = useState<{ accent: string; core: string } | null>(null);
+  const [holder, near] = useInViewOnce<HTMLDivElement>();
 
   useEffect(() => {
     const cssHexColor = (token: string) => {
@@ -43,11 +45,11 @@ export function GlobeReach({
 
   return (
     <div className="flex flex-col items-center gap-6">
-      {colors ? (
+      {colors && near ? (
         <div className={className}>
           <GlobeCanvas accent={colors.accent} core={colors.core} activeId={activeId} onSelect={onSelect} />
         </div>
-      ) : <div className={className} aria-hidden="true" />}
+      ) : <div ref={holder} className={className} aria-hidden="true" />}
       {showLegend && (
         <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-[13px] text-muted">
           {LOCATIONS.map((loc) => (
