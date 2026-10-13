@@ -14,6 +14,7 @@ import { Life } from "@/components/Life";
 import { Skills } from "@/components/Skills";
 import { Vision } from "@/components/Vision";
 import { Contact } from "@/components/Contact";
+import { CreditsOutro } from "@/components/CreditsOutro";
 
 export default function Home() {
   return (
@@ -34,6 +35,7 @@ export default function Home() {
       <Life />
       <Vision />
       <Contact />
+      <CreditsOutro />
     </main>
   );
 }

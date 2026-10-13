@@ -8,6 +8,7 @@ import "@fontsource/jetbrains-mono/400.css";
 import "@fontsource/jetbrains-mono/500.css";
 import "./globals.css";
 import { LenisProvider } from "@/components/LenisProvider";
+import { AICharacter } from "@/components/chat/AICharacter";
 import { PreferencesProvider } from "@/components/Preferences";
 
 const arabic = Noto_Sans_Arabic({ subsets: ["arabic"], weight: ["400", "600", "700"], variable: "--font-arabic" });
@@ -24,10 +25,19 @@ export const metadata: Metadata = {
     "Drug Discovery",
     "Morocco",
   ],
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true },
   openGraph: {
-    title: "Meriem Lmoubariki | AI Engineer & Researcher in Morocco",
-    description: "Building intelligent systems, grounded in research, from Morocco's Atlantic coast.",
+    title: "Meriem Lmoubariki | Builder of Systems",
+    description: "AI engineer, researcher, and founder. Building intelligent systems grounded in research.",
     type: "website",
+    url: "/",
+    siteName: "Meriem Lmoubariki",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Meriem Lmoubariki | Builder of Systems",
+    description: "AI engineer, researcher, and founder. Building intelligent systems grounded in research.",
   },
 };
 
@@ -63,6 +73,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="bg-canvas text-ink">
         <PreferencesProvider>
           <LenisProvider>{children}</LenisProvider>
+          <AICharacter />
         </PreferencesProvider>
       </body>
     </html>
