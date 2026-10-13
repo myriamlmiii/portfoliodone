@@ -1,14 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { moreProjects, projects } from "@/data/projects";
-import { SHOW_PENDING } from "@/lib/pending";
-import type { Project, ProjectArea } from "@/types";
-import { PendingBadge, StatusBadge } from "./PendingBadge";
-import { ProjectCover } from "./ProjectCover";
+import type { ProjectArea } from "@/types";
+import { Media, visibleMetrics } from "./ProjectMedia";
+import { ProjectStack } from "./ProjectStack";
 import { ProjectTilt } from "./ProjectTilt";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
@@ -25,37 +23,6 @@ const others = [
     .filter((item) => !item.slug)
     .map((item) => ({ key: item.name, project: undefined, name: item.name, areas: item.areas ?? [], detail: item.detail, metric: item.metric })),
 ];
-
-const visibleMetrics = (project: Project) => (project.metrics ?? []).filter((metric) => SHOW_PENDING || !metric.pending);
-
-function Media({ project, sizes }: { project: Project; sizes: string }) {
-  if (project.video) {
-    return (
-      <video
-        src={project.video}
-        poster={project.poster ?? project.image}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-      />
-    );
-  }
-  if (project.image) {
-    return (
-      <Image
-        src={project.image}
-        alt={`${project.title} preview`}
-        fill
-        sizes={sizes}
-        className={`transition-transform duration-500 group-hover:scale-[1.03] ${project.imageFit === "contain" ? "bg-white object-contain p-6" : "object-cover object-top"}`}
-      />
-    );
-  }
-  return <ProjectCover project={project} size="sm" bare />;
-}
 
 export function Work() {
   const { t } = usePreferences();
@@ -90,76 +57,7 @@ export function Work() {
           ))}
         </div>
 
-        {shownFeatured.length > 0 && (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {shownFeatured.map((project, index) => {
-              const copy = t.projects[project.slug];
-              const metrics = visibleMetrics(project);
-              return (
-                <Reveal key={project.slug} delay={Math.min(index * 0.06, 0.24)}>
-                  <ProjectTilt className="h-full">
-                    <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-surface transition-colors hover:border-accent/50">
-                      <Link href={`/projects/${project.slug}`} className="relative block aspect-[16/10] overflow-hidden bg-ink/5" tabIndex={-1} aria-hidden="true">
-                        <Media project={project} sizes="(min-width: 768px) 50vw, 100vw" />
-                        {project.year && (
-                          <span className="absolute end-3 top-3 rounded-full bg-ink/75 px-2.5 py-0.5 tabular text-xs text-canvas">{project.year}</span>
-                        )}
-                        {!project.video && project.image && project.imageNote && (
-                          <span className="absolute bottom-3 start-3 rounded-full bg-ink/75 px-2.5 py-0.5 text-xs text-canvas">{project.imageNote}</span>
-                        )}
-                      </Link>
-
-                      <div className="flex flex-1 flex-col p-5 sm:p-6">
-                        <div className="mb-2 flex flex-wrap items-center gap-2">
-                          <p className="text-sm text-accent">{copy?.category ?? project.category}</p>
-                          {project.status && project.statusLabel && <StatusBadge status={project.status} label={project.statusLabel} />}
-                        </div>
-                        <h3 className="font-display text-[1.375rem] font-medium leading-snug text-ink">
-                          <Link href={`/projects/${project.slug}`} className="hover:text-accent">{project.title}</Link>
-                        </h3>
-                        <p className="type-body content-reading mt-2 line-clamp-3 text-muted">{project.tagline ?? copy?.outcome ?? project.outcome}</p>
-
-                        {metrics.length > 0 && (
-                          <dl className={`mt-5 grid gap-3 border-y border-line py-4 ${metrics.length === 1 ? "grid-cols-1" : metrics.length === 2 ? "grid-cols-2" : metrics.length === 3 ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4"}`}>
-                            {metrics.map((metric) => (
-                              <div key={metric.label} className="flex flex-col-reverse">
-                                <dt className="mt-0.5 text-xs leading-snug text-muted">{metric.label}</dt>
-                                <dd className="tabular text-xl font-semibold text-ink">{metric.pending ? <PendingBadge /> : metric.value}</dd>
-                              </div>
-                            ))}
-                          </dl>
-                        )}
-
-                        <div className="mt-auto pt-4">
-                          <div className="flex flex-wrap gap-1.5 border-b border-line pb-4">
-                            {project.tags.slice(0, 3).map((tag) => (
-                              <span key={tag} className="rounded-full bg-canvas px-2.5 py-1 text-xs text-muted">{tag}</span>
-                            ))}
-                          </div>
-                          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-4">
-                            <Link href={`/projects/${project.slug}`} className="inline-flex items-center gap-1 text-sm font-medium text-ink hover:text-accent">
-                              {t.work.caseStudy} <ArrowUpRight size={15} />
-                            </Link>
-                            {project.href && (
-                              <a href={project.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm text-muted hover:text-accent">
-                                {project.demoLabel ?? "Live demo"} <ArrowUpRight size={14} />
-                              </a>
-                            )}
-                            {project.secondaryHref && (
-                              <a href={project.secondaryHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm text-muted hover:text-accent">
-                                {project.secondaryLabel ?? "More"} <ArrowUpRight size={14} />
-                              </a>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </article>
-                  </ProjectTilt>
-                </Reveal>
-              );
-            })}
-          </div>
-        )}
+        {shownFeatured.length > 0 && <ProjectStack key={filter} projects={shownFeatured} />}
 
         {shownOthers.length > 0 && (
           <div className="mt-16">
