@@ -220,7 +220,7 @@ const en: Dict = {
     ],
   },
   method: {
-    kicker: "How I Work",
+    kicker: "How I Think",
     titleBefore: "From ambiguity ",
     titleAccent: "to momentum.",
     steps: [
@@ -374,7 +374,8 @@ const fr: Dict = {
         "highlights": [
           "Première personne en échange d'AUI (Maroc) à l'UFV",
           "1re place, UFV Community Ideation Jam 2025",
-          "Recherche présentée au BC Cancer Research Day 2025, Vancouver"
+          "Recherche présentée au BC Cancer Research Day 2025, Vancouver",
+          "Liste du doyen avec distinction"
         ]
       }
     },
@@ -495,7 +496,7 @@ const fr: Dict = {
     ],
   },
   method: {
-    kicker: "Ma méthode",
+    kicker: "Ma façon de penser",
     titleBefore: "De l'ambiguïté ",
     titleAccent: "à l'élan.",
     steps: [
@@ -777,7 +778,8 @@ const ar: Dict = {
         "highlights": [
           "أول طالب تبادل من جامعة الأخوين (المغرب) في UFV",
           "المركز الأول، UFV Community Ideation Jam 2025",
-          "عرض بحث في BC Cancer Research Day 2025، فانكوفر"
+          "عرض بحث في BC Cancer Research Day 2025، فانكوفر",
+          "قائمة العميد مع مرتبة التميّز"
         ]
       }
     },
@@ -898,7 +900,7 @@ const ar: Dict = {
     ],
   },
   method: {
-    kicker: "كيف أعمل",
+    kicker: "كيف أفكر",
     titleBefore: "من الغموض ",
     titleAccent: "إلى الزخم.",
     steps: [

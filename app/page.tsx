@@ -4,6 +4,7 @@ import { Highlights } from "@/components/Highlights";
 import { AuthorityStrip } from "@/components/AuthorityStrip";
 import { About } from "@/components/About";
 import { Work } from "@/components/Work";
+import { Method } from "@/components/Method";
 import { Experience } from "@/components/Experience";
 import { Education } from "@/components/Education";
 import { Record } from "@/components/Record";
@@ -24,6 +25,7 @@ export default function Home() {
       <AuthorityStrip />
       <Skills />
       <Work />
+      <Method />
       <Experience />
       <Education />
       <Record />

@@ -28,6 +28,7 @@ export const education: readonly EducationEntry[] = [
       "First exchange student from AUI (Morocco) at UFV",
       "1st place, UFV Community Ideation Jam 2025",
       "Presented research at BC Cancer Research Day 2025, Vancouver",
+      "Dean's List with Distinction",
     ],
     projects: ["meeting-intelligence-system", "agriverse"],
   },
