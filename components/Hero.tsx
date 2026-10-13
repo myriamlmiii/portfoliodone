@@ -1,7 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ChevronRight, Github, Linkedin } from "lucide-react";
+import { HeroScene } from "./HeroScene";
 import { Portrait } from "./Portrait";
 import { usePreferences } from "./Preferences";
 
@@ -13,11 +15,22 @@ const fade = (delay: number) => ({
 
 export function Hero() {
   const { t } = usePreferences();
+  const sectionRef = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+
+  // Scroll-linked exit: copy drifts up and fades, the 3D accent swells and dissolves.
+  const copyY = useTransform(scrollYProgress, [0, 1], [0, -64]);
+  const copyOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
+  const sceneScale = useTransform(scrollYProgress, [0, 1], [1, 1.35]);
+  const sceneOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const scrollStyle = reduceMotion ? undefined : { y: copyY, opacity: copyOpacity };
+  const sceneStyle = reduceMotion ? undefined : { scale: sceneScale, opacity: sceneOpacity };
 
   return (
-    <section id="top" className="hero-section relative overflow-hidden pb-16 pt-28 md:pb-24 md:pt-32">
+    <section ref={sectionRef} id="top" className="hero-section relative overflow-hidden pb-16 pt-28 md:pb-24 md:pt-32">
       <div className="container-content relative grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-        <div className="relative z-10 text-center lg:text-start">
+        <motion.div style={scrollStyle} className="relative z-10 text-center lg:text-start">
           <motion.p {...fade(0)} className="type-eyebrow text-accent">
             {t.hero.kicker}
           </motion.p>
@@ -83,15 +96,24 @@ export function Hero() {
               </div>
             ))}
           </motion.dl>
-        </div>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="px-6 sm:px-10 lg:px-0"
+          className="relative px-6 sm:px-10 lg:px-0"
         >
-          <Portrait />
+          <motion.div
+            aria-hidden="true"
+            style={sceneStyle}
+            className="pointer-events-none absolute -inset-10 sm:-inset-16 lg:-inset-24"
+          >
+            <HeroScene />
+          </motion.div>
+          <div className="relative">
+            <Portrait />
+          </div>
         </motion.div>
       </div>
     </section>

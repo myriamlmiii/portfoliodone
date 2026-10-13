@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import * as THREE from "three";
 
 const NODE_COUNT = 520;
@@ -78,7 +79,15 @@ function Network({ nodeColor, linkColor, still }: { nodeColor: string; linkColor
   );
 }
 
-export default function NeuralField({ nodeColor, linkColor }: { nodeColor: string; linkColor: string }) {
+export default function NeuralField({
+  nodeColor,
+  linkColor,
+  bloom = false,
+}: {
+  nodeColor: string;
+  linkColor: string;
+  bloom?: boolean;
+}) {
   const wrapper = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(true);
   const [still, setStill] = useState(false);
@@ -97,10 +106,15 @@ export default function NeuralField({ nodeColor, linkColor }: { nodeColor: strin
       <Canvas
         camera={{ position: [0, 0, 4.4], fov: 45 }}
         dpr={[1, 1.5]}
-        gl={{ antialias: true, alpha: true }}
+        gl={{ antialias: !bloom, alpha: true, powerPreference: "high-performance" }}
         frameloop={visible ? "always" : "never"}
       >
         <Network nodeColor={nodeColor} linkColor={linkColor} still={still} />
+        {bloom && (
+          <EffectComposer multisampling={0}>
+            <Bloom intensity={0.55} luminanceThreshold={0.15} mipmapBlur />
+          </EffectComposer>
+        )}
       </Canvas>
     </div>
   );
