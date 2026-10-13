@@ -9,6 +9,7 @@ import "@fontsource/jetbrains-mono/500.css";
 import "./globals.css";
 import { LenisProvider } from "@/components/LenisProvider";
 import { AICharacter } from "@/components/chat/AICharacter";
+import { AmbientBackground } from "@/components/AmbientBackground";
 import { PreferencesProvider } from "@/components/Preferences";
 
 const arabic = Noto_Sans_Arabic({ subsets: ["arabic"], weight: ["400", "600", "700"], variable: "--font-arabic" });
@@ -73,6 +74,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="bg-canvas text-ink">
         <PreferencesProvider>
           <LenisProvider>{children}</LenisProvider>
+          <AmbientBackground />
           <AICharacter />
         </PreferencesProvider>
       </body>
