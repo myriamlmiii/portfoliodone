@@ -1,8 +1,18 @@
 import type { Skill } from "@/types";
 
 export const skills: readonly Skill[] = [
-  { name: "Systems thinking", description: "Designing products as connected technical and human systems.", category: "Engineering" },
-  { name: "Applied intelligence", description: "Using AI and data to improve the decision, not merely automate a task.", category: "Intelligence" },
-  { name: "Research practice", description: "Turning curiosity into questions, methods, evidence, and better questions.", category: "Research" },
-  { name: "Product strategy", description: "Framing opportunities around people, markets, feasibility, and meaningful leverage.", category: "Strategy" },
+  { name: "Applied AI & Data", description: "Building machine learning and data systems that improve a real decision, not just automate a task.", category: "Intelligence" },
+  { name: "Computational Research", description: "Turning curiosity into structured inquiry: a question, a method, evidence, and a sharper next question.", category: "Research" },
+  { name: "Product & Strategy", description: "Framing technical work around users, constraints, and the leverage worth pursuing.", category: "Strategy" },
+  { name: "Software Engineering", description: "Designing dependable full-stack systems, from interfaces and APIs to the infrastructure they run on.", category: "Engineering" },
+];
+
+/** Tech stack grouped for the Skills section; labels are translated via `t.skills.stackGroups`. */
+export const stackGroups: readonly { label: string; items: readonly string[] }[] = [
+  { label: "Languages", items: ["Python", "Java", "TypeScript", "SQL", "C"] },
+  { label: "ML / AI", items: ["PyTorch", "TensorFlow", "Hugging Face", "Scikit-learn"] },
+  { label: "Scientific computing", items: ["RDKit", "DeepChem", "GROMACS"] },
+  { label: "Data engineering", items: ["Spark", "Kafka"] },
+  { label: "Web & mobile", items: ["React", "Next.js", "React Native"] },
+  { label: "DevOps & cloud", items: ["Docker", "Azure", "AWS"] },
 ];
