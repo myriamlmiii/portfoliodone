@@ -2,6 +2,7 @@ import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { Highlights } from "@/components/Highlights";
 import { AuthorityStrip } from "@/components/AuthorityStrip";
+import { JourneyPlayback } from "@/components/JourneyPlayback";
 import { About } from "@/components/About";
 import { Work } from "@/components/Work";
 import { Method } from "@/components/Method";
@@ -23,6 +24,7 @@ export default function Home() {
       <Hero />
       <Highlights />
       <About />
+      <JourneyPlayback />
       <AuthorityStrip />
       <Skills />
       <Work />
