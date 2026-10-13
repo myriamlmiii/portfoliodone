@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { Component, useEffect, useState, type ReactNode } from "react";
 import { useSceneMode } from "@/lib/capability";
+import { readRgbToken } from "@/lib/theme";
 import { usePreferences } from "./Preferences";
 
 const NeuralField = dynamic(() => import("./three/NeuralField"), { ssr: false });
@@ -36,12 +37,6 @@ class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean
   render() {
     return this.state.failed ? <StaticFallback /> : this.props.children;
   }
-}
-
-function readRgbToken(token: string) {
-  const parts = getComputedStyle(document.documentElement).getPropertyValue(token).trim().split(/\s+/).map(Number);
-  if (parts.length !== 3 || parts.some((n) => !Number.isFinite(n))) return "#888888";
-  return `#${parts.map((n) => Math.round(n).toString(16).padStart(2, "0")).join("")}`;
 }
 
 /** Decorative hero 3D accent. Always aria-hidden; never required to read the page. */

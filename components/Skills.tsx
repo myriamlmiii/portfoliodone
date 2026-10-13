@@ -3,6 +3,7 @@
 import { stackGroups } from "@/data/skills";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
+import { SkillDrumSection } from "./SkillDrumSection";
 import { usePreferences } from "./Preferences";
 
 export function Skills() {
@@ -27,7 +28,11 @@ export function Skills() {
           ))}
         </div>
 
-        <Reveal delay={0.2} className="mt-10">
+        <div className="mt-10">
+          <SkillDrumSection />
+        </div>
+
+        <Reveal delay={0.2}>
           <p className="type-meta mb-4 text-muted">{t.skills.stack}</p>
           <div className="grid grid-cols-1 gap-6 border-t border-line pt-6 sm:grid-cols-2 lg:grid-cols-3">
             {stackGroups.map((group) => (
