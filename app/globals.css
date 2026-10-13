@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root,
 html.light,
 html[data-theme="light"] {
   color-scheme: light;
@@ -15,6 +14,7 @@ html[data-theme="light"] {
   --accent: 150 69 48;
 }
 
+:root,
 html.dark,
 html[data-theme="dark"] {
   color-scheme: dark;
@@ -52,7 +52,7 @@ html.lenis body {
 body {
   background: rgb(var(--canvas));
   color: rgb(var(--ink));
-  font-family: var(--font-geist-sans), var(--font-arabic), system-ui, sans-serif;
+  font-family: Inter, var(--font-arabic), system-ui, sans-serif;
   font-size: 1rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
@@ -60,9 +60,10 @@ body {
 }
 
 .font-display {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Bebas Neue", Impact, sans-serif;
+  font-weight: 400;
   font-feature-settings: "kern", "liga";
-  letter-spacing: -0.02em;
+  letter-spacing: 0.015em;
 }
 
 .type-eyebrow {
@@ -233,7 +234,7 @@ body {
 
 .atlas-label {
   fill: rgb(var(--ink));
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: Inter, system-ui, sans-serif;
   font-size: 20px;
   font-weight: 600;
   paint-order: stroke;
@@ -287,7 +288,7 @@ body {
 
 html[lang="ar"] body,
 html[lang="ar"] .font-display {
-  font-family: var(--font-arabic), var(--font-geist-sans), sans-serif;
+  font-family: var(--font-arabic), Inter, sans-serif;
 }
 
 html[lang="ar"] .uppercase {

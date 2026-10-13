@@ -14,9 +14,9 @@ const config: Config = {
         accent: "rgb(var(--accent) / <alpha-value>)",
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "var(--font-arabic)", "system-ui", "sans-serif"],
-        display: ["Georgia", "Times New Roman", "serif"],
-        mono: ["var(--font-geist-mono)", "monospace"],
+        sans: ["Inter", "var(--font-arabic)", "system-ui", "sans-serif"],
+        display: ["Bebas Neue", "Impact", "sans-serif"],
+        mono: ["JetBrains Mono", "ui-monospace", "monospace"],
       },
       letterSpacing: { display: "-0.03em" },
       maxWidth: { content: "1200px" },

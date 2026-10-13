@@ -1,11 +1,20 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, extend, useFrame, useThree, type ThreeElement } from "@react-three/fiber";
 import { useReducedMotion } from "framer-motion";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { buildArc, GLOBE_RADIUS, latLngToVec3, LOCATIONS } from "@/lib/geo";
+
+// `<line>` resolves to the SVG element in JSX, so register THREE.Line under another name.
+extend({ ThreeLine: THREE.Line });
+
+declare module "@react-three/fiber" {
+  interface ThreeElements {
+    threeLine: ThreeElement<typeof THREE.Line>;
+  }
+}
 
 function Controls() {
   const { camera, gl } = useThree();
@@ -142,13 +151,13 @@ function Globe({
         <meshStandardMaterial color={core} roughness={0.96} metalness={0} />
       </mesh>
       {curves.map((geometry, index) => (
-        <line key={`grid-${index}`} geometry={geometry}>
+        <threeLine key={`grid-${index}`} geometry={geometry}>
           <lineBasicMaterial
             color={accent}
             transparent
             opacity={index < 8 ? 0.11 : 0.09}
           />
-        </line>
+        </threeLine>
       ))}
       {LOCATIONS.map((loc) => (
         <Marker
@@ -161,9 +170,9 @@ function Globe({
         />
       ))}
       {arcs.map((geometry, index) => (
-        <line key={`route-${index}`} geometry={geometry}>
+        <threeLine key={`route-${index}`} geometry={geometry}>
           <lineBasicMaterial color={accent} transparent opacity={0.42} />
-        </line>
+        </threeLine>
       ))}
     </group>
   );

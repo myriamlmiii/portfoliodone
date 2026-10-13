@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Arabic } from "next/font/google";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+import "@fontsource/bebas-neue/400.css";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/500.css";
 import "./globals.css";
 import { LenisProvider } from "@/components/LenisProvider";
 import { PreferencesProvider } from "@/components/Preferences";
@@ -31,7 +35,7 @@ const bootScript = `
 try {
   var t = localStorage.getItem('theme');
   if (t !== 'dark' && t !== 'light') {
-    t = 'light';
+    t = 'dark';
   }
   var root = document.documentElement;
   root.dataset.theme = t;
@@ -50,10 +54,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${arabic.variable} ${GeistSans.variable} ${GeistMono.variable}`}
+      className={`${arabic.variable}`}
     >
       <head>
-        <meta name="theme-color" content="#f7f6f1" />
+        <meta name="theme-color" content="#0c0e0f" />
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
       </head>
       <body className="bg-canvas text-ink">

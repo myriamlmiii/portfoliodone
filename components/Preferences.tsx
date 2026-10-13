@@ -23,14 +23,14 @@ function applyLocale(locale: Locale) {
 
 export function PreferencesProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>("en");
-  const [theme, setThemeState] = useState<Theme>("light");
+  const [theme, setThemeState] = useState<Theme>("dark");
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const storedLocale = window.localStorage.getItem("locale") as Locale | null;
     const storedTheme = window.localStorage.getItem("theme") as Theme | null;
     const nextLocale = storedLocale && storedLocale in localeMeta ? storedLocale : "en";
-    const nextTheme = storedTheme === "dark" || storedTheme === "light" ? storedTheme : "light";
+    const nextTheme = storedTheme === "dark" || storedTheme === "light" ? storedTheme : "dark";
     setLocaleState(nextLocale);
     setThemeState(nextTheme);
     applyLocale(nextLocale);
