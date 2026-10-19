@@ -2,118 +2,119 @@
 
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { ChevronRight, Github, Linkedin } from "lucide-react";
+import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { HeroScene } from "./HeroScene";
-import { Portrait } from "./Portrait";
+import { CharacterVideo } from "./CharacterVideo";
 import { usePreferences } from "./Preferences";
 
 const fade = (delay: number) => ({
-  initial: { opacity: 0, y: 16 },
+  initial: { opacity: 0, y: 14 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] as const },
+  transition: { duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] as const },
 });
 
+/**
+ * Editorial hero: an oversized name that overlaps a portrait bleeding off the right edge, a small
+ * caption-style line under it, and understated text links instead of filled buttons.
+ */
 export function Hero() {
   const { t } = usePreferences();
   const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
 
-  // Scroll-linked exit: copy drifts up and fades, the 3D accent swells and dissolves.
-  const copyY = useTransform(scrollYProgress, [0, 1], [0, -64]);
-  const copyOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
-  const sceneScale = useTransform(scrollYProgress, [0, 1], [1, 1.35]);
+  const copyY = useTransform(scrollYProgress, [0, 1], [0, -48]);
+  const copyOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const portraitY = useTransform(scrollYProgress, [0, 1], [0, 70]);
+  const sceneScale = useTransform(scrollYProgress, [0, 1], [1, 1.25]);
   const sceneOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const scrollStyle = reduceMotion ? undefined : { y: copyY, opacity: copyOpacity };
+  const copyStyle = reduceMotion ? undefined : { y: copyY, opacity: copyOpacity };
+  const portraitStyle = reduceMotion ? undefined : { y: portraitY };
   const sceneStyle = reduceMotion ? undefined : { scale: sceneScale, opacity: sceneOpacity };
 
   return (
-    <section ref={sectionRef} id="top" className="hero-section relative overflow-hidden pb-16 pt-28 md:pb-24 md:pt-32">
-      <div className="container-content relative grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-        <motion.div style={scrollStyle} className="relative z-10 text-center lg:text-start">
-          <motion.p {...fade(0)} className="type-eyebrow text-accent">
+    <section ref={sectionRef} id="top" className="hero-section relative overflow-hidden pb-20 pt-28 md:pb-28 md:pt-32 lg:min-h-[100svh]">
+      {/* network behind the portrait, pushed to the right and allowed to bleed */}
+      <motion.div aria-hidden="true" style={sceneStyle} className="pointer-events-none absolute -end-[12vw] top-0 h-[85%] w-[78vw] max-w-[1100px] opacity-70 lg:opacity-100">
+        <HeroScene />
+      </motion.div>
+
+      {/* portrait: bleeds off the right edge, no box */}
+      <motion.div
+        style={portraitStyle}
+        className="relative mx-auto mt-10 w-[min(88vw,30rem)] lg:absolute lg:end-[1vw] lg:top-24 lg:mx-0 lg:mt-0 lg:w-[min(46vw,44rem)]"
+      >
+        <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}>
+          <CharacterVideo />
+        </motion.div>
+      </motion.div>
+
+      <div className="container-content relative z-10 lg:-mt-[0.5rem]">
+        <motion.div style={copyStyle} className="relative max-w-none">
+          <motion.p
+            {...fade(0)}
+            className="inline-block rounded-sm border border-accent/50 px-2.5 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-accent"
+          >
             {t.hero.kicker}
           </motion.p>
 
           <motion.h1
             {...fade(0.06)}
-            className="font-display mt-3 text-[clamp(3rem,6.2vw,4.75rem)] font-medium leading-[0.98] tracking-[-0.03em] text-ink"
+            className="font-display mt-6 text-[clamp(4.25rem,14.5vw,13.5rem)] leading-[0.84] tracking-[0.005em] text-ink lg:mt-10 lg:text-[clamp(7rem,13.2vw,13.5rem)]"
           >
             Meriem
             <br />
-            Lmoubariki.
+            <span className="lg:ms-[0.35em]">Lmoubariki.</span>
           </motion.h1>
 
-          <motion.p
-            {...fade(0.12)}
-            className="mx-auto mt-6 max-w-[32rem] text-[clamp(1.25rem,2vw,1.5rem)] font-medium leading-[1.35] text-ink/90 lg:mx-0"
-          >
+          <motion.p {...fade(0.14)} className="mt-8 max-w-[22rem] text-[11px] font-medium uppercase leading-[1.9] tracking-[0.2em] text-muted lg:mt-12">
             {t.hero.title}
           </motion.p>
 
-          <motion.p {...fade(0.18)} className="content-reading type-body mx-auto mt-4 text-muted lg:mx-0">
-            {t.hero.body}
-          </motion.p>
-
-          <motion.div {...fade(0.24)} className="mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 lg:justify-start">
+          <motion.div {...fade(0.22)} className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
             <a
               href="#work"
-              className="interactive-target inline-flex items-center rounded-full bg-accent px-5 text-base font-medium text-canvas transition-opacity hover:opacity-90"
+              className="interactive-target group inline-flex items-center gap-2 border-b border-ink/40 pb-1 text-sm tracking-[0.04em] text-ink transition-colors hover:border-accent hover:text-accent"
             >
               {t.hero.cta}
+              <ArrowRight size={15} className="transition-transform group-hover:translate-x-1 rtl:rotate-180" />
             </a>
-            <a href="#contact" className="interactive-target group inline-flex items-center gap-1 text-base text-accent hover:underline">
+            <a
+              href="#contact"
+              className="interactive-target inline-flex items-center border-b border-transparent pb-1 text-sm tracking-[0.04em] text-muted transition-colors hover:border-accent hover:text-accent"
+            >
               {t.contact.kicker}
-              <ChevronRight size={18} className="transition-transform group-hover:translate-x-0.5 rtl:rotate-180" />
             </a>
-            <span className="flex items-center gap-1">
+            <span className="flex items-center gap-1 text-muted">
               <a
                 href="https://github.com/myriamlmiii"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="GitHub"
-                className="interactive-target inline-flex w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-ink/[0.06] hover:text-ink"
+                className="interactive-target inline-flex w-10 items-center justify-center transition-colors hover:text-accent"
               >
-                <Github size={20} />
+                <Github size={18} />
               </a>
               <a
                 href="https://linkedin.com/in/meriem-lmoubariki-591710351"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"
-                className="interactive-target inline-flex w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-ink/[0.06] hover:text-ink"
+                className="interactive-target inline-flex w-10 items-center justify-center transition-colors hover:text-accent"
               >
-                <Linkedin size={20} />
+                <Linkedin size={18} />
               </a>
             </span>
           </motion.div>
 
-          <motion.dl {...fade(0.3)} className="mx-auto mt-10 grid max-w-xl gap-5 text-start sm:grid-cols-2 lg:mx-0">
+          <motion.dl {...fade(0.3)} className="mt-14 grid max-w-md gap-6 text-start sm:grid-cols-2 lg:mt-24">
             {t.hero.facts.map((fact) => (
-              <div key={fact.label}>
-                <dt className="type-caption font-medium text-muted">{fact.label}</dt>
-                <dd className="mt-1 text-sm leading-snug text-ink">{fact.value}</dd>
+              <div key={fact.label} className="border-t border-line pt-3">
+                <dt className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-muted">{fact.label}</dt>
+                <dd className="mt-1.5 text-[13px] leading-snug text-ink/90">{fact.value}</dd>
               </div>
             ))}
           </motion.dl>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="relative px-6 sm:px-10 lg:px-0"
-        >
-          <motion.div
-            aria-hidden="true"
-            style={sceneStyle}
-            className="pointer-events-none absolute -inset-10 sm:-inset-16 lg:-inset-24"
-          >
-            <HeroScene />
-          </motion.div>
-          <div className="relative">
-            <Portrait />
-          </div>
         </motion.div>
       </div>
     </section>

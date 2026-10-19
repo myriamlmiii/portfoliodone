@@ -1,9 +1,22 @@
 "use client";
 
 import Lenis from "lenis";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 
 const LenisContext = createContext<Lenis | null>(null);
+
+/** Lock or unlock page scrolling (used by the intro overlay). */
+export function useScrollApi() {
+  const lenis = useContext(LenisContext);
+  const setScrollLocked = useCallback(
+    (locked: boolean) => {
+      if (locked) lenis?.stop();
+      else lenis?.start();
+    },
+    [lenis],
+  );
+  return { setScrollLocked };
+}
 
 /** The page-wide smooth-scroll instance, or null before mount. */
 export function useLenis() {

@@ -83,6 +83,7 @@ export function Education() {
             );
           })}
         </div>
+        <p className="type-meta content-reading mt-6 text-muted">{t.about.accreditation}</p>
       </div>
     </section>
   );

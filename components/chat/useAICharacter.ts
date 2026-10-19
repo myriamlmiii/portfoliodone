@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ChatMessage } from "@/lib/chat";
 
-const SECTION_IDS = ["top", "about", "work", "method", "experience", "education", "record", "places", "vision", "contact"];
+const SECTION_IDS = ["top", "about", "work", "experience", "education", "record", "places", "vision", "causes", "contact"];
 
 /** Tracks which page section is most visible, so replies can be context-aware. */
 function useCurrentSection() {

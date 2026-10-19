@@ -30,6 +30,7 @@ export function Life() {
             </Reveal>
           ))}
         </div>
+        {t.life.closing && <p className="type-body content-reading mt-8 text-muted">{t.life.closing}</p>}
       </div>
     </section>
   );

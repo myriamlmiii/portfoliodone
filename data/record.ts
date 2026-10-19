@@ -8,16 +8,12 @@ export const record: readonly RecordGroup[] = [
         title:
           "Predicting Failures Using Neural Networks and Quantum Optimization in Concentrated Solar Power Plants: A Case Study of Morocco Noor Ouarzazate Complex",
         detail:
-          "Neural network + quantum optimization pipeline predicting failures at Morocco's Noor Ouarzazate solar complex. AUI × King Fahd University. ICEF'26 proceedings (Materials Research Proceedings), Scopus-indexed, open access.",
+          "Neural network + quantum optimization pipeline predicting failures at Morocco's Noor Ouarzazate solar complex. Co-authored by Al Akhawayn University and King Fahd University of Petroleum and Minerals. Published in the ICEF 2026 proceedings (Materials Research Proceedings, Materials Research Forum LLC, USA), indexed in Scopus, open access.",
         year: "2026",
         href: "https://doi.org/10.21741/9781644904091",
+        extra: { label: "Technical presentation slides (PDF)", href: "/images/projects/ICEF26_Technical_Professional.pptx.pdf" },
+        logo: { src: "/logos/kfupm.svg", alt: "King Fahd University of Petroleum and Minerals", width: 300, height: 49 },
         status: "published",
-      },
-      {
-        title: "ICEF 2026 technical presentation slides",
-        detail: "Technical presentation slides for the ICEF conference paper on predictive failure modeling for concentrated solar power plants.",
-        year: "2026",
-        href: "/images/projects/ICEF26_Technical_Professional.pptx.pdf",
       },
       {
         title: "Why Agentic AI Fails in Production: An Empirical Failure Taxonomy for Enterprise Deployment",
@@ -46,15 +42,15 @@ export const record: readonly RecordGroup[] = [
         status: "submitted",
       },
       {
-        title: "RAG Class Assistant",
-        detail:
-          "With Dr. Sofiane Grira. A retrieval-augmented system that turns a professor's OneNote notebook into an intelligent class assistant.",
+        title: "ML Virtual Screening for Cancer Drug Discovery",
+        detail: "With Dr. Thana Sutthibutpong. Research question: can ML-guided screening surface aromatase inhibitors in fungal chemical space? Targeting a Q1 journal.",
         year: "2026",
         status: "in-progress",
       },
       {
-        title: "ML Virtual Screening for Cancer Drug Discovery",
-        detail: "With Dr. Thana Sutthibutpong. Journal paper on the aromatase inhibitor screening pipeline built at KMUTT. Targeting a Q1 journal.",
+        title: "RAG Class Assistant",
+        detail:
+          "With Prof. Sofiane Grira. Research question: how well do hybrid retrieval and cross-encoder reranking serve mathematical educational content? Paper in progress.",
         year: "2026",
         status: "in-progress",
       },

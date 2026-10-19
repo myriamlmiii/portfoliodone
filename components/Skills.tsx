@@ -14,20 +14,6 @@ export function Skills() {
       <div className="container-content">
         <SectionHeading eyebrow={t.skills.kicker} title={t.skills.titleBefore} accent={t.skills.titleAccent} />
 
-        <div className="grid grid-cols-1 border-t border-line sm:grid-cols-2 lg:grid-cols-4">
-          {t.skills.items.map((skill, i) => (
-            <Reveal key={skill.name} delay={i * 0.06} className="border-b border-line sm:border-e sm:last:border-e-0">
-              <div className="flex h-full min-h-[220px] flex-col justify-between p-5">
-                <span className="font-mono tabular text-xs text-muted">0{i + 1}</span>
-                <div>
-                  <h3 className="mb-2 font-display text-xl font-medium text-ink">{skill.name}</h3>
-                  <p className="type-meta text-muted">{skill.description}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
         <div className="mt-10">
           <SkillDrumSection />
         </div>

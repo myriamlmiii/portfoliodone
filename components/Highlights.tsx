@@ -7,7 +7,7 @@ import { usePreferences } from "./Preferences";
 /** Each headline result links to the project or experience behind it. */
 const highlights = [
   { value: "99.98%", href: "/projects/ai-drug-discovery" },
-  { value: "88.9%", href: "/projects/rag-class-assistant" },
+  { value: "94%", href: "/projects/rag-class-assistant" },
   { value: "35%", href: "/#ravel" },
   { value: "30%", href: "/#smart-city" },
   { value: "79.9%", href: "/projects/montreal-aqi-forecasting" },

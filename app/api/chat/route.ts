@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
-import { presetAnswer, SYSTEM_PROMPT, type ChatMessage } from "@/lib/chat";
+import type { ChatMessage } from "@/lib/chat";
+import { buildContext, extractiveAnswer, RAG_INSTRUCTIONS, retrieve, sourcesLine } from "@/lib/rag";
 
 export const runtime = "nodejs";
 
@@ -41,8 +42,12 @@ export async function POST(req: NextRequest) {
   const last = messages.at(-1);
   if (!last || last.role !== "user") return text("Invalid request.", 400);
 
+  // Retrieve from the site's own data; the question plus the previous user turn gives follow-ups some context.
+  const prevUser = messages.filter((m) => m.role === "user").at(-2)?.content ?? "";
+  const hits = retrieve(`${last.content} ${last.content.split(/\s+/).length < 4 ? prevUser : ""}`, 4);
+
   const key = process.env.ANTHROPIC_API_KEY;
-  if (!key) return text(presetAnswer(last.content));
+  if (!key) return text(extractiveAnswer(last.content));
 
   const section = typeof payload.section === "string" ? payload.section.slice(0, 40) : "";
   const upstream = await fetch("https://api.anthropic.com/v1/messages", {
@@ -52,12 +57,15 @@ export async function POST(req: NextRequest) {
       model: MODEL,
       max_tokens: 300,
       stream: true,
-      system: SYSTEM_PROMPT + (section ? `\nThe visitor is currently viewing the "${section}" section.` : ""),
+      system:
+        RAG_INSTRUCTIONS +
+        (section ? `\nThe visitor is currently viewing the "${section}" section.` : "") +
+        `\n\nContext passages:\n${buildContext(hits) || "(none matched)"}`,
       messages,
     }),
   }).catch(() => null);
 
-  if (!upstream?.ok || !upstream.body) return text(presetAnswer(last.content));
+  if (!upstream?.ok || !upstream.body) return text(extractiveAnswer(last.content));
 
   // Convert Anthropic's SSE stream into a plain text stream of deltas.
   const decoder = new TextDecoder();
@@ -80,6 +88,9 @@ export async function POST(req: NextRequest) {
             /* ignore keep-alives and partial frames */
           }
         }
+      },
+      flush(controller) {
+        if (hits.length) controller.enqueue(encoder.encode(sourcesLine(hits.slice(0, 3))));
       },
     })
   );

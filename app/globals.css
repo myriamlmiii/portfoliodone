@@ -32,6 +32,8 @@ html[data-theme="dark"] {
 }
 
 html {
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
   scroll-behavior: auto;
   scroll-padding-top: 5rem;
 }
@@ -50,6 +52,7 @@ html.lenis body {
 }
 
 body {
+  overflow-x: clip;
   background: rgb(var(--canvas));
   color: rgb(var(--ink));
   font-family: Inter, var(--font-arabic), system-ui, sans-serif;
@@ -75,9 +78,14 @@ body {
 
 .type-section-title {
   font-size: clamp(2.25rem, 4.3vw, 3.5rem);
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.08;
-  letter-spacing: -0.025em;
+  letter-spacing: 0.01em;
+}
+
+html[lang="ar"] .type-section-title {
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
 .type-body {

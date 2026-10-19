@@ -29,15 +29,9 @@ function Block({ label, lines }: { label: string; lines: readonly string[] }) {
   );
 }
 
-export function CreditsOutro() {
+function useCredits() {
   const { t, locale } = usePreferences();
-  const reduce = useReducedMotion();
-  const ref = useRef<HTMLElement>(null);
   const labels = LABELS[locale as keyof typeof LABELS] ?? LABELS.en;
-
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "-88%"]);
-
   const built = projects.filter((project) => project.featured).map((project) => project.title);
   const schools = education.map((entry) => entry.school.replace(/\s*\(.*\)$/, ""));
   const places = PLACES.map((place) => t.countries[place] ?? place);
@@ -55,13 +49,28 @@ export function CreditsOutro() {
     </div>
   );
 
-  if (reduce) {
-    return (
-      <section aria-label={labels.role} className="border-t border-line bg-canvas">
-        {content}
-      </section>
-    );
-  }
+  return { labels, content };
+}
+
+export function CreditsOutro() {
+  const reduce = useReducedMotion();
+  return reduce ? <StaticCredits /> : <ScrollCredits />;
+}
+
+function StaticCredits() {
+  const { labels, content } = useCredits();
+  return (
+    <section aria-label={labels.role} className="border-t border-line bg-canvas">
+      {content}
+    </section>
+  );
+}
+
+function ScrollCredits() {
+  const { labels, content } = useCredits();
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "-88%"]);
 
   return (
     <section ref={ref} aria-label={labels.role} className="relative h-[320svh] border-t border-line bg-canvas">

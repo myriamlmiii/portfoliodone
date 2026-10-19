@@ -52,7 +52,7 @@ export function HeroScene() {
 
   return (
     <SceneBoundary>
-      <NeuralField nodeColor={color} linkColor={color} bloom={theme === "dark"} />
+      <NeuralField nodeColor={color} linkColor={color} bloom={false} />
     </SceneBoundary>
   );
 }

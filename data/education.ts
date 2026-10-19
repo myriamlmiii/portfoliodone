@@ -4,7 +4,7 @@ export const education: readonly EducationEntry[] = [
   {
     id: "aui",
     school: "Al Akhawayn University (AUI)",
-    degree: "B.S. in Computer Science, concentration in AI & Big Data Analytics; minor in Business Administration",
+    degree: "B.Sc. in Computer Science, double specialization in AI and Big Data Analytics; minor in Business Administration",
     location: "Ifrane, Morocco",
     dateRange: "2022 to December 2026",
     logo: "/logos/aui.png",

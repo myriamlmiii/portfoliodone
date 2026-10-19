@@ -26,3 +26,15 @@ SafeLens AI is a computer-vision system designed to improve construction-site sa
 ## Project Context
 
 SafeLens AI was developed to demonstrate how AI can support industrial safety at scale, with a particular focus on construction environments where rapid risk detection can prevent injuries and improve compliance.
+
+## Hero video character
+
+`components/CharacterVideo.tsx` (hero) shows a 3D, photo-textured AI version of Meriem (`public/photos/talk.webp`, background removed) that introduces herself out loud with lip-sync, using the browser voice. If `public/video/hero.mp4` exists, that real clip is used instead.
+
+Rebuild the clip from a new intro video (needs ffmpeg, ffprobe and numpy):
+
+```
+python scripts/build-hero-assets.py intro.mp4 [--crop W:H:X:Y] [--photo photo.jpg]
+```
+
+It crops to the person, whitens the backdrop, cross-fades the last 0.5 s into the first 0.5 s (picture with ffmpeg `xfade`, audio in numpy), and writes `public/video/hero.mp4`, `hero.webm`, `public/photos/portrait-bust.webp` and `public/og.jpg`.

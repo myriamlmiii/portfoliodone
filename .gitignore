@@ -20,3 +20,9 @@ Thumbs.db
 
 # TypeScript
 *.tsbuildinfo
+
+# Private documents: share the CV by email on request only
+*resume*.pdf
+*cv*.pdf
+app/projects/PICTURE/*.pdf
+app/projects/PICTURE/

@@ -13,8 +13,12 @@ const VH_PER_STEP = 0.6;
 const SECONDS_PER_STEP = 2.2;
 
 export function JourneyPlayback() {
-  const { t } = usePreferences();
   const reduce = useReducedMotion();
+  return reduce ? <Journey /> : <JourneyScrubber />;
+}
+
+function JourneyScrubber() {
+  const { t } = usePreferences();
   const lenis = useLenis();
   const steps = t.journey;
   const count = steps.length;
@@ -85,8 +89,6 @@ export function JourneyPlayback() {
       events.forEach((e) => window.removeEventListener(e, stop));
     };
   }, [playing, lenis, range, count]);
-
-  if (reduce) return <Journey />;
 
   const label = `${String(index + 1).padStart(2, "0")} / ${String(count).padStart(2, "0")}`;
   const isLast = index === count - 1;

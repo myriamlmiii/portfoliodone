@@ -138,6 +138,10 @@ export interface RecordItem {
   detail: string;
   year?: string;
   href?: string;
+  /** Companion material shown under the entry (e.g. the slides for a paper). */
+  extra?: { label: string; href: string };
+  /** Partner institution mark shown on the entry. */
+  logo?: { src: string; alt: string; width: number; height: number };
   status?: "published" | "presented" | "submitted" | "in-progress";
   /** Sub-heading inside a compact group, e.g. "Cybersecurity" for certifications. */
   category?: string;

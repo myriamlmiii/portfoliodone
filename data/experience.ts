@@ -16,13 +16,14 @@ export const experience: readonly ExperienceRole[] = [
     location: "Casablanca, Morocco",
     detail: "VC fund founded by Driss Laraki · Part-time",
     description:
-      "247 live startup records. I built the internal AI layer that turns U-Investors' Airtable deal-flow into dashboards the partners use to decide. Tech-structure review sits on top of that pipeline, not beside it.",
+      "1,600+ startups listed. I built U-Investors' full end-to-end AI system: a CRM with AI screening and sourcing, a RAG assistant over the whole startup database, and the dashboards the partners use to decide. Tech-structure review sits on top of that pipeline, not beside it.",
     bullets: [
-      "Built the fund's CRM with AI screening and sourcing on top of its Airtable deal-flow, deployed as the company's internal ERP.",
+      "Built the fund's CRM with AI screening and sourcing on top of its deal-flow, deployed as the company's internal ERP.",
+      "Built a RAG assistant over the full database of 1,600+ listed startups, so partners can query the pipeline in plain language.",
       "Turned the pipeline into dashboards the partners use to make investment decisions.",
       "Review the technical structure of startups in the pipeline.",
     ],
-    metrics: [{ value: "247", label: "live startup records in the CRM" }],
+    metrics: [{ value: "1,600+", label: "startups listed in the CRM" }],
   },
   {
     id: "grira",
@@ -33,15 +34,15 @@ export const experience: readonly ExperienceRole[] = [
     location: "Ifrane, Morocco",
     detail: "Supervisor: Prof. Sofiane Grira",
     description:
-      "Full research assistantship with a dedicated grant. Building and evaluating a RAG class assistant for Calculus II: hybrid BM25 + dense retrieval with RRF, ms-marco-MiniLM-L-6-v2 cross-encoder rerank, HyDE, and EasyOCR for handwritten notes. 88.9% retrieval pass rate on 1,159 chunks from 112 pages. Co-authoring the paper and a PIF Spring 2027 grant proposal. Microsoft Graph API, Python, FastAPI, FAISS, Groq.",
+      "Full research assistantship with a dedicated grant. Building and evaluating a RAG class assistant for Calculus II: hybrid BM25 + dense retrieval with RRF, BAAI/bge-reranker-v2-m3 cross-encoder rerank, HyDE, and dual-engine math OCR (EasyOCR + GOT-OCR2). Deployed for 600 engineering students at 94% accuracy (47/50 on a validated question bank) over 1,183 indexed chunks. Co-authoring the paper and a PIF Spring 2027 grant proposal. Microsoft Graph API, Python, FastAPI, FAISS, Groq.",
     bullets: [
-      "Retrieval-augmented class assistant for MTH 1312 Calculus II that ingests a professor's OneNote notebook through the Microsoft Graph API.",
-      "Hybrid BM25 and dense retrieval with Reciprocal Rank Fusion, ms-marco-MiniLM-L-6-v2 cross-encoder reranking, HyDE for free-text queries, and EasyOCR for handwritten notes.",
-      "Co-authoring the research paper and a PIF Spring 2027 grant proposal (72,000 MAD).",
+      "Solo-engineered a production RAG assistant over a professor's OneNote notebooks through the Microsoft Graph API, with slide-level citations on every answer.",
+      "Hybrid BM25 and dense retrieval with Reciprocal Rank Fusion, bge cross-encoder reranking, HyDE query rewriting, and dual math OCR (EasyOCR and GOT-OCR2).",
+      "Built the full-stack pipeline: retrieval, LLM generation with provider failover, and a OneNote add-in. Co-authoring the research paper and a PIF Spring 2027 grant proposal (72,000 MAD).",
     ],
     metrics: [
-      { value: "88.9%", label: "retrieval pass rate" },
-      { value: "1,159", label: "chunks from 112 notebook pages" },
+      { value: "94%", label: "accuracy, 47/50 validated questions" },
+      { value: "600", label: "engineering students served" },
       { value: "72,000 MAD", label: "grant proposal" },
     ],
   },
@@ -58,14 +59,16 @@ export const experience: readonly ExperienceRole[] = [
     description:
       "Fully funded international internship, Department of Computational Physics. Curated 5,308 bioactivity compounds, then screened 51,837 MeFSAT fungal compounds against aromatase (CYP19A1) using high-performance GPU computing. Random Forest ROC-AUC 0.898. 8 candidates. Top hit NPA020664 at −8.96 kcal/mol, then GROMACS / CHARMM36 / GAFF2 MD. Only undergraduate and first Moroccan in the program, alongside Master's and PhD students. Q1 paper in progress. Hands-on at FIBO.",
     bullets: [
-      "Built an ML virtual screening pipeline targeting aromatase (CYP19A1) for breast cancer drug discovery: curated 5,308 bioactivity compounds and screened 51,837 fungal compounds from MeFSAT down to 8 candidates.",
-      "Extra Trees reached ROC-AUC 0.978 (Random Forest 0.898). Top docking hit NPA020664 at −8.96 kcal/mol on PDB 3EQM, followed by a full MD production run (GROMACS, CHARMM36, GAFF2).",
-      "Only undergraduate and first Moroccan in the program, alongside Master's and PhD students. Worked with high-performance GPU resources for large-scale screening and molecular simulation. Q1 journal paper in progress. Hands-on robotics at FIBO.",
+      "Designed an end-to-end ML virtual screening pipeline for new aromatase (CYP19A1) inhibitors in breast cancer drug discovery, trained on 5,308 curated bioactivity compounds.",
+      "Random Forest beat the Liu et al. 2025 benchmark, and Extra Trees performed best across the MeFSAT fungal library.",
+      "Validated the top hit, NPA020664, by docking on PDB 3EQM and a full molecular dynamics run (GROMACS, CHARMM36, VMD, PyMOL). Co-writing a paper for a Q1 journal.",
+      "Only undergraduate and first Moroccan in the program, alongside Master's and PhD students, using high-performance GPU resources.",
     ],
     metrics: [
       { value: "51,837", label: "compounds screened" },
       { value: "0.978", label: "ROC-AUC, Extra Trees" },
       { value: "8", label: "final candidates" },
+      { value: "−8.96", label: "kcal/mol, top docking hit" },
     ],
   },
   {
@@ -81,9 +84,9 @@ export const experience: readonly ExperienceRole[] = [
     description:
       "Computer vision for sustainable urban planning, NLP meeting intelligence, and agriculture research. Presented during BC Cancer Research Day 2025.",
     bullets: [
-      "Built a meeting intelligence pipeline with speaker diarization on the AMI corpus under Dr. Russell Campbell.",
-      "Computer vision for sustainable urban planning, plus agriculture research with Dr. Mike Ivanof.",
-      "Presented UFV research at BC Cancer Research Day 2025 in Vancouver.",
+      "Built ML models for sustainable urban planning analytics and a meeting intelligence pipeline with speaker diarization on the AMI corpus, under Dr. Russell Campbell.",
+      "Agriculture research with Dr. Mike Ivanof.",
+      "Presented the research at BC Cancer Research Day 2025 in Vancouver.",
     ],
   },
   {
@@ -96,12 +99,12 @@ export const experience: readonly ExperienceRole[] = [
     org: "Ravel Future",
     location: "Lisbon, Portugal (Remote)",
     description:
-      "35% faster decision-making on sustainable-materials work. Python and SQL automation plus model benchmarks for Ravel Future.",
+      "Benchmarked ML models for sustainable-materials optimization and built automated Python and SQL data pipelines, improving decision-making efficiency by 35%.",
     bullets: [
-      "Python and SQL automation plus model benchmarks for sustainable-materials work.",
-      "Helped the team make decisions 35% faster.",
+      "Benchmarked ML models for sustainable-materials optimization.",
+      "Built automated data pipelines in Python and SQL that sped up the team's decisions.",
     ],
-    metrics: [{ value: "35%", label: "faster decision-making" }],
+    metrics: [{ value: "35%", label: "better decision-making efficiency" }],
   },
   {
     id: "smart-city",
@@ -111,9 +114,9 @@ export const experience: readonly ExperienceRole[] = [
     location: "Ifrane, Morocco",
     detail: "Dr. Houssain Kettani",
     description:
-      "30% faster data retrieval on a React city-planning platform for Smart City Ifrane, under Dr. Houssain Kettani.",
-    bullets: ["Made data retrieval 30% faster on a React city-planning platform for Smart City Ifrane."],
-    metrics: [{ value: "30%", label: "faster data retrieval" }],
+      "Built a scalable full-stack city-planning platform in React for Smart City Ifrane, improving urban development analytics and cutting data retrieval time by 30%.",
+    bullets: ["Built a scalable full-stack city-planning platform in React, improving urban development analytics."],
+    metrics: [{ value: "30%", label: "less data retrieval time" }],
   },
   {
     id: "taqa",
@@ -121,17 +124,21 @@ export const experience: readonly ExperienceRole[] = [
     logoTone: "dark",
     href: "https://www.taqamorocco.ma",
     dateRange: "Jun to Aug 2023",
-    title: "Data Analyst Intern",
+    title: "Data Engineer Intern",
     org: "TAQA Morocco",
     location: "El Jadida / Jorf Lasfar, Morocco",
     detail: "Independent power producer",
     description:
-      "Plant data from TAQA Morocco, about 35% of the country's electricity. Power BI dashboards, SQL/Python pipelines, and predictive maintenance on real operations.",
+      "Automated enterprise ETL workflows in Python and SQL, cutting manual reporting time by 25%, and designed Power BI dashboards on plant data from TAQA Morocco, which produces about 35% of the country's electricity.",
     bullets: [
-      "Built Power BI dashboards and SQL/Python pipelines on plant data.",
+      "Automated enterprise ETL workflows in Python and SQL.",
+      "Designed Power BI dashboards that support strategic decisions.",
       "Predictive maintenance analysis on live power-plant operations.",
     ],
-    metrics: [{ value: "~35%", label: "of Morocco's electricity comes from TAQA" }],
+    metrics: [
+      { value: "25%", label: "less manual reporting time" },
+      { value: "~35%", label: "of Morocco's electricity comes from TAQA" },
+    ],
   },
   {
     id: "blissbites",
@@ -172,24 +179,28 @@ export const experience: readonly ExperienceRole[] = [
     id: "ta",
     group: "campus",
     ...AUI,
-    dateRange: "Jan 2026 to Present",
+    dateRange: "Jan to May 2026",
     title: "Teaching Assistant, Computer Science",
     org: "Al Akhawayn University, School of Science and Engineering",
     location: "Ifrane, Morocco",
     detail: "Dr. Mouna Kettani & Dr. Naeem Sheikh",
     description:
       "Assist faculty in undergraduate programming, algorithms, and AI coursework through grading, office hours, mentoring, and technical support.",
+    bullets: [
+      "Assisted faculty in undergraduate programming, algorithms, and AI coursework.",
+      "Graded assignments, held office hours, and mentored students through technical problems.",
+    ],
   },
   {
     id: "oip",
     group: "campus",
     ...AUI,
-    dateRange: "2026 to Present",
-    title: "OIP Ambassador",
+    dateRange: "Jan to May 2026",
+    title: "OIP Ambassador & Orientation Program Ambassador",
     org: "Office of International Programs, AUI",
     location: "Ifrane, Morocco",
     description:
-      "Guide and mentor incoming international students through their semester at AUI: airport pickups, Ifrane orientation tours, and day-to-day academic and social integration.",
+      "Represented AUI's international programs to prospective and enrolled students and led orientation and cross-cultural integration initiatives: airport pickups, Ifrane orientation tours, and day-to-day academic and social support.",
     compact: true,
   },
   {
@@ -200,8 +211,11 @@ export const experience: readonly ExperienceRole[] = [
     title: "Peer Mentor",
     org: "Center for Learning Excellence, AUI",
     location: "Ifrane, Morocco",
-    description: "Mentored 15 students in academic subjects and study skills.",
-    metrics: [{ value: "15", label: "students mentored" }],
+    description: "Mentored and guided incoming students through their first year, in academic subjects and study skills.",
+    metrics: [
+      { value: "15+", label: "students mentored" },
+      { value: "95%", label: "mentee satisfaction" },
+    ],
     compact: true,
   },
   {
@@ -209,10 +223,12 @@ export const experience: readonly ExperienceRole[] = [
     group: "campus",
     ...AUI,
     dateRange: "2024",
-    title: "Student Assistant",
+    title: "Student Assistant & Project Manager",
     org: "AUI Counseling Department",
     location: "Ifrane, Morocco",
-    description: "Supported students across levels for one year, including operations and student-facing work.",
+    description:
+      "Managed events, administrative work, and departmental projects for a year, supporting students across levels, and automated administrative workflows to save staff time.",
+    metrics: [{ value: "20%", label: "less time per administrative task" }],
     compact: true,
   },
 
@@ -264,7 +280,7 @@ export const experience: readonly ExperienceRole[] = [
     location: "Morocco",
     description:
       "Ship autonomous agents and production front ends for small businesses: n8n, Make, Zapier, Instagram automation, and RAG systems.",
-    bullets: ["Build autonomous agents and production front ends for small businesses with n8n, Make, Zapier, and RAG systems."],
+    bullets: ["Architect and deploy autonomous AI agents and production front-end systems for small-business clients, driving automation and digital growth (n8n, Make, Zapier, RAG)."],
     compact: true,
   },
   {

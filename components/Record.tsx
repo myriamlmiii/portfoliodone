@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import Image from "next/image";
 import { ArrowUpRight, Award, BookOpen, Mic2, Stamp } from "lucide-react";
 import { record } from "@/data/record";
 import type { RecordGroup, RecordItem } from "@/types";
@@ -36,9 +37,15 @@ function RecordEntry({
     <div className="min-w-0">
       <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
         <h3 className="max-w-[52ch] text-base font-semibold leading-snug text-ink">
-          {item.title}
+          {item.extra && item.href ? (
+            <a href={item.href} target="_blank" rel="noreferrer" className="hover:text-accent">
+              {item.title}
+            </a>
+          ) : (
+            item.title
+          )}
         </h3>
-        {item.href && (
+        {item.href && !item.extra && (
           <ArrowUpRight
             size={16}
             className="mt-0.5 shrink-0 text-accent transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -61,10 +68,34 @@ function RecordEntry({
         )}
       </div>
       <p className="type-meta content-reading mt-2 text-muted">{detail}</p>
+      {(item.extra || item.logo) && (
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+          {item.extra && (
+            <a
+              href={item.extra.href}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-line px-3 text-xs font-medium text-accent transition-colors hover:border-accent"
+            >
+              {item.extra.label}
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </a>
+          )}
+          {item.logo && (
+            <Image
+              src={item.logo.src}
+              alt={item.logo.alt}
+              width={item.logo.width}
+              height={item.logo.height}
+              className="h-7 w-auto opacity-85 dark:brightness-0 dark:invert"
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 
-  return item.href ? (
+  return item.href && !item.extra ? (
     <a
       href={item.href}
       target="_blank"
@@ -80,7 +111,14 @@ function RecordEntry({
 
 export function Record() {
   const { t } = usePreferences();
-  const [active, setActive] = useState<ShelfId>("research");
+  // The tab highlights instantly; the heavier panel re-renders as a low-priority transition.
+  const [tab, setTab] = useState<ShelfId>("research");
+  const [active, setActiveDeferred] = useState<ShelfId>("research");
+  const [, startTransition] = useTransition();
+  const setActive = (id: ShelfId) => {
+    setTab(id);
+    startTransition(() => setActiveDeferred(id));
+  };
   const selectedShelf = shelves.find((shelf) => shelf.id === active) ?? shelves[0];
   const selectedGroups = selectedShelf.groups
     .map(findGroup)
@@ -114,7 +152,7 @@ export function Record() {
             >
               {shelves.map(({ id, groups, icon: Icon }, index) => {
                 const count = groups.reduce((sum, label) => sum + (findGroup(label)?.items.length ?? 0), 0);
-                const selected = active === id;
+                const selected = tab === id;
                 return (
                   <button
                     key={id}

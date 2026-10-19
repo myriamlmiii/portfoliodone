@@ -142,10 +142,22 @@ function StackedCard({
   );
 }
 
-export function ProjectStack({ projects }: { projects: readonly Project[] }) {
-  const stacked = useStackMode();
+/** Scroll-linked stack. Kept separate so the scroll target ref is always mounted when useScroll runs. */
+function StackedProjects({ projects }: { projects: readonly Project[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
+
+  return (
+    <div ref={containerRef} className="relative">
+      {projects.map((project, index) => (
+        <StackedCard key={project.slug} project={project} index={index} total={projects.length} progress={scrollYProgress} />
+      ))}
+    </div>
+  );
+}
+
+export function ProjectStack({ projects }: { projects: readonly Project[] }) {
+  const stacked = useStackMode();
 
   if (!stacked) {
     return (
@@ -161,11 +173,5 @@ export function ProjectStack({ projects }: { projects: readonly Project[] }) {
     );
   }
 
-  return (
-    <div ref={containerRef} className="relative">
-      {projects.map((project, index) => (
-        <StackedCard key={project.slug} project={project} index={index} total={projects.length} progress={scrollYProgress} />
-      ))}
-    </div>
-  );
+  return <StackedProjects projects={projects} />;
 }

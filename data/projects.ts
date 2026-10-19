@@ -54,6 +54,59 @@ export const projects: readonly Project[] = [
     ],
   },
   {
+    slug: "rag-class-assistant",
+    status: "research",
+    statusLabel: "Paper in progress",
+    details: [
+      { label: "Course", value: "MTH 1312 Calculus II, Al Akhawayn University" },
+      { label: "Supervisor", value: "Prof. Sofiane Grira" },
+      { label: "Funding", value: "PIF Spring 2027 grant proposal, 72,000 MAD" },
+    ],
+    areas: ["ai", "research"],
+    experienceId: "grira",
+    index: "01b",
+    featured: true,
+    category: "Applied AI, AUI",
+    title: "RAG Class Assistant",
+    tagline: "A production RAG assistant for Calculus II, built solo and deployed inside OneNote, with slide-level citations for every answer.",
+    outcome:
+      "An end-to-end retrieval-augmented generation system, solo-engineered and deployed as university infrastructure for 600 engineering students in Al Akhawayn University's Calculus II course. It answers with exact chapter, section, and slide citations at 94% accuracy (47/50 on a validated question bank) and runs inside Microsoft OneNote as a native task-pane add-in. Built under Prof. Sofiane Grira as both a production deployment and an active research project: a paper on hybrid retrieval and cross-encoder reranking for mathematical educational content is in progress, alongside a PIF Spring 2027 grant proposal (72,000 MAD).",
+    tags: ["RAG", "FAISS", "BM25", "Cross-Encoder Reranking", "HyDE", "EasyOCR", "GOT-OCR2", "Office.js", "Microsoft Graph API", "FastAPI", "Groq"],
+    image: "/images/projects/rag-class-assistant.png",
+    poster: "/images/projects/rag-class-assistant.png",
+    year: "2026",
+    org: "AUI",
+    metrics: [
+      { value: "600", label: "engineering students served" },
+      { value: "94%", label: "accuracy, 47/50 on a validated question bank" },
+      { value: "1,183", label: "production chunks indexed" },
+    ],
+    problem:
+      "Students navigating 1,000+ lecture slides across multiple OneNote class notebooks had no way to instantly locate, cross-reference, and understand specific calculus concepts, from integration by parts to p-series convergence, with precise slide-level citations.",
+    solution:
+      "A production-grade RAG pipeline that ingests, indexes, and retrieves mathematical content, delivering answers with exact chapter, section, and slide references, deployed directly inside Microsoft OneNote as a native task-pane add-in.",
+    impact:
+      "Built entirely solo, from the dual OCR math extraction pipeline to the hybrid retrieval engine, the OneNote add-in, and the security-hardened API, and deployed as real university infrastructure rather than a class project. Now scaling from free-tier prototyping to a paid Groq tier for the full engineering department. The paper with Dr. Grira will formalize the retrieval methodology, evaluation framework, and findings.",
+    stack: [
+      "Python",
+      "FastAPI (CSP, rate limiting, cookie isolation)",
+      "FAISS dense retrieval (IndexFlatIP) + BM25 with synonym expansion, fused by RRF (k=60)",
+      "BAAI/bge-base-en-v1.5 embeddings (768-d)",
+      "BAAI/bge-reranker-v2-m3 cross-encoder (top 128 to 32, rerank top 16)",
+      "HyDE query rewriting",
+      "EasyOCR + GOT-OCR2 for math formulas",
+      "Groq, Gemini, Claude, SambaNova failover with circuit breakers",
+      "Microsoft Graph API",
+      "Office.js OneNote add-in",
+    ],
+    highlights: [
+      "Hybrid BM25 + dense retrieval fused with Reciprocal Rank Fusion",
+      "Cross-encoder reranking and HyDE query rewriting",
+      "Dual-engine math OCR; every answer cites chapter, section, and slide",
+      "Multi-provider LLM failover with per-provider circuit breakers",
+    ],
+  },
+  {
     slug: "agriverse",
     areas: ["ai", "fullstack"],
     index: "02",
@@ -324,57 +377,6 @@ export const projects: readonly Project[] = [
     ],
     pendingNotes: ["Repo or demo link"],
   },
-  {
-    slug: "rag-class-assistant",
-    status: "research",
-    statusLabel: "Paper in progress",
-    details: [
-      { label: "Course", value: "MTH 1312 Calculus II, Al Akhawayn University" },
-      { label: "Supervisor", value: "Prof. Sofiane Grira" },
-      { label: "Funding", value: "PIF Spring 2027 grant proposal, 72,000 MAD" },
-    ],
-    areas: ["ai", "research"],
-    experienceId: "grira",
-    index: "08",
-    featured: true,
-    category: "Applied AI, AUI",
-    title: "RAG Class Assistant",
-    tagline: "Retrieval-augmented class assistant for MTH 1312 Calculus II, built on a professor's OneNote notebook.",
-    outcome:
-      "A retrieval-augmented class assistant for MTH 1312 Calculus II, built as learning infrastructure for Al Akhawayn University. It ingests a professor's OneNote notebook through the Microsoft Graph API and answers student questions with citations to the chapter, section, and slide number. Built as a funded research assistantship with Prof. Sofiane Grira; the paper and a PIF Spring 2027 grant proposal (72,000 MAD) are in progress.",
-    tags: ["RAG", "FAISS", "FastAPI", "Groq", "BM25", "Cross-Encoder", "HyDE"],
-    image: "/images/projects/rag-class-assistant.png",
-    poster: "/images/projects/rag-class-assistant.png",
-    year: "2026",
-    org: "AUI",
-    metrics: [
-      { value: "88.9%", label: "retrieval pass rate" },
-      { value: "1,159", label: "chunks indexed" },
-      { value: "112", label: "notebook pages" },
-    ],
-    problem:
-      "Students are overloaded with fragmented lecture notes, readings, and slides, and they often ask questions that require accurate, traceable answers from specific academic materials rather than generic AI responses.",
-    solution:
-      "I designed a RAG-first learning assistant that indexes course content, retrieves the most relevant chunks, reranks candidates, and grounds answers in material-backed citations. The result is a reliable study companion rather than a hallucination-prone chatbot.",
-    impact:
-      "The assistant turns dispersed academic material into a searchable and explainable learning interface with stronger fidelity and traceability for students.",
-    stack: [
-      "Python",
-      "FastAPI",
-      "FAISS",
-      "BAAI/bge-base-en-v1.5 embeddings (768-d)",
-      "ms-marco-MiniLM-L-6-v2 cross-encoder",
-      "EasyOCR",
-      "Groq API",
-      "Microsoft Graph API",
-    ],
-    highlights: [
-      "Hybrid BM25 + dense retrieval fused with RRF",
-      "Cross-encoder reranking and HyDE query expansion",
-      "EasyOCR for handwritten notes; answers cite chapter, section, and slide",
-    ],
-  },
-
   // Tier 2: case-study pages linked from "Also built".
   {
     slug: "darija-word2vec",
@@ -589,7 +591,7 @@ export const moreProjects: readonly MoreProject[] = [
     name: "Internal CRM System: AI Screening and Sourcing",
     experienceId: "uinvestors",
     areas: ["ai", "data"],
-    metric: { value: "247", label: "live startup records" },
-    detail: "Built at U-Investors and deployed as the company's internal ERP. 247 live startup records, from Airtable deal-flow to an investment dashboard.",
+    metric: { value: "1,600+", label: "startups listed" },
+    detail: "End-to-end AI for U-Investors, deployed as the company's internal ERP: AI screening and sourcing, a RAG assistant over 1,600+ listed startups, and decision dashboards for the partners.",
   },
 ];

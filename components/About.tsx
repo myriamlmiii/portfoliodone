@@ -1,13 +1,12 @@
 "use client";
 
-import { ChevronRight } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 import { usePreferences } from "./Preferences";
 
 export function About() {
   const { t } = usePreferences();
-  const paragraphs = [t.about.p1, t.about.p2, t.about.p3, t.about.p4];
+  const paragraphs = [t.about.p1, t.about.p2, t.about.p3, t.about.p4].filter(Boolean);
 
   return (
     <section id="about" className="section-pad bg-surface">
@@ -25,10 +24,6 @@ export function About() {
             {paragraphs.map((text) => (
               <p key={text.slice(0, 32)}>{text}</p>
             ))}
-            <a href="#vision" className="interactive-target group inline-flex items-center gap-1 text-base text-accent hover:underline">
-              {t.about.headed}
-              <ChevronRight size={18} className="transition-transform group-hover:translate-x-0.5 rtl:rotate-180" />
-            </a>
           </Reveal>
 
           <Reveal delay={0.12}>
@@ -40,7 +35,7 @@ export function About() {
                 </div>
               ))}
             </dl>
-            <p className="type-meta mt-4 px-2 text-muted">{t.about.accreditation}</p>
+            <p className="type-meta mt-4 px-2 text-muted">{t.about.recommended}</p>
           </Reveal>
         </div>
       </div>

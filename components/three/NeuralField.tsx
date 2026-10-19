@@ -1,12 +1,12 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import * as THREE from "three";
 
-const NODE_COUNT = 520;
-const LINK_DISTANCE = 0.42;
+const NODE_COUNT = 360;
+const LINK_DISTANCE = 0.5;
 const MAX_LINKS_PER_NODE = 3;
 
 /** Small seeded PRNG so the network has the same shape on every load. */
@@ -106,13 +106,13 @@ export default function NeuralField({
       <Canvas
         camera={{ position: [0, 0, 4.4], fov: 45 }}
         dpr={[1, 1.5]}
-        gl={{ antialias: !bloom, alpha: true, powerPreference: "high-performance" }}
+        gl={{ antialias: !bloom, alpha: true, powerPreference: "default" }}
         frameloop={visible ? "always" : "never"}
       >
         <Network nodeColor={nodeColor} linkColor={linkColor} still={still} />
         {bloom && (
           <EffectComposer multisampling={0}>
-            <Bloom intensity={0.55} luminanceThreshold={0.15} mipmapBlur />
+            <Bloom intensity={0.4} luminanceThreshold={0.2} />
           </EffectComposer>
         )}
       </Canvas>

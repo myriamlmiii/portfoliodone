@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, extend, useFrame, useThree, type ThreeElement } from "@react-three/fiber";
 import { useReducedMotion } from "framer-motion";
 import * as THREE from "three";
@@ -190,12 +190,23 @@ export function GlobeCanvas({
   onSelect: (id: string) => void;
 }) {
   const reduceMotion = useReducedMotion() === true;
+  const host = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = host.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { rootMargin: "200px" });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
+    <div ref={host} className="h-full w-full">
     <Canvas
       camera={{ position: [0, 0.4, 4.4], fov: 45 }}
       dpr={[1, 1.5]}
-      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+      gl={{ antialias: true, alpha: true, powerPreference: "default" }}
+      frameloop={visible ? "always" : "never"}
       className="h-full w-full cursor-grab active:cursor-grabbing"
     >
       <ambientLight intensity={1} />
@@ -210,5 +221,6 @@ export function GlobeCanvas({
         onSelect={onSelect}
       />
     </Canvas>
+    </div>
   );
 }

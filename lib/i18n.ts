@@ -11,7 +11,7 @@ export const localeMeta: Record<Locale, { label: string; dir: "ltr" | "rtl"; htm
 
 type Dict = {
   nav: Record<string, string>;
-  life: { kicker: string; titleBefore: string; titleAccent: string; intro: string; items: { title: string; detail: string }[] };
+  life: { kicker: string; titleBefore: string; titleAccent: string; intro: string; items: { title: string; detail: string }[]; closing?: string };
   talk: string;
   menu: string;
   themeLight: string;
@@ -21,11 +21,11 @@ type Dict = {
   journey: readonly string[];
   countries: Record<string, string>;
   hero: { kicker: string; title: string; body: string; cta: string; scroll: string; facts: { label: string; value: string }[]; stats: string[] };
-  about: { kicker: string; title: string; lead: string; p1: string; p2: string; p3: string; p4: string; headed: string; facts: { label: string; value: string }[]; accreditation: string };
+  about: { recommended?: string; kicker: string; title: string; lead: string; p1: string; p2: string; p3: string; p4: string; headed: string; facts: { label: string; value: string }[]; accreditation: string };
   causes: { kicker: string; titleBefore: string; titleAccent: string; intro: string; items: { title: string; body: string; link?: string }[] };
   places: { kicker: string; titleBefore: string; titleAccent: string; intro: string; home: string; items: Record<string, { name: string; note: string }> };
   authority: string;
-  work: { kicker: string; titleBefore: string; titleAccent: string; also: string; caseStudy: string; filters: Record<"all" | "ai" | "research" | "fullstack" | "data", string> };
+  work: { moreLabel: string; lessLabel: string; kicker: string; titleBefore: string; titleAccent: string; also: string; caseStudy: string; filters: Record<"all" | "ai" | "research" | "fullstack" | "data", string> };
   education: {
     kicker: string;
     titleBefore: string;
@@ -37,6 +37,7 @@ type Dict = {
   projects: Record<string, { category: string; outcome: string }>;
   more: Record<string, string>;
   record: { kicker: string; titleBefore: string; titleAccent: string; intro: string; groups: Record<string, string>; status: Record<"published" | "presented" | "submitted" | "in-progress", string>; totalLabel: string; archiveLabel: string; entriesLabel: string; indexNote: string; paperNote: string };
+  story?: { kicker: string; titleBefore: string; titleAccent: string; inspiration: string; philosophy: string; defend: string; quote: string; belief: string };
   recordDetails: Record<string, string>;
   skills: { kicker: string; titleBefore: string; titleAccent: string; stack: string; stackGroups: Record<string, string>; items: { name: string; description: string }[] };
   method: { kicker: string; titleBefore: string; titleAccent: string; steps: { title: string; body: string }[] };
@@ -102,13 +103,13 @@ const en: Dict = {
   hero: {
     kicker: "AI Engineer & Researcher",
     title: "I build AI systems that make complex operations less costly, more efficient, and more predictable.",
-    body: "Final-year Computer Science student at Al Akhawayn University, concentrating in AI & Big Data. Recent work spans breast cancer drug discovery at KMUTT, a RAG system built as learning infrastructure for Al Akhawayn University, and an AI deal-flow CRM deployed as U-Investors' internal ERP.",
+    body: "Final-year Computer Science student at Al Akhawayn University, with a double specialization in AI and Big Data Analytics. Recent work spans breast cancer drug discovery at KMUTT, a RAG system built as learning infrastructure for Al Akhawayn University, and an AI deal-flow CRM deployed as U-Investors' internal ERP.",
     cta: "View projects",
     scroll: "Scroll to explore",
     facts: [{"label":"Currently","value":"Tech Lead at U-Investors · Research Assistant and Teaching Assistant at AUI"},{"label":"Based in","value":"Morocco"}],
-    stats: ["compounds screened in breast cancer medication testing research","retrieval pass rate on the RAG class assistant","orders delivered by delivery2dorms","Best Startup Award for Bliss Bites"],
+    stats: ["compounds screened in breast cancer medication testing research","accuracy on the RAG class assistant's 50-question validation bank","orders delivered by delivery2dorms","Best Startup Award for Bliss Bites"],
   },
-  about: {"kicker":"About","title":"Engineer, researcher, founder.","lead":"From Beni Tajjit in southeastern Morocco to research labs in Canada and Thailand, I build AI that does real work, and I bring my community with me.","p1":"I'm Meriem Lmoubariki, from Beni Tajjit in southeastern Morocco. I'm in my final year of a B.S. in Computer Science at Al Akhawayn University in Ifrane (2022 to December 2026), concentrating in AI and Big Data Analytics with a minor in Business Administration. I study on a 60% Merit Scholarship and made the Dean's List in Spring 2024 and Fall 2025.","p2":"In fall 2025 I spent a semester at the University of the Fraser Valley in British Columbia, Canada, through AUI's bilateral exchange, as the first exchange student from AUI (Morocco) to attend UFV. I studied machine learning, NLP, and finance, worked as an ML research assistant in the School of Computing under Dr. Russell Campbell and Dr. Mike Ivanof, and presented a paper at BC Cancer Research Day in Vancouver.","p3":"I measure my work in results. At KMUTT in Bangkok, I screened 51,837 compounds in breast cancer medication research (ROC-AUC 0.978 with Extra Trees) and narrowed them to 8 candidates; the strongest, NPA020664, docked at −8.96 kcal/mol. At U-Investors, I run AI across 247 live deals. My Calculus II RAG assistant reaches 88.9% retrieval accuracy. Before that, I worked on predictive maintenance at TAQA Morocco, which produces about 35% of the country's electricity, and on automation at Ravel Future in Lisbon, where decisions became 35% faster.","p4":"Leadership matters to me as much as code. I was accepted into the fully funded LeadGreen Fellowship (Cohort 4), a pan-African climate leadership program selected from 6,000 applicants. I founded Bliss Bites, an agrifood startup that won AUI's Best Startup Award two years in a row with full investor funding, and Phi Nu, AUI's first sorority, which 50 members have joined. At UFV, I initiated the Alpha Pi Phi Cygnet chapter. I also write (Future Young Writer Award at 16), DJ as DJ Mimi, play futsal, and swim.","headed":"See where I'm headed","facts":[{"label":"Hometown","value":"Beni Tajjit, Morocco"},{"label":"University","value":"Al Akhawayn University, Class of Dec 2026"},{"label":"Focus","value":"AI & Big Data Analytics, Business minor"},{"label":"Honors","value":"60% Merit Scholarship, Dean's List ×2"},{"label":"Exchange","value":"University of the Fraser Valley, Canada"},{"label":"Languages","value":"Arabic, French (C1), English (IELTS 7)"}],"accreditation":"About AUI: the first non-US university in Africa accredited by NECHE, the US accreditor of Harvard, MIT, and Yale (since 2017, renewed through 2032). Computer Science is ABET-accredited, the School of Business holds EFMD EPAS accreditation, and the university is recognized by Morocco's Ministry of Higher Education (MESRS)."},
+  about: {"kicker":"About","title":"Engineer, researcher, founder.","lead":"From Beni Tajjit in southeastern Morocco to research labs in Canada and Thailand, I build AI that does real work, and I bring my community with me.","p1":"I'm Meriem Lmoubariki, from Beni Tajjit in southeastern Morocco. I'm in my final year of a B.S. in Computer Science at Al Akhawayn University in Ifrane (2022 to December 2026), concentrating in AI and Big Data Analytics with a minor in Business Administration. I study on a 60% Merit Scholarship and made the Dean's List in Spring 2024 and Fall 2025.","p2":"In fall 2025 I spent a semester at the University of the Fraser Valley in British Columbia, Canada, through AUI's bilateral exchange, as the first exchange student from AUI (Morocco) to attend UFV. I studied machine learning, NLP, and finance, worked as an ML research assistant in the School of Computing under Dr. Russell Campbell and Dr. Mike Ivanof, and presented a paper at BC Cancer Research Day in Vancouver.","p3":"I measure my work in results. At KMUTT in Bangkok, I screened 51,837 compounds in breast cancer medication research (ROC-AUC 0.978 with Extra Trees) and narrowed them to 8 candidates; the strongest, NPA020664, docked at −8.96 kcal/mol. At U-Investors, I run AI across 247 live deals. My Calculus II RAG assistant reaches 94% accuracy on a 50-question validation bank. Before that, I worked on predictive maintenance at TAQA Morocco, which produces about 35% of the country's electricity, and on automation at Ravel Future in Lisbon, where decisions became 35% faster.","p4":"Leadership matters to me as much as code. I was accepted into the fully funded LeadGreen Fellowship (Cohort 4), a pan-African climate leadership program selected from 6,000 applicants. I founded Bliss Bites, an agrifood startup that won AUI's Best Startup Award two years in a row with full investor funding, and Phi Nu, AUI's first sorority, which 50 members have joined. At UFV, I initiated the Alpha Pi Phi Cygnet chapter. I also write (Future Young Writer Award at 16), DJ as DJ Mimi, play futsal, and swim.","headed":"See where I'm headed","facts":[{"label":"Hometown","value":"Beni Tajjit, Morocco"},{"label":"University","value":"Al Akhawayn University, Class of Dec 2026"},{"label":"Focus","value":"AI & Big Data Analytics, Business minor"},{"label":"Honors","value":"60% Merit Scholarship, Dean's List ×2"},{"label":"Exchange","value":"University of the Fraser Valley, Canada"},{"label":"Languages","value":"Arabic, French (C1), English (IELTS 7)"}],"accreditation":"About AUI: the first non-US university in Africa accredited by NECHE, the US accreditor of Harvard, MIT, and Yale (since 2017, renewed through 2032). Computer Science is ABET-accredited, the School of Business holds EFMD EPAS accreditation, and the university is recognized by Morocco's Ministry of Higher Education (MESRS)."},
   causes: {"kicker":"Causes","titleBefore":"What I stand for. ","titleAccent":"And who I build for.","intro":"Technology should widen the circle of who gets to lead, and whose knowledge counts.","items":[{"title":"Youth leadership","body":"I believe young people are ready to lead now, not someday. I founded Phi Nu, AUI's first sorority, to welcome women from different regions and backgrounds, especially those with fewer resources or access to campus networks. I also initiated a chapter at UFV, was elected to the Student Government Association, and keep opening doors for those who come after me."},{"title":"Indigenous knowledge","body":"Indigenous communities carry generations of ecological knowledge that is too easily lost. I built AgriVerse to help keep it alive: it pairs Indigenous land knowledge with machine learning so farms can make more sustainable decisions. It won 1st place at the UFV Community Ideation Jam 2025.","link":"/projects/agriverse"},{"title":"Community & network","body":"Through fellowships, research labs, startups, and volunteering, I've built a strong community across Morocco, Canada, Thailand, Portugal, and the pan-African climate network. I show up for it, and it shows up for me."}]},
   places: {"kicker":"Places","titleBefore":"Rooted in Morocco. ","titleAccent":"Shaped around the world.","intro":"Every place on this map changed how I work.","home":"Home","items":{"beniTajjit":{"name":"Beni Tajjit, Morocco","note":"Where I'm from"},"ifrane":{"name":"Ifrane, Morocco","note":"Al Akhawayn University, 2022 to 2026"},"abbotsford":{"name":"Abbotsford, Canada","note":"Exchange at the University of the Fraser Valley, Fall 2025"},"vancouver":{"name":"Vancouver, Canada","note":"Presented research at BC Cancer Research Day"},"bangkok":{"name":"Bangkok, Thailand","note":"Breast cancer research at KMUTT, 2026"},"lisbon":{"name":"Lisbon, Portugal","note":"AI & automation at Ravel Future"}}},
   authority: "Studied, worked, and built alongside",
@@ -150,7 +151,7 @@ const en: Dict = {
       },
     ],
   },
-  work: { kicker: "Projects", titleBefore: "Things I've built, ", titleAccent: "with the numbers behind them.", also: "More projects", caseStudy: "Case study", filters: {"all":"All","ai":"AI & ML","research":"Research","fullstack":"Full-stack","data":"Data"} },
+  work: { moreLabel: "More projects", lessLabel: "Show fewer projects", kicker: "Projects", titleBefore: "Things I've built, ", titleAccent: "with the numbers behind them.", also: "More projects", caseStudy: "Case study", filters: {"all":"All","ai":"AI & ML","research":"Research","fullstack":"Full-stack","data":"Data"} },
   education: {
     kicker: "Education",
     titleBefore: "Where I ",
@@ -166,7 +167,7 @@ const en: Dict = {
     },
     "rag-class-assistant": {
       category: "Applied AI, AUI",
-      outcome: "88.9% retrieval pass rate on Calculus II notes after hybrid search, rerank, and HyDE.",
+      outcome: "94% accuracy (47/50 validated questions) on Calculus II after hybrid search, rerank, and HyDE.",
     },
     "the-observer": {
       category: "Interactive Research",
@@ -179,8 +180,8 @@ const en: Dict = {
   },
   more: {
     "Meeting Intelligence System": "Speaker diarization on the AMI corpus under Dr. Russell Campbell. Built for Teams.",
-    "RAG Class Assistant": "88.9% retrieval pass rate on Calculus II notes. FAISS, BM25, rerank, HyDE.",
-    "Internal CRM System: AI Screening and Sourcing": "Built at U-Investors and deployed as the company's internal ERP. 247 live startup records, from Airtable deal-flow to an investment dashboard.",
+    "RAG Class Assistant": "94% accuracy, 600 students. FAISS, BM25, rerank, HyDE.",
+    "Internal CRM System: AI Screening and Sourcing": "End-to-end AI for U-Investors, deployed as the company's internal ERP: AI screening and sourcing, a RAG assistant over 1,600+ listed startups, and decision dashboards for the partners.",
     "darija-gap": "Darija evaluation harness for GPT-5.6. OpenAI Build Week, 2025.",
     CryptoVault: "Azure-hosted FastAPI crypto dashboard with automated ReportLab PDFs.",
     "Spark Kafka Pipeline": "99% uptime. Dockerized Spark, Kafka, HDFS, Hive.",
@@ -242,7 +243,7 @@ const en: Dict = {
     kicker: "Leadership & Impact",
     titleBefore: "The work is the ",
     titleAccent: "output.",
-    body: "51,837 compounds screened. 88.9% retrieval. 247 live deals. 500+ deliveries. Those numbers are the work, not decoration.",
+    body: "51,837 compounds screened. 94% accuracy. 1,600+ startups listed. 500+ deliveries. Those numbers are the work, not decoration.",
     cta: "Explore the record",
     stats: [
       "MeFSAT compounds screened for CYP19A1",
@@ -326,13 +327,13 @@ const fr: Dict = {
   hero: {
     kicker: "Ingénieure IA et chercheuse",
     title: "Je crée des systèmes d'IA qui rendent les opérations complexes moins coûteuses, plus efficaces et plus prévisibles.",
-    body: "Étudiante en dernière année d'informatique à l'Université Al Akhawayn, concentration IA et Big Data. Travaux récents : découverte de médicaments contre le cancer du sein à KMUTT, un système RAG conçu comme infrastructure pédagogique pour l'Université Al Akhawayn, et un CRM IA de deal-flow déployé comme ERP interne chez U-Investors.",
+    body: "Étudiante en dernière année d'informatique à l'Université Al Akhawayn, double spécialisation IA et Big Data. Travaux récents : découverte de médicaments contre le cancer du sein à KMUTT, un système RAG conçu comme infrastructure pédagogique pour l'Université Al Akhawayn, et un CRM IA de deal-flow déployé comme ERP interne chez U-Investors.",
     cta: "Voir les projets",
     scroll: "Défiler pour explorer",
     facts: [{"label":"Actuellement","value":"Tech Lead chez U-Investors · Assistante de recherche et d'enseignement à AUI"},{"label":"Basée à","value":"Maroc"}],
-    stats: ["composés criblés dans la recherche sur les traitements du cancer du sein","de réussite en retrieval pour l'assistant RAG","commandes livrées par delivery2dorms","Best Startup Award pour Bliss Bites"],
+    stats: ["composés criblés dans la recherche sur les traitements du cancer du sein","de précision de l'assistant RAG sur une banque de 50 questions","commandes livrées par delivery2dorms","Best Startup Award pour Bliss Bites"],
   },
-  about: {"kicker":"À propos","title":"Ingénieure, chercheuse, fondatrice.","lead":"De Beni Tajjit, dans le sud-est du Maroc, aux laboratoires de recherche au Canada et en Thaïlande, je construis une IA qui sert vraiment, et j'emmène ma communauté avec moi.","p1":"Je suis Meriem Lmoubariki, originaire de Beni Tajjit, dans le sud-est du Maroc. Je suis en dernière année de licence en informatique à l'Université Al Akhawayn d'Ifrane (2022 à décembre 2026), concentration IA et analyse du Big Data, mineure en administration des affaires. Boursière au mérite (60 %), inscrite au Dean's List au printemps 2024 et à l'automne 2025.","p2":"À l'automne 2025, j'ai passé un semestre à l'University of the Fraser Valley, en Colombie-Britannique (Canada), dans le cadre de l'échange bilatéral d'AUI, en tant que première étudiante d'AUI à y partir. J'y ai étudié le machine learning, le TAL et la finance, travaillé comme assistante de recherche en ML à l'École d'informatique auprès du Dr Russell Campbell et du Dr Mike Ivanof, et présenté un article au BC Cancer Research Day à Vancouver.","p3":"Je mesure mon travail en résultats. À KMUTT (Bangkok), j'ai criblé 51 837 composés dans le cadre d'une recherche sur les traitements du cancer du sein (ROC-AUC 0,898) pour aboutir à 8 candidats ; le meilleur, NPA020664, atteint −8,96 kcal/mol. Chez U-Investors, je pilote l'IA sur 247 dossiers actifs. Mon assistant RAG de Calcul II atteint 88,9 % de précision en retrieval. Auparavant : maintenance prédictive chez TAQA Morocco (environ 35 % de l'électricité nationale) et automatisation chez Ravel Future à Lisbonne (+35 % de vitesse de décision).","p4":"Le leadership compte autant que le code. J'ai été acceptée à la LeadGreen Fellowship (cohorte 4), programme panafricain de leadership climatique entièrement financé, sélectionné parmi 6 000 candidatures. J'ai fondé Bliss Bites, startup agroalimentaire lauréate du Best Startup Award d'AUI deux années de suite avec un financement intégral par des investisseurs, ainsi que Phi Nu, première sororité d'AUI (50 membres). À l'UFV, j'ai lancé le chapitre Alpha Pi Phi Cygnet. J'écris aussi (Future Young Writer Award à 16 ans), je mixe sous le nom de DJ Mimi, je joue au futsal et je nage.","headed":"Voir où je vais","facts":[{"label":"Origine","value":"Beni Tajjit, Maroc"},{"label":"Université","value":"Université Al Akhawayn, promotion déc. 2026"},{"label":"Spécialité","value":"IA et Big Data, mineure business"},{"label":"Distinctions","value":"Bourse au mérite 60 %, Dean's List ×2"},{"label":"Échange","value":"University of the Fraser Valley, Canada"},{"label":"Langues","value":"Arabe, français (C1), anglais (IELTS 7)"}],"accreditation":"À propos d'AUI : première université non américaine d'Afrique accréditée par NECHE, l'organisme qui accrédite Harvard, le MIT et Yale (depuis 2017, renouvelé jusqu'en 2032). L'informatique est accréditée ABET, l'école de commerce détient l'accréditation EFMD EPAS, et l'université est reconnue par le ministère marocain de l'Enseignement supérieur (MESRS)."},
+  about: {"kicker":"À propos","title":"Ingénieure, chercheuse, fondatrice.","lead":"De Beni Tajjit, dans le sud-est du Maroc, aux laboratoires de recherche au Canada et en Thaïlande, je construis une IA qui sert vraiment, et j'emmène ma communauté avec moi.","p1":"Je suis Meriem Lmoubariki, originaire de Beni Tajjit, dans le sud-est du Maroc. Je suis en dernière année de licence en informatique à l'Université Al Akhawayn d'Ifrane (2022 à décembre 2026), concentration IA et analyse du Big Data, mineure en administration des affaires. Boursière au mérite (60 %), inscrite au Dean's List au printemps 2024 et à l'automne 2025.","p2":"À l'automne 2025, j'ai passé un semestre à l'University of the Fraser Valley, en Colombie-Britannique (Canada), dans le cadre de l'échange bilatéral d'AUI, en tant que première étudiante d'AUI à y partir. J'y ai étudié le machine learning, le TAL et la finance, travaillé comme assistante de recherche en ML à l'École d'informatique auprès du Dr Russell Campbell et du Dr Mike Ivanof, et présenté un article au BC Cancer Research Day à Vancouver.","p3":"Je mesure mon travail en résultats. À KMUTT (Bangkok), j'ai criblé 51 837 composés dans le cadre d'une recherche sur les traitements du cancer du sein (ROC-AUC 0,898) pour aboutir à 8 candidats ; le meilleur, NPA020664, atteint −8,96 kcal/mol. Chez U-Investors, je pilote l'IA sur 247 dossiers actifs. Mon assistant RAG de Calcul II atteint 94 % de précision sur une banque de 50 questions de validation. Auparavant : maintenance prédictive chez TAQA Morocco (environ 35 % de l'électricité nationale) et automatisation chez Ravel Future à Lisbonne (+35 % de vitesse de décision).","p4":"Le leadership compte autant que le code. J'ai été acceptée à la LeadGreen Fellowship (cohorte 4), programme panafricain de leadership climatique entièrement financé, sélectionné parmi 6 000 candidatures. J'ai fondé Bliss Bites, startup agroalimentaire lauréate du Best Startup Award d'AUI deux années de suite avec un financement intégral par des investisseurs, ainsi que Phi Nu, première sororité d'AUI (50 membres). À l'UFV, j'ai lancé le chapitre Alpha Pi Phi Cygnet. J'écris aussi (Future Young Writer Award à 16 ans), je mixe sous le nom de DJ Mimi, je joue au futsal et je nage.","headed":"Voir où je vais","facts":[{"label":"Origine","value":"Beni Tajjit, Maroc"},{"label":"Université","value":"Université Al Akhawayn, promotion déc. 2026"},{"label":"Spécialité","value":"IA et Big Data, mineure business"},{"label":"Distinctions","value":"Bourse au mérite 60 %, Dean's List ×2"},{"label":"Échange","value":"University of the Fraser Valley, Canada"},{"label":"Langues","value":"Arabe, français (C1), anglais (IELTS 7)"}],"accreditation":"À propos d'AUI : première université non américaine d'Afrique accréditée par NECHE, l'organisme qui accrédite Harvard, le MIT et Yale (depuis 2017, renouvelé jusqu'en 2032). L'informatique est accréditée ABET, l'école de commerce détient l'accréditation EFMD EPAS, et l'université est reconnue par le ministère marocain de l'Enseignement supérieur (MESRS)."},
   causes: {"kicker":"Engagements","titleBefore":"Ce que je défends. ","titleAccent":"Et pour qui je construis.","intro":"La technologie doit élargir le cercle de celles et ceux qui dirigent, et des savoirs qui comptent.","items":[{"title":"Le leadership des jeunes","body":"Je crois que les jeunes sont prêts à diriger maintenant, pas un jour. J'ai fondé Phi Nu, première sororité d'AUI, pour accueillir des femmes de régions et d'horizons différents, en particulier celles qui disposent de moins de ressources ou de réseaux sur le campus. J'ai aussi lancé un chapitre à l'UFV, été élue au gouvernement étudiant et continue d'ouvrir des portes aux étudiantes qui viennent après moi."},{"title":"Les savoirs autochtones","body":"Les communautés autochtones portent des générations de savoirs écologiques, trop facilement perdus. J'ai créé AgriVerse pour les préserver : la plateforme associe ces savoirs au machine learning pour aider les fermes à prendre des décisions plus durables. 1re place à l'UFV Community Ideation Jam 2025.","link":"/projects/agriverse"},{"title":"Communauté et réseau","body":"Grâce aux fellowships, aux laboratoires, aux startups et au bénévolat, j'ai bâti une communauté solide au Maroc, au Canada, en Thaïlande, au Portugal et dans le réseau climatique panafricain. Je suis là pour elle, et elle est là pour moi."}]},
   places: {"kicker":"Lieux","titleBefore":"Enracinée au Maroc. ","titleAccent":"Façonnée par le monde.","intro":"Chaque lieu de cette carte a changé ma façon de travailler.","home":"Chez moi","items":{"beniTajjit":{"name":"Beni Tajjit, Maroc","note":"Là d'où je viens"},"ifrane":{"name":"Ifrane, Maroc","note":"Université Al Akhawayn, 2022 à 2026"},"abbotsford":{"name":"Abbotsford, Canada","note":"Échange à l'University of the Fraser Valley, automne 2025"},"vancouver":{"name":"Vancouver, Canada","note":"Recherche présentée au BC Cancer Research Day"},"bangkok":{"name":"Bangkok, Thaïlande","note":"Recherche sur le cancer du sein à KMUTT, 2026"},"lisbon":{"name":"Lisbonne, Portugal","note":"IA et automatisation chez Ravel Future"}}},
   authority: "Études, recherche et collaborations",
@@ -350,7 +351,7 @@ const fr: Dict = {
       { title: "Sport", detail: "Futsal et natation. Médaille d'or, meilleure jeune nageuse locale, Doukkala (2018). Équipe féminine de futsal d'AUI, 3e place au Cubs Tournament (mai 2023)." },
     ],
   },
-  work: { kicker: "Projets", titleBefore: "Ce que j'ai construit, ", titleAccent: "chiffres à l'appui.", also: "Autres projets", caseStudy: "Étude de cas", filters: {"all":"Tous","ai":"IA et ML","research":"Recherche","fullstack":"Full-stack","data":"Données"} },
+  work: { moreLabel: "Plus de projets", lessLabel: "Voir moins de projets", kicker: "Projets", titleBefore: "Ce que j'ai construit, ", titleAccent: "chiffres à l'appui.", also: "Autres projets", caseStudy: "Étude de cas", filters: {"all":"Tous","ai":"IA et ML","research":"Recherche","fullstack":"Full-stack","data":"Données"} },
   education: {
     kicker: "Formation",
     titleBefore: "Là où j'ai ",
@@ -359,7 +360,7 @@ const fr: Dict = {
     campusRoles: "Découvrir les six emplois sur le campus",
     entries: {
       "aui": {
-        "degree": "Licence (B.Sc.) en informatique, concentration intelligence artificielle et big data",
+        "degree": "Licence (B.Sc.) en informatique, double spécialisation en intelligence artificielle et analyse du Big Data ; mineure en administration des affaires",
         "location": "Ifrane, Maroc",
         "highlights": [
           "Bourse au mérite (60 %)",
@@ -387,7 +388,7 @@ const fr: Dict = {
     },
     "rag-class-assistant": {
       category: "IA appliquée, AUI",
-      outcome: "88,9 % de réussite en retrieval sur les notes de Calcul II après recherche hybride, rerank et HyDE.",
+      outcome: "94 % de précision (47/50 questions validées) en Calcul II après recherche hybride, rerank et HyDE.",
     },
     "the-observer": {
       category: "Recherche interactive",
@@ -400,8 +401,8 @@ const fr: Dict = {
   },
   more: {
     "Meeting Intelligence System": "Diarisation sur le corpus AMI sous Dr. Russell Campbell. Conçu pour Teams.",
-    "RAG Class Assistant": "88,9 % de réussite en retrieval sur Calcul II. FAISS, BM25, rerank, HyDE.",
-    "Internal CRM System: AI Screening and Sourcing": "Conçu chez U-Investors et déployé comme ERP interne de l'entreprise. 247 dossiers de startups en direct, du deal-flow Airtable à un tableau d'investissement.",
+    "RAG Class Assistant": "94 % de précision, 600 étudiants. FAISS, BM25, rerank, HyDE.",
+    "Internal CRM System: AI Screening and Sourcing": "IA de bout en bout pour U-Investors, déployée comme ERP interne : criblage et sourcing par IA, assistant RAG sur plus de 1 600 startups référencées et tableaux de décision pour les associés.",
     "darija-gap":     "Banc d'évaluation darija pour GPT-5.6. OpenAI Build Week, 2025.",
     CryptoVault: "Dashboard crypto FastAPI sur Azure, PDF ReportLab automatisés.",
     "Spark Kafka Pipeline": "99 % de disponibilité. Spark, Kafka, HDFS, Hive, Docker.",
@@ -440,7 +441,7 @@ const fr: Dict = {
     "Best Startup Award, AUI Entrepreneurship Week":
       "Bliss Bites, la startup agroalimentaire que j'ai fondée. Deux années consécutives, 100 % de financement investisseurs et 16 certificats gouvernementaux d'investisseurs en France, aux États-Unis, au Maroc et au Royaume-Uni.",
     "Predicting Failures Using Neural Networks and Quantum Optimization in Concentrated Solar Power Plants: A Case Study of Morocco Noor Ouarzazate Complex":
-      "Pipeline réseaux de neurones + optimisation quantique pour prédire les pannes du complexe solaire Noor Ouarzazate. AUI × Université King Fahd. Actes ICEF'26 (Materials Research Proceedings), indexé Scopus, accès ouvert.",
+      "Pipeline réseaux de neurones + optimisation quantique pour prédire les pannes du complexe solaire Noor Ouarzazate. Co-écrit par l'Université Al Akhawayn et l'Université King Fahd du pétrole et des minéraux. Publié dans les actes ICEF 2026 (Materials Research Proceedings, Materials Research Forum LLC, États-Unis), indexé Scopus, accès ouvert.",
     "Why Agentic AI Fails in Production: An Empirical Failure Taxonomy for Enterprise Deployment":
       "Corpus structuré de défaillances réelles de l'IA en entreprise, tableaux d'audit et alignement NIST AI RMF. Présenté à l'IBRS 2026, AUI.",
     "Enterprise AI Reliability Framework (EARF)":
@@ -450,7 +451,7 @@ const fr: Dict = {
     "Can a Black-Box Model Discover? Epistemic Opacity and the Limits of Machine Learning as a Source of Knowledge":
       "Article de philosophie des sciences : les modèles de ML produisent des « artefacts épistémiques » plutôt qu'un véritable savoir, avec un pipeline réel de découverte de médicaments comme étude de cas. Dialogue avec Gettier, Goldman, Rudin, Humphreys et Pollock. Soumis à Stance (Ball State University, ~7 % d'acceptation).",
     "RAG Class Assistant":
-      "Avec Dr. Sofiane Grira. Un système RAG qui transforme le carnet OneNote d'un professeur en assistant de cours intelligent.",
+      "Avec Prof. Sofiane Grira. Système RAG en production pour 600 étudiants en Calcul II à l'Université Al Akhawayn, et projet de recherche actif : un article sur la recherche hybride et le reranking par cross-encoder pour le contenu mathématique.",
     "ML Virtual Screening for Cancer Drug Discovery":
       "Avec Dr. Thana Sutthibutpong. Article sur le pipeline de criblage d'inhibiteurs de l'aromatase construit à KMUTT. Visée revue Q1.",
     "ESG Banking Papers":
@@ -544,14 +545,14 @@ const fr: Dict = {
         dateRange: "Sept. 2026 à aujourd'hui",
         location: "Casablanca, Maroc",
         detail: "Fonds VC fondé par Driss Laraki · Temps partiel",
-        description: "247 dossiers startups live. Couche IA interne : Airtable deal-flow vers les tableaux de décision des associés.",
+        description: "Plus de 1 600 startups référencées. Système d'IA de bout en bout pour U-Investors : CRM avec criblage et sourcing par IA, assistant RAG sur toute la base, tableaux de décision pour les associés.",
       },
       grira: {
         title: "Assistante de recherche",
         dateRange: "Août 2026 à aujourd'hui",
         location: "Ifrane, Maroc",
         detail: "Prof. Sofiane Grira",
-        description: "Assistanat de recherche complet avec financement dédié. Assistant de cours RAG pour MTH 1312 Calcul II alimenté par le carnet OneNote du professeur via Microsoft Graph : BM25 + dense avec RRF, rerank cross-encoder, HyDE, EasyOCR. 88,9 % de réussite en retrieval sur 1 159 segments de 112 pages. Co-rédaction de l'article et proposition PIF printemps 2027 (72 000 MAD).",
+        description: "Assistanat de recherche complet avec financement dédié. Assistant de cours RAG pour MTH 1312 Calcul II alimenté par le carnet OneNote du professeur via Microsoft Graph : BM25 + dense avec RRF, rerank cross-encoder, HyDE, EasyOCR. 94 % de précision (47/50 questions validées) sur 1 183 segments indexés. Co-rédaction de l'article et proposition PIF printemps 2027 (72 000 MAD).",
       },
       kmutt: {
         title: "Stagiaire de recherche financée, découverte de médicaments contre le cancer",
@@ -563,7 +564,7 @@ const fr: Dict = {
       },
       ta: {
         title: "Assistante d'enseignement",
-        dateRange: "Janv. 2026 à aujourd'hui",
+        dateRange: "Janv. à mai 2026",
         location: "Ifrane, Maroc",
         detail: "Dr. Mouna Kettani et Dr. Naeem Sheikh",
         description: "Aide à l'enseignement de la programmation, des algorithmes et de l'IA : notation, permanences, mentorat et soutien technique.",
@@ -596,12 +597,11 @@ const fr: Dict = {
         description: "−30 % de temps d'accès aux données. Plateforme React de planification urbaine, Smart City Ifrane.",
       },
       taqa: {
-        title: "Stagiaire analyste de données",
+        title: "Stagiaire ingénieure de données",
         dateRange: "Juin à août 2023",
         location: "El Jadida / Jorf Lasfar, Maroc",
         detail: "Premier producteur indépendant d'électricité, environ 35 % de l'électricité marocaine",
-        description:
-          "TAQA Morocco est le premier producteur indépendant d'électricité du pays, filiale d'Abu Dhabi National Energy Company, et exploite le complexe thermique de Jorf Lasfar, plus grande centrale charbon de la région MENA, cotée à Casablanca. Accès aux données opérationnelles du parc, tableaux Power BI, pipelines SQL/Python et maintenance prédictive.",
+        description: "Automatisation de flux ETL en Python et SQL (25 % de temps de reporting manuel en moins) et tableaux de bord Power BI sur les données de TAQA Morocco, qui produit environ 35 % de l'électricité du pays.",
       },
       freelance: {
         title: "Développeuse IA agentique et front-end",
@@ -610,11 +610,11 @@ const fr: Dict = {
         description: "Architecture et déploiement d'agents IA autonomes et de fronts de production pour des PME.",
       },
       oip: {
-        title: "Ambassadrice OIP",
-        dateRange: "2026 à aujourd'hui",
+        title: "Ambassadrice OIP et orientation",
+        dateRange: "Janv. à mai 2026",
         location: "Ifrane, Maroc",
         detail: "Office of International Programs, AUI",
-        description: "Accompagnement des étudiantes et étudiants internationaux pendant leur semestre à AUI : accueil à l'aéroport, visites d'orientation d'Ifrane, intégration académique et sociale.",
+        description: "Représentation des programmes internationaux d'AUI auprès des étudiantes et étudiants actuels et futurs : accueil à l'aéroport, visites d'orientation d'Ifrane, intégration académique et sociale.",
       },
       abby: {
         title: "Tutrice",
@@ -629,10 +629,10 @@ const fr: Dict = {
         description: "Accompagnement de plus de 15 primo-arrivantes et primo-arrivants, 95 % de satisfaction.",
       },
       counseling: {
-        title: "Assistante étudiante",
+        title: "Assistante étudiante et cheffe de projet",
         dateRange: "2024",
         location: "Ifrane, Maroc",
-        description: "Soutien aux étudiantes et étudiants à tous les niveaux pendant un an.",
+        description: "Gestion d'événements, de tâches administratives et de projets du département pendant un an, avec automatisation des flux administratifs (20 % de temps en moins par tâche).",
       },
       charcot: {
         title: "Professeure de maths et prépa Bac",
@@ -646,7 +646,7 @@ const fr: Dict = {
     kicker: "Leadership et impact",
     titleBefore: "Le travail, c'est ",
     titleAccent: "le résultat.",
-    body: "51 837 composés. 88,9 % de retrieval. 247 dossiers live. Plus de 500 livraisons. Les chiffres sont le travail.",
+    body: "51 837 composés. 94 % de précision. Plus de 1 600 startups référencées. Plus de 500 livraisons. Les chiffres sont le travail.",
     cta: "Voir le parcours",
     stats: [
       "Composés MeFSAT criblés pour CYP19A1",
@@ -730,13 +730,13 @@ const ar: Dict = {
   hero: {
     kicker: "مهندسة ذكاء اصطناعي وباحثة",
     title: "أبني أنظمة ذكاء اصطناعي تجعل العمليات المعقدة أقل تكلفة وأكثر كفاءة وقابلية للتنبؤ.",
-    body: "طالبة في السنة الأخيرة لعلوم الحاسوب بجامعة الأخوين، تخصص الذكاء الاصطناعي والبيانات الضخمة. من أعمالي الأخيرة: اكتشاف أدوية سرطان الثدي في KMUTT، ونظام RAG مبني كبنية تحتية تعليمية لجامعة الأخوين، ونظام CRM بالذكاء الاصطناعي لتدفق الصفقات منشور كنظام ERP داخلي في U-Investors.",
+    body: "طالبة في السنة الأخيرة لعلوم الحاسوب بجامعة الأخوين، بتخصصين: الذكاء الاصطناعي وتحليلات البيانات الضخمة. من أعمالي الأخيرة: اكتشاف أدوية سرطان الثدي في KMUTT، ونظام RAG مبني كبنية تحتية تعليمية لجامعة الأخوين، ونظام CRM بالذكاء الاصطناعي لتدفق الصفقات منشور كنظام ERP داخلي في U-Investors.",
     cta: "عرض المشاريع",
     scroll: "مرّر للاستكشاف",
     facts: [{"label":"حاليا","value":"قائدة تقنية في U-Investors · مساعدة بحث وتدريس في الأخوين"},{"label":"مقيمة في","value":"المغرب"}],
     stats: ["مركبا فُحصت في أبحاث اختبار أدوية سرطان الثدي","نسبة نجاح الاسترجاع في مساعد RAG","طلبية سلّمتها delivery2dorms","جائزة أفضل شركة ناشئة لـ Bliss Bites"],
   },
-  about: {"kicker":"نبذة","title":"مهندسة، باحثة، مؤسِّسة.","lead":"من بني تجيت في جنوب شرق المغرب إلى مختبرات البحث في كندا وتايلاند، أبني ذكاء اصطناعيا ينجز عملا حقيقيا، وأحمل مجتمعي معي.","p1":"أنا مريم المباركي من بني تجيت في جنوب شرق المغرب. أدرس في السنة الأخيرة من البكالوريوس في علوم الحاسوب بجامعة الأخوين في إفران (2022 إلى ديسمبر 2026)، بتخصص الذكاء الاصطناعي وتحليل البيانات الضخمة وتخصص فرعي في إدارة الأعمال. حاصلة على منحة الاستحقاق (60%) وعلى قائمة العميد في ربيع 2024 وخريف 2025.","p2":"في خريف 2025 قضيت فصلا دراسيا في جامعة فريزر فالي بكولومبيا البريطانية في كندا ضمن برنامج التبادل الثنائي لجامعة الأخوين، كأول طالبة تبادل من جامعة الأخوين (المغرب) في UFV. درست التعلم الآلي ومعالجة اللغة الطبيعية والتمويل، وعملت مساعدة بحث في التعلم الآلي بكلية الحوسبة مع د. راسل كامبل ود. مايك إيفانوف، وقدّمت ورقة بحثية في يوم أبحاث السرطان بفانكوفر.","p3":"أقيس عملي بالنتائج. في KMUTT ببانكوك فحصت 51,837 مركبا ضمن أبحاث أدوية سرطان الثدي (ROC-AUC 0.978 مع Extra Trees) واختصرتها إلى 8 مرشحين، أقواها NPA020664 بطاقة ارتباط −8.96 كيلو كالوري/مول. في U-Investors أدير الذكاء الاصطناعي على 247 صفقة نشطة. ويحقق مساعد RAG لمادة التفاضل والتكامل 2 دقة استرجاع 88.9%. وقبل ذلك عملت على الصيانة التنبؤية في طاقة المغرب (نحو 35% من كهرباء البلاد)، وعلى الأتمتة في Ravel Future بلشبونة حيث أصبحت القرارات أسرع بنسبة 35%.","p4":"القيادة تهمني بقدر البرمجة. قُبلت في زمالة LeadGreen (الدفعة 4)، برنامج أفريقي للقيادة المناخية ممول بالكامل اختير من بين 6000 متقدم. أسست Bliss Bites، شركة ناشئة في الصناعات الغذائية الزراعية فازت بجائزة أفضل شركة ناشئة في الأخوين سنتين متتاليتين بتمويل كامل من المستثمرين، وPhi Nu، أول جمعية نسائية في الأخوين انضمت إليها 50 عضوة. وفي UFV أطلقت فرع Alpha Pi Phi Cygnet. كما أكتب (جائزة الكاتبة الشابة في سن 16)، وأقدّم الموسيقى باسم DJ Mimi، وألعب كرة القدم داخل القاعة وأمارس السباحة.","headed":"إلى أين أتجه","facts":[{"label":"المدينة الأم","value":"بني تجيت، المغرب"},{"label":"الجامعة","value":"جامعة الأخوين، دفعة ديسمبر 2026"},{"label":"التخصص","value":"الذكاء الاصطناعي والبيانات الضخمة، فرعي أعمال"},{"label":"التميز","value":"منحة استحقاق 60%، قائمة العميد مرتين"},{"label":"التبادل","value":"جامعة فريزر فالي، كندا"},{"label":"اللغات","value":"العربية، الفرنسية (C1)، الإنجليزية (IELTS 7)"}],"accreditation":"عن جامعة الأخوين: أول جامعة غير أمريكية في أفريقيا تعتمدها NECHE، الجهة الأمريكية التي تعتمد هارفارد ومعهد ماساتشوستس للتكنولوجيا وييل (منذ 2017، مجدد حتى 2032). برنامج علوم الحاسوب معتمد من ABET، وكلية الأعمال حاصلة على اعتماد EFMD EPAS، والجامعة معترف بها من وزارة التعليم العالي المغربية."},
+  about: {"kicker":"نبذة","title":"مهندسة، باحثة، مؤسِّسة.","lead":"من بني تجيت في جنوب شرق المغرب إلى مختبرات البحث في كندا وتايلاند، أبني ذكاء اصطناعيا ينجز عملا حقيقيا، وأحمل مجتمعي معي.","p1":"أنا مريم المباركي من بني تجيت في جنوب شرق المغرب. أدرس في السنة الأخيرة من البكالوريوس في علوم الحاسوب بجامعة الأخوين في إفران (2022 إلى ديسمبر 2026)، بتخصص الذكاء الاصطناعي وتحليل البيانات الضخمة وتخصص فرعي في إدارة الأعمال. حاصلة على منحة الاستحقاق (60%) وعلى قائمة العميد في ربيع 2024 وخريف 2025.","p2":"في خريف 2025 قضيت فصلا دراسيا في جامعة فريزر فالي بكولومبيا البريطانية في كندا ضمن برنامج التبادل الثنائي لجامعة الأخوين، كأول طالبة تبادل من جامعة الأخوين (المغرب) في UFV. درست التعلم الآلي ومعالجة اللغة الطبيعية والتمويل، وعملت مساعدة بحث في التعلم الآلي بكلية الحوسبة مع د. راسل كامبل ود. مايك إيفانوف، وقدّمت ورقة بحثية في يوم أبحاث السرطان بفانكوفر.","p3":"أقيس عملي بالنتائج. في KMUTT ببانكوك فحصت 51,837 مركبا ضمن أبحاث أدوية سرطان الثدي (ROC-AUC 0.978 مع Extra Trees) واختصرتها إلى 8 مرشحين، أقواها NPA020664 بطاقة ارتباط −8.96 كيلو كالوري/مول. في U-Investors أدير الذكاء الاصطناعي على 247 صفقة نشطة. ويحقق مساعد RAG لمادة التفاضل والتكامل 2 دقة 94% على بنك تحقق من 50 سؤالا. وقبل ذلك عملت على الصيانة التنبؤية في طاقة المغرب (نحو 35% من كهرباء البلاد)، وعلى الأتمتة في Ravel Future بلشبونة حيث أصبحت القرارات أسرع بنسبة 35%.","p4":"القيادة تهمني بقدر البرمجة. قُبلت في زمالة LeadGreen (الدفعة 4)، برنامج أفريقي للقيادة المناخية ممول بالكامل اختير من بين 6000 متقدم. أسست Bliss Bites، شركة ناشئة في الصناعات الغذائية الزراعية فازت بجائزة أفضل شركة ناشئة في الأخوين سنتين متتاليتين بتمويل كامل من المستثمرين، وPhi Nu، أول جمعية نسائية في الأخوين انضمت إليها 50 عضوة. وفي UFV أطلقت فرع Alpha Pi Phi Cygnet. كما أكتب (جائزة الكاتبة الشابة في سن 16)، وأقدّم الموسيقى باسم DJ Mimi، وألعب كرة القدم داخل القاعة وأمارس السباحة.","headed":"إلى أين أتجه","facts":[{"label":"المدينة الأم","value":"بني تجيت، المغرب"},{"label":"الجامعة","value":"جامعة الأخوين، دفعة ديسمبر 2026"},{"label":"التخصص","value":"الذكاء الاصطناعي والبيانات الضخمة، فرعي أعمال"},{"label":"التميز","value":"منحة استحقاق 60%، قائمة العميد مرتين"},{"label":"التبادل","value":"جامعة فريزر فالي، كندا"},{"label":"اللغات","value":"العربية، الفرنسية (C1)، الإنجليزية (IELTS 7)"}],"accreditation":"عن جامعة الأخوين: أول جامعة غير أمريكية في أفريقيا تعتمدها NECHE، الجهة الأمريكية التي تعتمد هارفارد ومعهد ماساتشوستس للتكنولوجيا وييل (منذ 2017، مجدد حتى 2032). برنامج علوم الحاسوب معتمد من ABET، وكلية الأعمال حاصلة على اعتماد EFMD EPAS، والجامعة معترف بها من وزارة التعليم العالي المغربية."},
   causes: {"kicker":"قضاياي","titleBefore":"ما أؤمن به. ","titleAccent":"ولمن أبني.","intro":"على التكنولوجيا أن توسّع دائرة من يقود، ومن تُحتسب معرفته.","items":[{"title":"قيادة الشباب","body":"أؤمن أن الشباب مستعدون للقيادة الآن لا لاحقا. أسست Phi Nu، أول جمعية نسائية في الأخوين، لتضم نساء من مناطق وخلفيات مختلفة، ولا سيما من لديهن موارد أو فرص أقل للوصول إلى شبكات الجامعة. وأطلقت فرعا في UFV، وانتُخبت في مجلس الطلبة، وما زلت أفتح الأبواب لمن يأتي بعدي."},{"title":"معارف الشعوب الأصلية","body":"تحمل الشعوب الأصلية معارف بيئية متوارثة عبر أجيال، وهي معرضة للضياع. بنيت AgriVerse للحفاظ عليها: منصة تجمع هذه المعارف مع التعلم الآلي لمساعدة المزارع على اتخاذ قرارات أكثر استدامة. فازت بالمركز الأول في UFV Community Ideation Jam 2025.","link":"/projects/agriverse"},{"title":"المجتمع والشبكة","body":"عبر الزمالات ومختبرات البحث والشركات الناشئة والتطوع، بنيت مجتمعا قويا في المغرب وكندا وتايلاند والبرتغال وشبكة المناخ الأفريقية. أحضر من أجله، ويحضر من أجلي."}]},
   places: {"kicker":"أماكن","titleBefore":"جذوري في المغرب. ","titleAccent":"وتشكّلت حول العالم.","intro":"كل مكان على هذه الخريطة غيّر طريقة عملي.","home":"موطني","items":{"beniTajjit":{"name":"بني تجيت، المغرب","note":"من حيث أتيت"},"ifrane":{"name":"إفران، المغرب","note":"جامعة الأخوين، 2022 إلى 2026"},"abbotsford":{"name":"أبوتسفورد، كندا","note":"تبادل في جامعة فريزر فالي، خريف 2025"},"vancouver":{"name":"فانكوفر، كندا","note":"تقديم بحث في يوم أبحاث السرطان"},"bangkok":{"name":"بانكوك، تايلاند","note":"أبحاث سرطان الثدي في KMUTT، 2026"},"lisbon":{"name":"لشبونة، البرتغال","note":"الذكاء الاصطناعي والأتمتة في Ravel Future"}}},
   authority: "دراسة وعمل وبناء إلى جانب",
@@ -754,7 +754,7 @@ const ar: Dict = {
       { title: "رياضة", detail: "كرة القدم داخل القاعة والسباحة. ذهبية أفضل سباحة شابة محلية، دكالة (2018). فريق الفوتسال النسائي في الأخوين، المركز الثالث في دوري Cubs (ماي 2023)." },
     ],
   },
-  work: { kicker: "المشاريع", titleBefore: "ما بنيته، ", titleAccent: "بالأرقام.", also: "مشاريع أخرى", caseStudy: "دراسة الحالة", filters: {"all":"الكل","ai":"الذكاء الاصطناعي","research":"البحث","fullstack":"تطوير متكامل","data":"البيانات"} },
+  work: { moreLabel: "المزيد من المشاريع", lessLabel: "إظهار مشاريع أقل", kicker: "المشاريع", titleBefore: "ما بنيته، ", titleAccent: "بالأرقام.", also: "مشاريع أخرى", caseStudy: "دراسة الحالة", filters: {"all":"الكل","ai":"الذكاء الاصطناعي","research":"البحث","fullstack":"تطوير متكامل","data":"البيانات"} },
   education: {
     kicker: "التعليم",
     titleBefore: "حيث ",
@@ -763,7 +763,7 @@ const ar: Dict = {
     campusRoles: "استكشف الوظائف الجامعية الست",
     entries: {
       "aui": {
-        "degree": "بكالوريوس علوم الحاسوب، تخصص الذكاء الاصطناعي والبيانات الضخمة",
+        "degree": "بكالوريوس علوم الحاسوب، بتخصصين في الذكاء الاصطناعي وتحليلات البيانات الضخمة، وتخصص فرعي في إدارة الأعمال",
         "location": "إفران، المغرب",
         "highlights": [
           "منحة استحقاق (60%)",
@@ -791,7 +791,7 @@ const ar: Dict = {
     },
     "rag-class-assistant": {
       category: "ذكاء اصطناعي تطبيقي، الأخوين",
-      outcome: "نسبة نجاح استرجاع 88.9% على ملاحظات حساب التفاضل 2 بعد بحث هجين وإعادة ترتيب وHyDE.",
+      outcome: "دقة 94% (47 من 50 سؤالا موثقا) في حساب التفاضل 2 بعد بحث هجين وإعادة ترتيب وHyDE.",
     },
     "the-observer": {
       category: "بحث تفاعلي",
@@ -804,8 +804,8 @@ const ar: Dict = {
   },
   more: {
     "Meeting Intelligence System": "تمييز المتحدثين على مجموعة AMI مع د. راسل كامبل. مصمم لـ Teams.",
-    "RAG Class Assistant": "نسبة نجاح استرجاع 88.9% على حساب التفاضل 2. FAISS وBM25 وإعادة ترتيب.",
-    "Internal CRM System: AI Screening and Sourcing": "بُني في U-Investors ونُشر كنظام ERP داخلي للشركة. 247 سجلا مباشرا لشركات ناشئة، من تدفق الصفقات في Airtable إلى لوحة استثمار.",
+    "RAG Class Assistant": "دقة 94% و600 طالب. FAISS وBM25 وإعادة ترتيب.",
+    "Internal CRM System: AI Screening and Sourcing": "ذكاء اصطناعي متكامل لصالح U-Investors، نُشر كنظام ERP داخلي: فرز واستقطاب بالذكاء الاصطناعي، ومساعد RAG فوق أكثر من 1600 شركة ناشئة مدرجة، ولوحات قرارات للشركاء.",
     "darija-gap":     "أداة تقييم الدارجة لـ GPT-5.6. أسبوع بناء OpenAI، 2025.",
     CryptoVault: "لوحة FastAPI على Azure وتقارير PDF آلية.",
     "Spark Kafka Pipeline": "جاهزية 99%. Spark وKafka وHDFS وHive.",
@@ -844,7 +844,7 @@ const ar: Dict = {
     "Best Startup Award, AUI Entrepreneurship Week":
       "Bliss Bites، الشركة الناشئة الغذائية الزراعية التي أسستها. سنتان متتاليتان، تمويل كامل من المستثمرين، و16 شهادة حكومية من مستثمرين في فرنسا والولايات المتحدة والمغرب والمملكة المتحدة.",
     "Predicting Failures Using Neural Networks and Quantum Optimization in Concentrated Solar Power Plants: A Case Study of Morocco Noor Ouarzazate Complex":
-      "خط معالجة يجمع الشبكات العصبية والتحسين الكمّي للتنبؤ بأعطال مجمع نور ورزازات الشمسي. الأخوين × جامعة الملك فهد. وقائع ICEF'26 (Materials Research Proceedings)، مفهرس في Scopus، وصول مفتوح.",
+      "خط معالجة يجمع الشبكات العصبية والتحسين الكمّي للتنبؤ بأعطال مجمع نور ورزازات الشمسي. بمشاركة جامعة الأخوين وجامعة الملك فهد للبترول والمعادن. نُشرت في وقائع ICEF 2026 (Materials Research Proceedings، Materials Research Forum LLC، الولايات المتحدة)، مفهرسة في Scopus، وصول مفتوح.",
     "Why Agentic AI Fails in Production: An Empirical Failure Taxonomy for Enterprise Deployment":
       "مجموعة حالات منظمة لإخفاقات حقيقية للذكاء الاصطناعي في المؤسسات، وجداول تدقيق، وربط بإطار NIST AI RMF. قُدّمت في IBRS 2026، الأخوين.",
     "Enterprise AI Reliability Framework (EARF)":
@@ -854,7 +854,7 @@ const ar: Dict = {
     "Can a Black-Box Model Discover? Epistemic Opacity and the Limits of Machine Learning as a Source of Knowledge":
       "ورقة في فلسفة العلم تجادل بأن نماذج تعلم الآلة تنتج «مصنوعات معرفية» لا معرفة حقيقية، بدراسة حالة من خط حقيقي لاكتشاف الأدوية. تناقش Gettier وGoldman وRudin وHumphreys وPollock. مُرسلة إلى Stance (جامعة بول ستيت، نسبة قبول ~7%).",
     "RAG Class Assistant":
-      "مع د. سفيان قريرا. نظام توليد معزز بالاسترجاع يحول دفتر OneNote لأستاذ إلى مساعد ذكي للمقرر.",
+      "مع الأستاذ سفيان قريرا. نظام RAG قيد الإنتاج يخدم 600 طالب في حساب التفاضل 2 بجامعة الأخوين، ومشروع بحثي نشط: ورقة حول الاسترجاع الهجين وإعادة الترتيب بالمُشفّر المتقاطع للمحتوى الرياضي.",
     "ML Virtual Screening for Cancer Drug Discovery":
       "مع د. ثانا سوثيبوتبونغ. ورقة حول خط فحص مثبطات الأروماتاز المبني في KMUTT. استهداف مجلة Q1.",
     "ESG Banking Papers":
@@ -948,14 +948,14 @@ const ar: Dict = {
         dateRange: "سبتمبر 2026 حتى الآن",
         location: "الدار البيضاء، المغرب",
         detail: "صندوق رأس مال مغامر أسسه إدريس لاراكي · دوام جزئي",
-        description: "247 صفقة ناشئة مباشرة. طبقة ذكاء اصطناعي: Airtable إلى لوحات قرارات الشركاء.",
+        description: "أكثر من 1600 شركة ناشئة مدرجة. نظام ذكاء اصطناعي متكامل لصالح U-Investors: CRM مع فرز واستقطاب بالذكاء الاصطناعي، ومساعد RAG فوق قاعدة البيانات كلها، ولوحات قرارات للشركاء.",
       },
       grira: {
         title: "مساعدة بحث",
         dateRange: "أغسطس 2026 حتى الآن",
         location: "إفران، المغرب",
         detail: "الأستاذ سفيان قريرا",
-        description: "مساعدة بحث كاملة بمنحة مخصصة. مساعد مقرر RAG لمادة MTH 1312 حساب التفاضل 2 يعتمد على دفتر OneNote للأستاذ عبر Microsoft Graph: BM25 واسترجاع كثيف مع RRF، إعادة ترتيب، HyDE وEasyOCR. نسبة نجاح استرجاع 88.9% على 1159 مقطعا من 112 صفحة. مشاركة في كتابة الورقة ومقترح PIF ربيع 2027 (72000 درهم).",
+        description: "مساعدة بحث كاملة بمنحة مخصصة. مساعد مقرر RAG لمادة MTH 1312 حساب التفاضل 2 يعتمد على دفتر OneNote للأستاذ عبر Microsoft Graph: BM25 واسترجاع كثيف مع RRF، إعادة ترتيب، HyDE وEasyOCR. دقة 94% (47 من 50 سؤالا موثقا) على 1183 مقطعا مفهرسا. مشاركة في كتابة الورقة ومقترح PIF ربيع 2027 (72000 درهم).",
       },
       kmutt: {
         title: "متدربة بحث ممولة، اكتشاف أدوية السرطان",
@@ -967,7 +967,7 @@ const ar: Dict = {
       },
       ta: {
         title: "مساعدة تدريس",
-        dateRange: "يناير 2026 حتى الآن",
+        dateRange: "يناير إلى مايو 2026",
         location: "إفران، المغرب",
         detail: "د. منى كتاني ود. نعيم شيخ",
         description: "المساعدة في تدريس البرمجة والخوارزميات والذكاء الاصطناعي: تصحيح، ساعات مكتبية، إرشاد ودعم تقني.",
@@ -999,12 +999,11 @@ const ar: Dict = {
         description: "−30% زمن استرجاع البيانات. منصة React لتخطيط مدينة إفران الذكية.",
       },
       taqa: {
-        title: "متدربة محللة بيانات",
+        title: "متدربة مهندسة بيانات",
         dateRange: "يونيو إلى أغسطس 2023",
         location: "الجديدة / الجرف الأصفر، المغرب",
         detail: "أكبر منتج مستقل للكهرباء، نحو 35% من كهرباء المغرب",
-        description:
-          "طاقة المغرب المنتج المستقل الرائد للكهرباء وتابعة لشركة أبوظبي الوطنية للطاقة، وتشغّل مجمع الجرف الأصفر الحراري، أكبر محطة فحم في منطقة الشرق الأوسط وشمال أفريقيا، ومدرجة في بورصة الدار البيضاء. وصول إلى بيانات المحطات، لوحات Power BI، خطوط SQL/Python وصيانة تنبؤية.",
+        description: "أتمتة مسارات ETL بلغة Python وSQL (تقليل وقت إعداد التقارير اليدوية بنسبة 25%) ولوحات Power BI على بيانات طاقة المغرب (TAQA) التي تنتج نحو 35% من كهرباء البلاد.",
       },
       freelance: {
         title: "مطوّرة ذكاء اصطناعي وواجهات",
@@ -1013,11 +1012,11 @@ const ar: Dict = {
         description: "تصميم ونشر وكلاء ذكاء اصطناعي مستقلين وواجهات إنتاج لشركات صغيرة.",
       },
       oip: {
-        title: "سفيرة OIP",
-        dateRange: "2026 حتى الآن",
+        title: "سفيرة مكتب البرامج الدولية والتوجيه",
+        dateRange: "يناير إلى مايو 2026",
         location: "إفران، المغرب",
         detail: "مكتب البرامج الدولية، جامعة الأخوين",
-        description: "مرافقة الطلبة الدوليين الوافدين خلال فصلهم في الأخوين: الاستقبال من المطار، جولات تعريفية في إفران، ودعم الاندماج الأكاديمي والاجتماعي.",
+        description: "تمثيل البرامج الدولية في الأخوين أمام الطلبة الحاليين والمحتملين: الاستقبال من المطار، جولات التعريف بإفران، والاندماج الأكاديمي والاجتماعي.",
       },
       abby: {
         title: "مدرّسة خصوصية",
@@ -1032,10 +1031,10 @@ const ar: Dict = {
         description: "إرشاد أكثر من 15 طالبا في سنتهم الأولى، بنسبة رضا 95%.",
       },
       counseling: {
-        title: "مساعدة طلابية",
+        title: "مساعدة طلابية ومديرة مشاريع",
         dateRange: "2024",
         location: "إفران، المغرب",
-        description: "دعم الطلاب في كل المستويات لمدة عام.",
+        description: "إدارة الفعاليات والأعمال الإدارية ومشاريع القسم لمدة عام، وأتمتة المهام الإدارية (تقليل زمن المهمة بنسبة 20%).",
       },
       charcot: {
         title: "مدرسة رياضيات وتحضير البكالوريا",
@@ -1049,7 +1048,7 @@ const ar: Dict = {
     kicker: "القيادة والأثر",
     titleBefore: "العمل هو ",
     titleAccent: "النتيجة.",
-    body: "51837 مركبا. 88.9% استرجاع. 247 صفقة. أكثر من 500 توصيلة. الأرقام هي العمل.",
+    body: "51837 مركبا. 94% دقة. أكثر من 1600 شركة ناشئة. أكثر من 500 توصيلة. الأرقام هي العمل.",
     cta: "استكشف السجل",
     stats: [
       "مركبات MeFSAT فُحصت لـ CYP19A1",
@@ -1146,7 +1145,7 @@ const originCopy: Record<
     heroBody: "I work in applied AI across computational drug discovery, education, and business operations.",
     stats: [
       "search space narrowed from 51,837 compounds to 8 candidates",
-      "retrieval pass rate across 1,159 course-content chunks",
+      "accuracy on a 50-question validation bank, 1,183 course-content chunks indexed",
       "faster decision-making through AI and automation",
       "faster data retrieval on a city-planning platform",
       "lower forecast error versus a naive baseline",
@@ -1171,7 +1170,7 @@ const originCopy: Record<
     heroBody: "Je travaille en IA appliquée, entre découverte computationnelle de médicaments, éducation et opérations d'entreprise.",
     stats: [
       "espace de recherche réduit de 51 837 composés à 8 candidats",
-      "taux de réussite du retrieval sur 1 159 segments de cours",
+      "de précision sur une banque de 50 questions, 1 183 segments de cours indexés",
       "décisions accélérées grâce à l'IA et à l'automatisation",
       "récupération de données accélérée sur une plateforme d'urbanisme",
       "erreur de prévision réduite par rapport à une référence naïve",
@@ -1196,7 +1195,7 @@ const originCopy: Record<
     heroBody: "أعمل في الذكاء الاصطناعي التطبيقي، بين اكتشاف الأدوية حاسوبيًا والتعليم والعمليات التشغيلية.",
     stats: [
       "تقليص نطاق البحث من 51,837 مركبا إلى 8 مرشحين",
-      "نسبة نجاح الاسترجاع عبر 1,159 مقطعا من محتوى المقرر",
+      "دقة على بنك من 50 سؤالا، مع فهرسة 1,183 مقطعا من محتوى المقرر",
       "تسريع اتخاذ القرار باستخدام الذكاء الاصطناعي والأتمتة",
       "تسريع استرجاع البيانات في منصة تخطيط المدن",
       "خفض خطأ التنبؤ مقارنة بخط أساس بسيط",
@@ -1272,8 +1271,219 @@ function withCorrectOrigin(copy: Dict, locale: Locale): Dict {
   };
 }
 
+
+/** The story as of this edit: a personal About, four causes, a trimmed Beyond Work, and sharper research entries. */
+const story = {
+  "en": {
+    "about": {
+      "lead": "I'm the first person in my family to graduate from college, and the first woman in my family to work.",
+      "p1": "We didn't have resources, but my father taught me mechanics, electricity, and gardening, raised me like his son, and gave me the belief that I could build anything. He's my inspiration for everything.",
+      "p2": "I'm from El Jadida on Morocco's Atlantic coast. I build AI systems that ship to production, from cancer drug discovery to university-wide infrastructure to venture capital deal flow. I study on a merit scholarship at Al Akhawayn University, spent a semester at the University of the Fraser Valley as AUI's first exchange student to Canada, and have researched in Bangkok, built in Lisbon, and presented in Vancouver.",
+      "p3": "I believe in philanthropy and in developing the people and places that don't get developed first. I defend climate action, sustainable agriculture, and energy access, not as side interests but as the context my technical work serves. I care about who gets access to the tools that matter, because nobody made sure I did.",
+      "recommended": "Recommended by six faculty and industry supervisors across three countries."
+    },
+    "causes": {
+      "intro": "Technology should widen the circle of who gets to lead, learn, and build.",
+      "items": [
+        {
+          "title": "Philanthropy & Access",
+          "body": "I build for people who don't have what I didn't have. Technology should widen the circle of who gets to lead, learn, and build, not shrink it. First-gen, no resources, scholarship kid: every system I build carries that."
+        },
+        {
+          "title": "Climate & Sustainability",
+          "body": "I defend climate action because the places that contributed least to the crisis are hit first, and mine is one of them. I was accepted into the LeadGreen Fellowship (selected from 6,000 applicants), a fully funded pan-African climate leadership program. I've worked on sustainable energy at TAQA Morocco, on sustainable agriculture through AgriVerse, and I'm applying to the IRENA Youth Forum 2027 in Abu Dhabi. This isn't a side interest. It's the lens through which I evaluate every technical decision."
+        },
+        {
+          "title": "Youth Leadership",
+          "body": "Young people are ready to lead now, not someday. I founded Phi Nu, Morocco's first university sorority: 50 members, built from scratch to welcome women from different regions and backgrounds, especially those with fewer resources or access to campus networks. I initiated the Alpha Pi Phi chapter at UFV, was elected to the Student Government Association, and keep opening doors for those who come after me."
+        },
+        {
+          "title": "Indigenous & Local Knowledge",
+          "link": "/projects/agriverse",
+          "body": "Indigenous communities carry generations of ecological knowledge that is too easily lost. I built AgriVerse to help keep it alive, pairing Indigenous land knowledge with machine learning for sustainable farming decisions. It won 1st place at the UFV Community Ideation Jam 2025 and was offered expansion across real Fraser Valley farms in partnership with UFV's School of Agriculture."
+        }
+      ]
+    },
+    "life": {
+      "intro": "The lab and the product are only part of it. I write, DJ, and compete.",
+      "items": [
+        {
+          "title": "Writer",
+          "detail": "Future Young Writer Award at 16, the youngest recipient (2022). A poetry reading at Dar El Ajaza retirement home. Unpublished French novel: Frénésie."
+        },
+        {
+          "title": "DJ Mimi",
+          "detail": "First female DJ in AUI history (techno / schranz, Numark)."
+        },
+        {
+          "title": "Sport",
+          "detail": "Gold medal, Best Young Local Swimmer, Doukkala (2018). AUI women's futsal."
+        }
+      ],
+      "closing": "I also play guitar and piano, volunteer with Lions Club, ALCS, and Scholars of Sustenance, and speak Arabic, French (C1), and English."
+    },
+    "records": {
+      "kmutt": "With Dr. Thana Sutthibutpong. Research question: can ML-guided screening surface aromatase inhibitors in fungal chemical space? Targeting a Q1 journal.",
+      "rag": "With Prof. Sofiane Grira. Research question: how well do hybrid retrieval and cross-encoder reranking serve mathematical educational content? Paper in progress."
+    }
+  },
+  "fr": {
+    "about": {
+      "lead": "Je suis la première de ma famille à obtenir un diplôme universitaire, et la première femme de ma famille à travailler.",
+      "p1": "Nous n'avions pas de ressources, mais mon père m'a appris la mécanique, l'électricité et le jardinage, m'a élevée comme son fils et m'a donné la conviction que je pouvais tout construire. Il est mon inspiration pour tout.",
+      "p2": "Je viens d'El Jadida, sur la côte atlantique du Maroc. Je construis des systèmes d'IA qui arrivent en production, de la découverte de médicaments contre le cancer à l'infrastructure universitaire, en passant par le deal-flow du capital-risque. J'étudie grâce à une bourse au mérite à l'Université Al Akhawayn, j'ai passé un semestre à l'Université de la Fraser Valley en tant que première étudiante d'échange de l'AUI au Canada, et j'ai fait de la recherche à Bangkok, construit à Lisbonne et présenté à Vancouver.",
+      "p3": "Je crois à la philanthropie et au développement des personnes et des lieux qui ne sont pas développés en premier. Je défends l'action climatique, l'agriculture durable et l'accès à l'énergie, non comme des intérêts secondaires, mais comme le contexte que sert mon travail technique. Je me soucie de qui a accès aux outils qui comptent, parce que personne ne s'est assuré que j'y aie accès.",
+      "recommended": "Recommandée par six enseignants et responsables professionnels dans trois pays."
+    },
+    "causes": {
+      "intro": "La technologie doit élargir le cercle de ceux qui dirigent, apprennent et construisent.",
+      "items": [
+        {
+          "title": "Philanthropie et accès",
+          "body": "Je construis pour celles et ceux qui n'ont pas ce que je n'ai pas eu. La technologie doit élargir le cercle de ceux qui dirigent, apprennent et construisent, pas le réduire. Première de ma famille à l'université, sans ressources, boursière : chaque système que je construis porte cela."
+        },
+        {
+          "title": "Climat et durabilité",
+          "body": "Je défends l'action climatique parce que les régions qui ont le moins contribué à la crise sont touchées en premier, et la mienne en fait partie. J'ai été admise au LeadGreen Fellowship (sélectionnée parmi 6 000 candidats), un programme panafricain de leadership climatique entièrement financé. J'ai travaillé sur l'énergie durable chez TAQA Morocco, sur l'agriculture durable avec AgriVerse, et je candidate à l'IRENA Youth Forum 2027 à Abou Dhabi. Ce n'est pas un intérêt secondaire : c'est le prisme à travers lequel j'évalue chaque décision technique."
+        },
+        {
+          "title": "Leadership des jeunes",
+          "body": "Les jeunes sont prêts à diriger maintenant, pas un jour. J'ai fondé Phi Nu, la première sororité universitaire du Maroc : 50 membres, construite de zéro pour accueillir des femmes de toutes régions et de tous horizons, surtout celles qui ont moins de ressources ou d'accès aux réseaux du campus. J'ai lancé le chapitre Alpha Pi Phi à l'UFV, j'ai été élue à l'Association des étudiants, et je continue d'ouvrir des portes à celles qui viennent après moi."
+        },
+        {
+          "title": "Savoirs autochtones et locaux",
+          "link": "/projects/agriverse",
+          "body": "Les communautés autochtones portent des générations de savoir écologique, trop facile à perdre. J'ai créé AgriVerse pour aider à le préserver : il associe le savoir autochtone du territoire au machine learning pour des décisions agricoles durables. Il a gagné la 1re place au UFV Community Ideation Jam 2025 et s'est vu proposer une extension sur de vraies fermes de la Fraser Valley, en partenariat avec l'École d'agriculture de l'UFV."
+        }
+      ]
+    },
+    "life": {
+      "intro": "Le labo et le produit ne sont qu'une partie. J'écris, je mixe et je fais de la compétition.",
+      "items": [
+        {
+          "title": "Autrice",
+          "detail": "Future Young Writer Award à 16 ans, la plus jeune lauréate (2022). Une lecture de poésie à la maison de retraite Dar El Ajaza. Roman français inédit : Frénésie."
+        },
+        {
+          "title": "DJ Mimi",
+          "detail": "Première DJ femme de l'histoire de l'AUI (techno / schranz, Numark)."
+        },
+        {
+          "title": "Sport",
+          "detail": "Médaille d'or, meilleure jeune nageuse locale, Doukkala (2018). Équipe féminine de futsal de l'AUI."
+        }
+      ],
+      "closing": "Je joue aussi de la guitare et du piano, je suis bénévole au Lions Club, à l'ALCS et chez Scholars of Sustenance, et je parle arabe, français (C1) et anglais."
+    },
+    "records": {
+      "kmutt": "Avec Dr. Thana Sutthibutpong. Question de recherche : un criblage guidé par le ML peut-il révéler des inhibiteurs de l'aromatase dans l'espace chimique fongique ? Visée revue Q1.",
+      "rag": "Avec Prof. Sofiane Grira. Question de recherche : dans quelle mesure la recherche hybride et le reranking par cross-encoder servent-ils le contenu pédagogique mathématique ? Article en cours."
+    }
+  },
+  "ar": {
+    "about": {
+      "lead": "أنا أول شخص في عائلتي يتخرج من الجامعة، وأول امرأة في عائلتي تعمل.",
+      "p1": "لم تكن لدينا موارد، لكن والدي علّمني الميكانيك والكهرباء والبستنة، وربّاني كما يربّي ابنه، وأعطاني الإيمان بأنني أستطيع بناء أي شيء. هو مصدر إلهامي في كل شيء.",
+      "p2": "أنا من الجديدة على الساحل الأطلسي للمغرب. أبني أنظمة ذكاء اصطناعي تصل إلى الإنتاج، من اكتشاف أدوية السرطان إلى البنية التحتية الجامعية إلى تدفق الصفقات في رأس المال المخاطر. أدرس بمنحة تفوق في جامعة الأخوين، وقضيت فصلا في جامعة وادي فريزر كأول طالبة تبادل من الأخوين إلى كندا، وأجريت أبحاثا في بانكوك، وبنيت في لشبونة، وقدمت في فانكوفر.",
+      "p3": "أؤمن بالعمل الخيري وبتنمية الناس والأماكن التي لا تصل إليها التنمية أولا. أدافع عن العمل المناخي والزراعة المستدامة والوصول إلى الطاقة، لا كاهتمامات جانبية، بل كسياق يخدمه عملي التقني. يهمني من يصل إلى الأدوات المهمة، لأن أحدا لم يحرص على أن أصل إليها.",
+      "recommended": "بتوصية من ستة أساتذة ومشرفين مهنيين في ثلاثة بلدان."
+    },
+    "causes": {
+      "intro": "يجب أن توسّع التقنية دائرة من يقودون ويتعلمون ويبنون.",
+      "items": [
+        {
+          "title": "العمل الخيري والإتاحة",
+          "body": "أبني لمن لا يملكون ما لم أملكه. يجب أن توسّع التقنية دائرة من يقودون ويتعلمون ويبنون، لا أن تضيّقها. أول جامعية في عائلتي، بلا موارد، وبمنحة: كل نظام أبنيه يحمل ذلك."
+        },
+        {
+          "title": "المناخ والاستدامة",
+          "body": "أدافع عن العمل المناخي لأن الأماكن الأقل مساهمة في الأزمة هي الأسرع تضررا، وبلدي منها. قُبلت في زمالة LeadGreen (اختيرت من بين 6000 متقدم)، وهي برنامج قيادة مناخية إفريقي ممول بالكامل. عملت على الطاقة المستدامة في طاقة المغرب (TAQA)، وعلى الزراعة المستدامة عبر AgriVerse، وأتقدم لمنتدى الشباب لوكالة إيرينا 2027 في أبوظبي. ليس هذا اهتماما جانبيا، بل العدسة التي أقيّم بها كل قرار تقني."
+        },
+        {
+          "title": "قيادة الشباب",
+          "body": "الشباب مستعدون للقيادة الآن لا يوما ما. أسست Phi Nu، أول جمعية نسائية جامعية في المغرب: 50 عضوة، بُنيت من الصفر لاستقبال نساء من مناطق وخلفيات مختلفة، خاصة من لديهن موارد أو علاقات أقل في الحرم الجامعي. بدأت فرع Alpha Pi Phi في UFV، وانتُخبت في اتحاد الطلبة، وأواصل فتح الأبواب لمن يأتين بعدي."
+        },
+        {
+          "title": "المعرفة الأصلية والمحلية",
+          "link": "/projects/agriverse",
+          "body": "تحمل مجتمعات السكان الأصليين معرفة بيئية عبر أجيال يسهل فقدانها. بنيت AgriVerse للمساعدة في الحفاظ عليها: يجمع معرفة السكان الأصليين بالأرض مع التعلم الآلي لقرارات زراعية مستدامة. فاز بالمركز الأول في UFV Community Ideation Jam 2025 وعُرض عليه التوسع في مزارع حقيقية في وادي فريزر بالشراكة مع كلية الزراعة في UFV."
+        }
+      ]
+    },
+    "life": {
+      "intro": "المختبر والمنتج جزء من الحكاية فقط. أكتب وأمزج الموسيقى وأتنافس.",
+      "items": [
+        {
+          "title": "كاتبة",
+          "detail": "جائزة الكاتب الشاب المستقبلي في سن 16، أصغر الفائزين (2022). أمسية شعرية في دار العجزة. رواية فرنسية غير منشورة: Frénésie."
+        },
+        {
+          "title": "DJ Mimi",
+          "detail": "أول DJ امرأة في تاريخ الأخوين (تكنو / شرانز، Numark)."
+        },
+        {
+          "title": "الرياضة",
+          "detail": "ميدالية ذهبية، أفضل سباحة محلية شابة، دكالة (2018). فريق كرة الصالات النسائي في الأخوين."
+        }
+      ],
+      "closing": "أعزف أيضا الجيتار والبيانو، وأتطوع مع نادي الأسود وALCS وScholars of Sustenance، وأتحدث العربية والفرنسية (C1) والإنجليزية."
+    },
+    "records": {
+      "kmutt": "مع د. ثانا سوثيبوتبونغ. سؤال البحث: هل يكشف الفحص الموجَّه بالتعلم الآلي عن مثبطات الأروماتاز في الفضاء الكيميائي الفطري؟ استهداف مجلة Q1.",
+      "rag": "مع الأستاذ سفيان قريرا. سؤال البحث: ما مدى خدمة الاسترجاع الهجين وإعادة الترتيب بالمُشفّر المتقاطع للمحتوى التعليمي الرياضي؟ الورقة قيد الإعداد."
+    }
+  }
+} as const;
+
+const labels = {
+  "en": {
+    "kicker": "My story",
+    "titleBefore": "Where I come from, ",
+    "titleAccent": "and what I defend.",
+    "inspiration": "Inspiration",
+    "philosophy": "Philosophy",
+    "defend": "What I defend",
+    "nav": "Story"
+  },
+  "fr": {
+    "kicker": "Mon histoire",
+    "titleBefore": "D'où je viens, ",
+    "titleAccent": "et ce que je défends.",
+    "inspiration": "Inspiration",
+    "philosophy": "Philosophie",
+    "defend": "Ce que je défends",
+    "nav": "Histoire"
+  },
+  "ar": {
+    "kicker": "قصتي",
+    "titleBefore": "من أين أتيت، ",
+    "titleAccent": "وما أدافع عنه.",
+    "inspiration": "الإلهام",
+    "philosophy": "الفلسفة",
+    "defend": "ما أدافع عنه",
+    "nav": "قصتي"
+  }
+} as const;
+
+function withStory(copy: Dict, locale: Locale): Dict {
+  const st = story[locale];
+  return {
+    ...copy,
+    about: { ...copy.about, ...st.about, p1: "", p3: "", p4: "" },
+    nav: { ...copy.nav, Story: labels[locale].nav },
+    story: { ...labels[locale], quote: st.about.p1, belief: st.about.p3 },
+    causes: { ...copy.causes, intro: st.causes.intro, items: st.causes.items.map((i) => ({ ...i })) },
+    life: { ...copy.life, intro: st.life.intro, items: st.life.items.map((i) => ({ ...i })), closing: st.life.closing },
+    recordDetails: {
+      ...copy.recordDetails,
+      "ML Virtual Screening for Cancer Drug Discovery": st.records.kmutt,
+      "RAG Class Assistant": st.records.rag,
+    },
+  };
+}
+
 export const translations: Record<Locale, Dict> = {
-  en: withCorrectOrigin(en, "en"),
-  fr: withCorrectOrigin(fr, "fr"),
-  ar: withCorrectOrigin(ar, "ar"),
+  en: withStory(withCorrectOrigin(en, "en"), "en"),
+  fr: withStory(withCorrectOrigin(fr, "fr"), "fr"),
+  ar: withStory(withCorrectOrigin(ar, "ar"), "ar"),
 };

@@ -7,5 +7,6 @@ export const navigation: readonly NavItem[] = [
   { label: "Education", href: "#education" },
   { label: "Research", href: "#record" },
   { label: "Places", href: "#places" },
+  { label: "Causes", href: "#causes" },
   { label: "Contact", href: "#contact" },
 ];

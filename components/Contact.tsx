@@ -16,7 +16,6 @@ export function Contact() {
     { href: "https://linkedin.com/in/meriem-lmoubariki-591710351", icon: Linkedin, label: "LinkedIn", note: "Professional profile", external: true },
     { href: "https://github.com/myriamlmiii", icon: Github, label: "GitHub", note: "github.com/myriamlmiii", external: true },
   ];
-  const referencesHref = `mailto:${EMAIL}?subject=${encodeURIComponent(t.contact.referencesSubject)}&body=${encodeURIComponent(t.contact.referencesEmailBody)}`;
 
   return (
     <footer id="contact" className="section-pad bg-canvas">
@@ -25,23 +24,8 @@ export function Contact() {
           <p className="type-eyebrow mb-3 text-accent">{t.contact.kicker}</p>
           <h2 className="font-display type-section-title text-ink">
             {t.contact.titleBefore}
-            <span className="font-normal italic text-accent">{t.contact.titleAccent}</span>
+            <span className="font-normal not-italic text-accent">{t.contact.titleAccent}</span>
           </h2>
-        </Reveal>
-
-        <Reveal>
-          <div className="mb-5 flex flex-col gap-6 rounded-xl bg-ink p-6 text-canvas md:flex-row md:items-center md:justify-between md:p-8">
-            <div className="max-w-xl">
-              <p className="font-display text-[clamp(1.5rem,3vw,2rem)] font-medium leading-tight">{t.contact.references}</p>
-              <p className="type-body mt-3 max-w-[60ch] text-canvas/70">{t.contact.referencesBody}</p>
-            </div>
-            <a
-              href={referencesHref}
-              className="interactive-target inline-flex shrink-0 items-center justify-center rounded-full bg-accent px-5 text-base font-medium text-canvas transition-opacity hover:opacity-90"
-            >
-              {t.contact.referencesCta}
-            </a>
-          </div>
         </Reveal>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
