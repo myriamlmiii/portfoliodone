@@ -20,7 +20,7 @@ type Logo = { name: string; path?: string; hex: string };
 
 const icon = (i: { title: string; path: string; hex: string }, name = i.title): Logo => ({ name, path: i.path, hex: `#${i.hex}` });
 /** Tools without a public logo get a clean wordmark in their own colour. */
-const word = (name: string, hex = "#60a5fa"): Logo => ({ name, hex });
+const word = (name: string, hex = "#7dc8b6"): Logo => ({ name, hex });
 
 /** Each group is a verb, not a category: what I actually do with these tools. */
 const groups: readonly { id: "build" | "train" | "simulate" | "ship"; logos: readonly Logo[] }[] = [

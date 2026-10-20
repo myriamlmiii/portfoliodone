@@ -16,8 +16,8 @@ export function ProjectCover({ project, size = "md", bare = false }: { project: 
             <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
           </pattern>
           <radialGradient id={`glow-${project.slug}`} cx="75%" cy="20%" r="70%">
-            <stop offset="0%" stopColor="rgba(96,165,250,0.22)" />
-            <stop offset="100%" stopColor="rgba(96,165,250,0)" />
+            <stop offset="0%" stopColor="rgba(125,200,182,0.22)" />
+            <stop offset="100%" stopColor="rgba(125,200,182,0)" />
           </radialGradient>
         </defs>
         <rect width="800" height="450" fill={`url(#grid-${project.slug})`} />
@@ -32,7 +32,7 @@ export function ProjectCover({ project, size = "md", bare = false }: { project: 
             <p className={`font-display font-medium leading-[1.05] ${titleSize}`}>{project.title}</p>
             {metric && size !== "sm" && (
               <p className="mt-2 text-sm text-white/70">
-                <span className="tabular font-semibold text-[#60a5fa]">{metric.value}</span> {metric.label}
+                <span className="tabular font-semibold text-[#7dc8b6]">{metric.value}</span> {metric.label}
               </p>
             )}
           </div>
@@ -42,7 +42,7 @@ export function ProjectCover({ project, size = "md", bare = false }: { project: 
   );
 }
 
-const accent = "#60a5fa";
+const accent = "#7dc8b6";
 const soft = "rgba(255,255,255,0.35)";
 
 function Motif({ slug }: { slug: string }) {
@@ -112,7 +112,7 @@ function Motif({ slug }: { slug: string }) {
         </g>
       );
     case "meeting-intelligence-system": {
-      const colors = [accent, "#2dd4bf", "#a78bfa", "#4ade80"];
+      const colors = [accent, "#60a5fa", "#a78bfa", "#4ade80"];
       return (
         <g>
           {Array.from({ length: 48 }).map((_, i) => {

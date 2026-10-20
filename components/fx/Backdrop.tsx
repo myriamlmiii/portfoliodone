@@ -7,7 +7,7 @@ import { live } from "@/lib/store";
 const VERT = `#version 300 es
 in vec2 p; void main(){ gl_Position = vec4(p, 0., 1.); }`;
 
-// FBM smoke: deep navy base with a blue glow. Swirls around the cursor, drifts with scroll.
+// FBM smoke: deep navy base with a soft jade glow. Swirls around the cursor, drifts with scroll.
 const FRAG = `#version 300 es
 precision mediump float;
 uniform vec2 uRes; uniform float uTime; uniform vec2 uMouse; uniform float uScroll;
@@ -27,7 +27,7 @@ void main(){
   float f = fbm(q * 1.6 + vec2(t, -t * .6) + fbm(q * 2.4 - t));
   vec3 navy = vec3(.012, .03, .055);
   vec3 deep = vec3(.0, .12, .15);
-  vec3 teal = vec3(.38, .65, .98);
+  vec3 teal = vec3(.30, .66, .60);
   vec3 col = mix(navy, deep, smoothstep(.25, .75, f));
   col += teal * pow(smoothstep(.55, .95, f), 2.) * .22;
   col += teal * swirl * .10;
