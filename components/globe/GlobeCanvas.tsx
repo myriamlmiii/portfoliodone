@@ -155,7 +155,7 @@ function Globe({
           <lineBasicMaterial
             color={accent}
             transparent
-            opacity={index < 8 ? 0.11 : 0.09}
+            opacity={index < 8 ? 0.2 : 0.16}
           />
         </threeLine>
       ))}
@@ -203,10 +203,10 @@ export function GlobeCanvas({
   return (
     <div ref={host} className="h-full w-full">
     <Canvas
-      camera={{ position: [0, 0.4, 4.4], fov: 45 }}
+      camera={{ position: [0, 0.4, 5.4], fov: 45 }}
       dpr={[1, 1.5]}
       gl={{ antialias: true, alpha: true, powerPreference: "default" }}
-      frameloop={visible ? "always" : "never"}
+      frameloop={visible ? "always" : "demand"}
       className="h-full w-full cursor-grab active:cursor-grabbing"
     >
       <ambientLight intensity={1} />

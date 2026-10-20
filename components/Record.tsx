@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import Image from "next/image";
+import { dirOf } from "@/lib/bidi";
 import { ArrowUpRight, Award, BookOpen, Mic2, Stamp } from "lucide-react";
 import { record } from "@/data/record";
 import type { RecordGroup, RecordItem } from "@/types";
@@ -36,7 +37,7 @@ function RecordEntry({
   const content = (
     <div className="min-w-0">
       <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
-        <h3 className="max-w-[52ch] text-base font-semibold leading-snug text-ink">
+        <h3 dir={dirOf(item.title)} className="max-w-[52ch] text-base font-semibold leading-snug text-ink">
           {item.extra && item.href ? (
             <a href={item.href} target="_blank" rel="noreferrer" className="hover:text-accent">
               {item.title}
@@ -126,7 +127,7 @@ export function Record() {
   const totalItems = record.reduce((count, group) => count + group.items.length, 0);
 
   return (
-    <section id="record" className="record-section relative isolate overflow-hidden py-16 md:py-24">
+    <section id="record" className="record-section section-pad relative isolate overflow-hidden">
       <div className="record-watermark" aria-hidden="true">R.</div>
       <div className="container-content relative">
         <div className="grid gap-5 border-b border-line pb-6 md:grid-cols-[1fr_auto] md:items-end md:gap-8 md:pb-8">

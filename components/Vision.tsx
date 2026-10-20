@@ -33,6 +33,14 @@ export function Vision() {
             </Reveal>
           ))}
         </div>
+
+        {t.next && (
+          <Reveal delay={0.1} className="mt-14 max-w-3xl border-s-2 border-accent ps-6">
+            <p className="type-eyebrow mb-3 text-accent">{t.next.kicker}</p>
+            <p className="text-[clamp(1.125rem,1.8vw,1.375rem)] font-medium leading-[1.5] text-ink">{t.next.body}</p>
+            <p className="type-meta mt-4 text-muted">{t.next.recommended}</p>
+          </Reveal>
+        )}
       </div>
     </section>
   );

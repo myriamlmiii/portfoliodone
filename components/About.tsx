@@ -35,7 +35,7 @@ export function About() {
                 </div>
               ))}
             </dl>
-            <p className="type-meta mt-4 px-2 text-muted">{t.about.recommended}</p>
+            {t.about.recommended && <p className="type-meta mt-4 px-2 text-muted">{t.about.recommended}</p>}
           </Reveal>
         </div>
       </div>

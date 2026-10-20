@@ -8,6 +8,7 @@ import type { Project } from "@/types";
 import { PendingBadge, StatusBadge } from "./PendingBadge";
 import { Media, visibleMetrics } from "./ProjectMedia";
 import { Reveal } from "./Reveal";
+import { dirOf } from "@/lib/bidi";
 import { usePreferences } from "./Preferences";
 
 const STACK_TOP_REM = 6;
@@ -33,6 +34,10 @@ function CardBody({ project, detail }: { project: Project; detail?: { opacity: M
   const { t } = usePreferences();
   const copy = t.projects[project.slug];
   const metrics = visibleMetrics(project);
+  const px = t.projectText;
+  const label = (text: string | undefined) => (text ? (px?.labels[text] ?? text) : text);
+  const tagline = px?.taglines[project.slug] ?? project.tagline ?? copy?.outcome ?? project.outcome;
+  const category = copy?.category ?? project.category;
 
   return (
     <>
@@ -53,21 +58,21 @@ function CardBody({ project, detail }: { project: Project; detail?: { opacity: M
 
       <motion.div style={detail ? { opacity: detail.opacity, x: detail.x } : undefined} className={`flex min-h-0 flex-1 flex-col p-5 sm:p-6 ${wide ? "lg:p-8" : ""}`}>
         <div className="mb-2 flex flex-wrap items-center gap-2">
-          <p className="font-mono text-xs uppercase tracking-wider text-accent">{copy?.category ?? project.category}</p>
-          {project.status && project.statusLabel && <StatusBadge status={project.status} label={project.statusLabel} />}
+          <p dir={dirOf(category)} className={`${dirOf(category) ? "font-mono uppercase tracking-wider" : "font-medium"} text-xs text-accent rtl:text-right`}>{category}</p>
+          {project.status && project.statusLabel && <StatusBadge status={project.status} label={label(project.statusLabel) ?? project.statusLabel} />}
         </div>
-        <h3 className="font-display text-[1.75rem] leading-none text-ink lg:text-[2.25rem]">
+        <h3 dir={dirOf(project.title)} className="rtl:text-right font-display text-[1.75rem] leading-none text-ink lg:text-[2.25rem]">
           <Link href={`/projects/${project.slug}`} className="hover:text-accent">
             {project.title}
           </Link>
         </h3>
-        <p className="type-body mt-3 line-clamp-3 text-muted">{project.tagline ?? copy?.outcome ?? project.outcome}</p>
+        <p dir={dirOf(tagline)} className="rtl:text-right type-body mt-3 line-clamp-3 text-muted">{tagline}</p>
 
         {metrics.length > 0 && (
           <dl className="mt-5 grid grid-cols-2 gap-3 border-y border-line py-4 sm:grid-cols-3">
             {metrics.slice(0, 3).map((metric) => (
               <div key={metric.label} className="flex flex-col-reverse">
-                <dt className="mt-0.5 text-xs leading-snug text-muted">{metric.label}</dt>
+                <dt dir={dirOf(px?.metrics[metric.label] ?? metric.label)} className="mt-0.5 text-xs leading-snug text-muted rtl:text-right">{px?.metrics[metric.label] ?? metric.label}</dt>
                 <dd className="tabular font-mono text-lg font-medium text-ink">{metric.pending ? <PendingBadge /> : metric.value}</dd>
               </div>
             ))}
@@ -77,7 +82,7 @@ function CardBody({ project, detail }: { project: Project; detail?: { opacity: M
         <div className="mt-auto pt-4">
           <div className="flex flex-wrap gap-1.5 pb-4">
             {project.tags.slice(0, 4).map((tag) => (
-              <span key={tag} className="rounded-full border border-line px-2.5 py-1 font-mono text-[11px] text-muted">
+              <span key={tag} dir="ltr" className="rounded-full border border-line px-2.5 py-1 font-mono text-[11px] text-muted">
                 {tag}
               </span>
             ))}
@@ -88,12 +93,12 @@ function CardBody({ project, detail }: { project: Project; detail?: { opacity: M
             </Link>
             {project.href && (
               <a href={project.href} target="_blank" rel="noreferrer" className="interactive-target inline-flex items-center gap-1 text-sm text-muted hover:text-accent">
-                {project.demoLabel ?? "Live demo"} <ArrowUpRight size={14} />
+                {label(project.demoLabel ?? "Live demo")} <ArrowUpRight size={14} />
               </a>
             )}
             {project.secondaryHref && (
               <a href={project.secondaryHref} target="_blank" rel="noreferrer" className="interactive-target inline-flex items-center gap-1 text-sm text-muted hover:text-accent">
-                {project.secondaryLabel ?? "More"} <ArrowUpRight size={14} />
+                {label(project.secondaryLabel ?? "More")} <ArrowUpRight size={14} />
               </a>
             )}
           </div>

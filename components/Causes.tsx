@@ -15,7 +15,7 @@ export function Causes() {
       <div className="container-content">
         <SectionHeading eyebrow={t.causes.kicker} title={t.story?.defend ?? t.causes.titleBefore} intro={t.causes.intro} />
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:[&>*:last-child:nth-child(odd)]:col-span-2">
           {t.causes.items.map((cause, i) => (
             <Reveal key={cause.title} delay={i * 0.08}>
               <article className="flex h-full flex-col border-t border-line bg-canvas p-5 transition-colors hover:border-accent sm:p-6">
@@ -23,7 +23,7 @@ export function Causes() {
                 <p className="type-body mt-3 text-muted">{cause.body}</p>
                 {cause.link && (
                   <Link href={cause.link} className="interactive-target group mt-auto inline-flex items-center gap-1 pt-5 text-base text-accent hover:underline">
-                    AgriVerse
+                    {cause.linkLabel ?? "AgriVerse"}
                     <ChevronRight size={18} className="transition-transform group-hover:translate-x-0.5 rtl:rotate-180" />
                   </Link>
                 )}

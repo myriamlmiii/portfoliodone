@@ -5,7 +5,7 @@ import { INTRO } from "@/lib/introText";
 export const runtime = "nodejs";
 
 /** Soft neural voices, identical in every browser. Audio is rendered once per language and cached. */
-const VOICES = { en: "en-US-JennyNeural", fr: "fr-FR-DeniseNeural", ar: "ar-SA-ZariyahNeural" } as const;
+const VOICES = { en: "en-US-AvaMultilingualNeural", fr: "fr-FR-VivienneMultilingualNeural", ar: "ar-SA-ZariyahNeural" } as const;
 type Lang = keyof typeof VOICES;
 
 const cache = new Map<Lang, Promise<Buffer>>();
@@ -16,7 +16,7 @@ function render(lang: Lang) {
       const tts = new MsEdgeTTS();
       await tts.setMetadata(VOICES[lang], OUTPUT_FORMAT.AUDIO_24KHZ_48KBITRATE_MONO_MP3);
       // Slightly slower and lower than default reads as calm and warm rather than bright and rushed.
-      const { audioStream } = tts.toStream(INTRO[lang], { rate: "-22%", pitch: "+2Hz", volume: "-18%" });
+      const { audioStream } = tts.toStream(INTRO[lang], { rate: "-16%", pitch: "+6Hz", volume: "-14%" });
       const chunks: Buffer[] = [];
       audioStream.on("data", (c: Buffer) => chunks.push(c));
       audioStream.on("end", () => {

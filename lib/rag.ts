@@ -16,7 +16,7 @@ const profile: Chunk[] = [
   {
     id: "profile",
     source: "About",
-    text: "Meriem Lmoubariki is a final-year Computer Science student (B.Sc. in Computer Science with a double specialization in AI and Big Data Analytics, and a minor in Business Administration) at Al Akhawayn University in Morocco, graduating December 2026. She is an AI engineer and researcher applying to graduate programs and scholarships, with a record spanning peer-reviewed publication, funded international research, production AI systems, and entrepreneurship.",
+    text: "Meriem Lmoubariki is a final-year Computer Science student (B.Sc. in Computer Science with a double specialization in AI and Big Data Analytics, and a minor in Business Administration) at Al Akhawayn University in Morocco, graduating December 2026. Based in Morocco and North America. She is an AI engineer and researcher applying to graduate programs and scholarships, with a record spanning peer-reviewed publication, funded international research, production AI systems, and entrepreneurship.",
   },
   {
     id: "scholarship",

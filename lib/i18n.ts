@@ -22,7 +22,7 @@ type Dict = {
   countries: Record<string, string>;
   hero: { kicker: string; title: string; body: string; cta: string; scroll: string; facts: { label: string; value: string }[]; stats: string[] };
   about: { recommended?: string; kicker: string; title: string; lead: string; p1: string; p2: string; p3: string; p4: string; headed: string; facts: { label: string; value: string }[]; accreditation: string };
-  causes: { kicker: string; titleBefore: string; titleAccent: string; intro: string; items: { title: string; body: string; link?: string }[] };
+  causes: { kicker: string; titleBefore: string; titleAccent: string; intro: string; items: { title: string; body: string; linkLabel?: string; link?: string }[] };
   places: { kicker: string; titleBefore: string; titleAccent: string; intro: string; home: string; items: Record<string, { name: string; note: string }> };
   authority: string;
   work: { moreLabel: string; lessLabel: string; kicker: string; titleBefore: string; titleAccent: string; also: string; caseStudy: string; filters: Record<"all" | "ai" | "research" | "fullstack" | "data", string> };
@@ -37,6 +37,8 @@ type Dict = {
   projects: Record<string, { category: string; outcome: string }>;
   more: Record<string, string>;
   record: { kicker: string; titleBefore: string; titleAccent: string; intro: string; groups: Record<string, string>; status: Record<"published" | "presented" | "submitted" | "in-progress", string>; totalLabel: string; archiveLabel: string; entriesLabel: string; indexNote: string; paperNote: string };
+  next?: { kicker: string; body: string; recommended: string };
+  projectText?: { taglines: Record<string, string>; metrics: Record<string, string>; labels: Record<string, string> };
   story?: { kicker: string; titleBefore: string; titleAccent: string; inspiration: string; philosophy: string; defend: string; quote: string; belief: string };
   recordDetails: Record<string, string>;
   skills: { kicker: string; titleBefore: string; titleAccent: string; stack: string; stackGroups: Record<string, string>; items: { name: string; description: string }[] };
@@ -93,7 +95,7 @@ const en: Dict = {
   journey: [
     "Moroccan Student",
     "Scholarship Recipient",
-    "First AUI (Morocco) exchange student at UFV",
+    "First AUI (Morocco) bilateral exchange student at UFV",
     "Automation Intern in Portugal",
     "Cancer Drug Discovery Researcher in Thailand",
     "Tech Lead at U-Investors",
@@ -109,7 +111,7 @@ const en: Dict = {
     facts: [{"label":"Currently","value":"Tech Lead at U-Investors · Research Assistant and Teaching Assistant at AUI"},{"label":"Based in","value":"Morocco"}],
     stats: ["compounds screened in breast cancer medication testing research","accuracy on the RAG class assistant's 50-question validation bank","orders delivered by delivery2dorms","Best Startup Award for Bliss Bites"],
   },
-  about: {"kicker":"About","title":"Engineer, researcher, founder.","lead":"From Beni Tajjit in southeastern Morocco to research labs in Canada and Thailand, I build AI that does real work, and I bring my community with me.","p1":"I'm Meriem Lmoubariki, from Beni Tajjit in southeastern Morocco. I'm in my final year of a B.S. in Computer Science at Al Akhawayn University in Ifrane (2022 to December 2026), concentrating in AI and Big Data Analytics with a minor in Business Administration. I study on a 60% Merit Scholarship and made the Dean's List in Spring 2024 and Fall 2025.","p2":"In fall 2025 I spent a semester at the University of the Fraser Valley in British Columbia, Canada, through AUI's bilateral exchange, as the first exchange student from AUI (Morocco) to attend UFV. I studied machine learning, NLP, and finance, worked as an ML research assistant in the School of Computing under Dr. Russell Campbell and Dr. Mike Ivanof, and presented a paper at BC Cancer Research Day in Vancouver.","p3":"I measure my work in results. At KMUTT in Bangkok, I screened 51,837 compounds in breast cancer medication research (ROC-AUC 0.978 with Extra Trees) and narrowed them to 8 candidates; the strongest, NPA020664, docked at −8.96 kcal/mol. At U-Investors, I run AI across 247 live deals. My Calculus II RAG assistant reaches 94% accuracy on a 50-question validation bank. Before that, I worked on predictive maintenance at TAQA Morocco, which produces about 35% of the country's electricity, and on automation at Ravel Future in Lisbon, where decisions became 35% faster.","p4":"Leadership matters to me as much as code. I was accepted into the fully funded LeadGreen Fellowship (Cohort 4), a pan-African climate leadership program selected from 6,000 applicants. I founded Bliss Bites, an agrifood startup that won AUI's Best Startup Award two years in a row with full investor funding, and Phi Nu, AUI's first sorority, which 50 members have joined. At UFV, I initiated the Alpha Pi Phi Cygnet chapter. I also write (Future Young Writer Award at 16), DJ as DJ Mimi, play futsal, and swim.","headed":"See where I'm headed","facts":[{"label":"Hometown","value":"Beni Tajjit, Morocco"},{"label":"University","value":"Al Akhawayn University, Class of Dec 2026"},{"label":"Focus","value":"AI & Big Data Analytics, Business minor"},{"label":"Honors","value":"60% Merit Scholarship, Dean's List ×2"},{"label":"Exchange","value":"University of the Fraser Valley, Canada"},{"label":"Languages","value":"Arabic, French (C1), English (IELTS 7)"}],"accreditation":"About AUI: the first non-US university in Africa accredited by NECHE, the US accreditor of Harvard, MIT, and Yale (since 2017, renewed through 2032). Computer Science is ABET-accredited, the School of Business holds EFMD EPAS accreditation, and the university is recognized by Morocco's Ministry of Higher Education (MESRS)."},
+  about: {"kicker":"About","title":"Engineer, researcher, founder.","lead":"From Beni Tajjit in southeastern Morocco to research labs in Canada and Thailand, I build AI that does real work, and I bring my community with me.","p1":"I'm Meriem Lmoubariki, from Beni Tajjit in southeastern Morocco. I'm in my final year of a B.S. in Computer Science at Al Akhawayn University in Ifrane (2022 to December 2026), concentrating in AI and Big Data Analytics with a minor in Business Administration. I study on a 60% Merit Scholarship and made the Dean's List in Spring 2024 and Fall 2025.","p2":"In fall 2025 I spent a semester at the University of the Fraser Valley in British Columbia, Canada, through AUI's bilateral exchange, as the first exchange student from AUI (Morocco) to attend UFV. I studied machine learning, NLP, and finance, worked as an ML research assistant in the School of Computing under Dr. Russell Campbell and Dr. Mike Ivanof, and presented a paper at BC Cancer Research Day in Vancouver.","p3":"I measure my work in results. At KMUTT in Bangkok, I screened 51,837 compounds in breast cancer medication research (ROC-AUC 0.978 with Extra Trees) and narrowed them to 8 candidates; the strongest, NPA020664, docked at −8.96 kcal/mol. At U-Investors, I run AI across 247 live deals. My Calculus II RAG assistant reaches 94% accuracy on a 50-question validation bank. Before that, I worked on predictive maintenance at TAQA Morocco, which produces about 35% of the country's electricity, and on automation at Ravel Future in Lisbon, where decisions became 35% faster.","p4":"Leadership matters to me as much as code. I was accepted into the fully funded LeadGreen Fellowship (Cohort 4), a pan-African climate leadership program selected from 6,000 applicants. I founded Bliss Bites, an agrifood startup that won AUI's Best Startup Award two years in a row with full investor funding, and Phi Nu, AUI's first sorority, which 50 members have joined. At UFV, I initiated the Alpha Pi Phi Cygnet chapter. I also write (Future Young Writer Award at 16), DJ as DJ Mimi, play futsal, and swim.","headed":"See where I'm headed","facts":[{"label":"Hometown","value":"Beni Tajjit, Morocco"},{"label":"University","value":"Al Akhawayn University, Class of Dec 2026"},{"label":"Focus","value":"AI & Big Data Analytics, Business minor"},{"label":"Honors","value":"60% Merit Scholarship, Dean's List ×2"},{"label":"Exchange","value":"Bilateral exchange, University of the Fraser Valley, Canada"},{"label":"Languages","value":"Arabic, French (C1), English (IELTS 7)"}],"accreditation":"About AUI: the first non-US university in Africa accredited by NECHE, the US accreditor of Harvard, MIT, and Yale (since 2017, renewed through 2032). Computer Science is ABET-accredited, the School of Business holds EFMD EPAS accreditation, and the university is recognized by Morocco's Ministry of Higher Education (MESRS)."},
   causes: {"kicker":"Causes","titleBefore":"What I stand for. ","titleAccent":"And who I build for.","intro":"Technology should widen the circle of who gets to lead, and whose knowledge counts.","items":[{"title":"Youth leadership","body":"I believe young people are ready to lead now, not someday. I founded Phi Nu, AUI's first sorority, to welcome women from different regions and backgrounds, especially those with fewer resources or access to campus networks. I also initiated a chapter at UFV, was elected to the Student Government Association, and keep opening doors for those who come after me."},{"title":"Indigenous knowledge","body":"Indigenous communities carry generations of ecological knowledge that is too easily lost. I built AgriVerse to help keep it alive: it pairs Indigenous land knowledge with machine learning so farms can make more sustainable decisions. It won 1st place at the UFV Community Ideation Jam 2025.","link":"/projects/agriverse"},{"title":"Community & network","body":"Through fellowships, research labs, startups, and volunteering, I've built a strong community across Morocco, Canada, Thailand, Portugal, and the pan-African climate network. I show up for it, and it shows up for me."}]},
   places: {"kicker":"Places","titleBefore":"Rooted in Morocco. ","titleAccent":"Shaped around the world.","intro":"Every place on this map changed how I work.","home":"Home","items":{"beniTajjit":{"name":"Beni Tajjit, Morocco","note":"Where I'm from"},"ifrane":{"name":"Ifrane, Morocco","note":"Al Akhawayn University, 2022 to 2026"},"abbotsford":{"name":"Abbotsford, Canada","note":"Exchange at the University of the Fraser Valley, Fall 2025"},"vancouver":{"name":"Vancouver, Canada","note":"Presented research at BC Cancer Research Day"},"bangkok":{"name":"Bangkok, Thailand","note":"Breast cancer research at KMUTT, 2026"},"lisbon":{"name":"Lisbon, Portugal","note":"AI & automation at Ravel Future"}}},
   authority: "Studied, worked, and built alongside",
@@ -317,7 +319,7 @@ const fr: Dict = {
   journey: [
     "Étudiante marocaine",
     "Boursière au mérite",
-    "Première personne en échange d'AUI (Maroc) à l'UFV",
+    "Première personne en échange bilatéral d'AUI (Maroc) à l'UFV",
     "Stagiaire automatisation au Portugal",
     "Chercheuse en découverte de médicaments en Thaïlande",
     "Tech Lead chez U-Investors",
@@ -333,7 +335,7 @@ const fr: Dict = {
     facts: [{"label":"Actuellement","value":"Tech Lead chez U-Investors · Assistante de recherche et d'enseignement à AUI"},{"label":"Basée à","value":"Maroc"}],
     stats: ["composés criblés dans la recherche sur les traitements du cancer du sein","de précision de l'assistant RAG sur une banque de 50 questions","commandes livrées par delivery2dorms","Best Startup Award pour Bliss Bites"],
   },
-  about: {"kicker":"À propos","title":"Ingénieure, chercheuse, fondatrice.","lead":"De Beni Tajjit, dans le sud-est du Maroc, aux laboratoires de recherche au Canada et en Thaïlande, je construis une IA qui sert vraiment, et j'emmène ma communauté avec moi.","p1":"Je suis Meriem Lmoubariki, originaire de Beni Tajjit, dans le sud-est du Maroc. Je suis en dernière année de licence en informatique à l'Université Al Akhawayn d'Ifrane (2022 à décembre 2026), concentration IA et analyse du Big Data, mineure en administration des affaires. Boursière au mérite (60 %), inscrite au Dean's List au printemps 2024 et à l'automne 2025.","p2":"À l'automne 2025, j'ai passé un semestre à l'University of the Fraser Valley, en Colombie-Britannique (Canada), dans le cadre de l'échange bilatéral d'AUI, en tant que première étudiante d'AUI à y partir. J'y ai étudié le machine learning, le TAL et la finance, travaillé comme assistante de recherche en ML à l'École d'informatique auprès du Dr Russell Campbell et du Dr Mike Ivanof, et présenté un article au BC Cancer Research Day à Vancouver.","p3":"Je mesure mon travail en résultats. À KMUTT (Bangkok), j'ai criblé 51 837 composés dans le cadre d'une recherche sur les traitements du cancer du sein (ROC-AUC 0,898) pour aboutir à 8 candidats ; le meilleur, NPA020664, atteint −8,96 kcal/mol. Chez U-Investors, je pilote l'IA sur 247 dossiers actifs. Mon assistant RAG de Calcul II atteint 94 % de précision sur une banque de 50 questions de validation. Auparavant : maintenance prédictive chez TAQA Morocco (environ 35 % de l'électricité nationale) et automatisation chez Ravel Future à Lisbonne (+35 % de vitesse de décision).","p4":"Le leadership compte autant que le code. J'ai été acceptée à la LeadGreen Fellowship (cohorte 4), programme panafricain de leadership climatique entièrement financé, sélectionné parmi 6 000 candidatures. J'ai fondé Bliss Bites, startup agroalimentaire lauréate du Best Startup Award d'AUI deux années de suite avec un financement intégral par des investisseurs, ainsi que Phi Nu, première sororité d'AUI (50 membres). À l'UFV, j'ai lancé le chapitre Alpha Pi Phi Cygnet. J'écris aussi (Future Young Writer Award à 16 ans), je mixe sous le nom de DJ Mimi, je joue au futsal et je nage.","headed":"Voir où je vais","facts":[{"label":"Origine","value":"Beni Tajjit, Maroc"},{"label":"Université","value":"Université Al Akhawayn, promotion déc. 2026"},{"label":"Spécialité","value":"IA et Big Data, mineure business"},{"label":"Distinctions","value":"Bourse au mérite 60 %, Dean's List ×2"},{"label":"Échange","value":"University of the Fraser Valley, Canada"},{"label":"Langues","value":"Arabe, français (C1), anglais (IELTS 7)"}],"accreditation":"À propos d'AUI : première université non américaine d'Afrique accréditée par NECHE, l'organisme qui accrédite Harvard, le MIT et Yale (depuis 2017, renouvelé jusqu'en 2032). L'informatique est accréditée ABET, l'école de commerce détient l'accréditation EFMD EPAS, et l'université est reconnue par le ministère marocain de l'Enseignement supérieur (MESRS)."},
+  about: {"kicker":"À propos","title":"Ingénieure, chercheuse, fondatrice.","lead":"De Beni Tajjit, dans le sud-est du Maroc, aux laboratoires de recherche au Canada et en Thaïlande, je construis une IA qui sert vraiment, et j'emmène ma communauté avec moi.","p1":"Je suis Meriem Lmoubariki, originaire de Beni Tajjit, dans le sud-est du Maroc. Je suis en dernière année de licence en informatique à l'Université Al Akhawayn d'Ifrane (2022 à décembre 2026), concentration IA et analyse du Big Data, mineure en administration des affaires. Boursière au mérite (60 %), inscrite au Dean's List au printemps 2024 et à l'automne 2025.","p2":"À l'automne 2025, j'ai passé un semestre à l'University of the Fraser Valley, en Colombie-Britannique (Canada), dans le cadre de l'échange bilatéral d'AUI, en tant que première étudiante d'AUI à y partir. J'y ai étudié le machine learning, le TAL et la finance, travaillé comme assistante de recherche en ML à l'École d'informatique auprès du Dr Russell Campbell et du Dr Mike Ivanof, et présenté un article au BC Cancer Research Day à Vancouver.","p3":"Je mesure mon travail en résultats. À KMUTT (Bangkok), j'ai criblé 51 837 composés dans le cadre d'une recherche sur les traitements du cancer du sein (ROC-AUC 0,898) pour aboutir à 8 candidats ; le meilleur, NPA020664, atteint −8,96 kcal/mol. Chez U-Investors, je pilote l'IA sur 247 dossiers actifs. Mon assistant RAG de Calcul II atteint 94 % de précision sur une banque de 50 questions de validation. Auparavant : maintenance prédictive chez TAQA Morocco (environ 35 % de l'électricité nationale) et automatisation chez Ravel Future à Lisbonne (+35 % de vitesse de décision).","p4":"Le leadership compte autant que le code. J'ai été acceptée à la LeadGreen Fellowship (cohorte 4), programme panafricain de leadership climatique entièrement financé, sélectionné parmi 6 000 candidatures. J'ai fondé Bliss Bites, startup agroalimentaire lauréate du Best Startup Award d'AUI deux années de suite avec un financement intégral par des investisseurs, ainsi que Phi Nu, première sororité d'AUI (50 membres). À l'UFV, j'ai lancé le chapitre Alpha Pi Phi Cygnet. J'écris aussi (Future Young Writer Award à 16 ans), je mixe sous le nom de DJ Mimi, je joue au futsal et je nage.","headed":"Voir où je vais","facts":[{"label":"Origine","value":"Beni Tajjit, Maroc"},{"label":"Université","value":"Université Al Akhawayn, promotion déc. 2026"},{"label":"Spécialité","value":"IA et Big Data, mineure business"},{"label":"Distinctions","value":"Bourse au mérite 60 %, Dean's List ×2"},{"label":"Échange","value":"Échange bilatéral, University of the Fraser Valley, Canada"},{"label":"Langues","value":"Arabe, français (C1), anglais (IELTS 7)"}],"accreditation":"À propos d'AUI : première université non américaine d'Afrique accréditée par NECHE, l'organisme qui accrédite Harvard, le MIT et Yale (depuis 2017, renouvelé jusqu'en 2032). L'informatique est accréditée ABET, l'école de commerce détient l'accréditation EFMD EPAS, et l'université est reconnue par le ministère marocain de l'Enseignement supérieur (MESRS)."},
   causes: {"kicker":"Engagements","titleBefore":"Ce que je défends. ","titleAccent":"Et pour qui je construis.","intro":"La technologie doit élargir le cercle de celles et ceux qui dirigent, et des savoirs qui comptent.","items":[{"title":"Le leadership des jeunes","body":"Je crois que les jeunes sont prêts à diriger maintenant, pas un jour. J'ai fondé Phi Nu, première sororité d'AUI, pour accueillir des femmes de régions et d'horizons différents, en particulier celles qui disposent de moins de ressources ou de réseaux sur le campus. J'ai aussi lancé un chapitre à l'UFV, été élue au gouvernement étudiant et continue d'ouvrir des portes aux étudiantes qui viennent après moi."},{"title":"Les savoirs autochtones","body":"Les communautés autochtones portent des générations de savoirs écologiques, trop facilement perdus. J'ai créé AgriVerse pour les préserver : la plateforme associe ces savoirs au machine learning pour aider les fermes à prendre des décisions plus durables. 1re place à l'UFV Community Ideation Jam 2025.","link":"/projects/agriverse"},{"title":"Communauté et réseau","body":"Grâce aux fellowships, aux laboratoires, aux startups et au bénévolat, j'ai bâti une communauté solide au Maroc, au Canada, en Thaïlande, au Portugal et dans le réseau climatique panafricain. Je suis là pour elle, et elle est là pour moi."}]},
   places: {"kicker":"Lieux","titleBefore":"Enracinée au Maroc. ","titleAccent":"Façonnée par le monde.","intro":"Chaque lieu de cette carte a changé ma façon de travailler.","home":"Chez moi","items":{"beniTajjit":{"name":"Beni Tajjit, Maroc","note":"Là d'où je viens"},"ifrane":{"name":"Ifrane, Maroc","note":"Université Al Akhawayn, 2022 à 2026"},"abbotsford":{"name":"Abbotsford, Canada","note":"Échange à l'University of the Fraser Valley, automne 2025"},"vancouver":{"name":"Vancouver, Canada","note":"Recherche présentée au BC Cancer Research Day"},"bangkok":{"name":"Bangkok, Thaïlande","note":"Recherche sur le cancer du sein à KMUTT, 2026"},"lisbon":{"name":"Lisbonne, Portugal","note":"IA et automatisation chez Ravel Future"}}},
   authority: "Études, recherche et collaborations",
@@ -373,7 +375,7 @@ const fr: Dict = {
         "location": "Colombie-Britannique, Canada",
         "dateRange": "Sept. à déc. 2025",
         "highlights": [
-          "Première personne en échange d'AUI (Maroc) à l'UFV",
+          "Première personne en échange bilatéral d'AUI (Maroc) à l'UFV",
           "1re place, UFV Community Ideation Jam 2025",
           "Recherche présentée au BC Cancer Research Day 2025, Vancouver",
           "Liste du doyen avec distinction"
@@ -573,7 +575,7 @@ const fr: Dict = {
         title: "Étudiante en échange bilatéral",
         dateRange: "Sept. à déc. 2025",
         location: "Colombie-Britannique, Canada",
-        detail: "Première personne en échange d'AUI (Maroc) à l'UFV · Machine learning, TAL et finance",
+        detail: "Première personne en échange bilatéral d'AUI (Maroc) à l'UFV · Machine learning, TAL et finance",
         description:
           "Semestre en machine learning, TAL et finance, première étudiante en échange venue d'AUI (Maroc). Intelligence de réunions sous Dr. Russell Campbell (diarisation AMI) et recherche urbanisme / agriculture sous Dr. Mike Ivanof. Présentation au BC Cancer Research Day 2025 à Vancouver.",
       },
@@ -720,7 +722,7 @@ const ar: Dict = {
   journey: [
     "طالبة مغربية",
     "حاصلة على منحة استحقاق",
-    "أول طالبة من جامعة الأخوين (المغرب) في تبادل بجامعة فريزر فالي",
+    "أول طالبة من جامعة الأخوين (المغرب) في تبادل ثنائي بجامعة فريزر فالي",
     "متدربة أتمتة في البرتغال",
     "باحثة في اكتشاف أدوية السرطان في تايلاند",
     "قائدة تقنية في U-Investors",
@@ -736,7 +738,7 @@ const ar: Dict = {
     facts: [{"label":"حاليا","value":"قائدة تقنية في U-Investors · مساعدة بحث وتدريس في الأخوين"},{"label":"مقيمة في","value":"المغرب"}],
     stats: ["مركبا فُحصت في أبحاث اختبار أدوية سرطان الثدي","نسبة نجاح الاسترجاع في مساعد RAG","طلبية سلّمتها delivery2dorms","جائزة أفضل شركة ناشئة لـ Bliss Bites"],
   },
-  about: {"kicker":"نبذة","title":"مهندسة، باحثة، مؤسِّسة.","lead":"من بني تجيت في جنوب شرق المغرب إلى مختبرات البحث في كندا وتايلاند، أبني ذكاء اصطناعيا ينجز عملا حقيقيا، وأحمل مجتمعي معي.","p1":"أنا مريم المباركي من بني تجيت في جنوب شرق المغرب. أدرس في السنة الأخيرة من البكالوريوس في علوم الحاسوب بجامعة الأخوين في إفران (2022 إلى ديسمبر 2026)، بتخصص الذكاء الاصطناعي وتحليل البيانات الضخمة وتخصص فرعي في إدارة الأعمال. حاصلة على منحة الاستحقاق (60%) وعلى قائمة العميد في ربيع 2024 وخريف 2025.","p2":"في خريف 2025 قضيت فصلا دراسيا في جامعة فريزر فالي بكولومبيا البريطانية في كندا ضمن برنامج التبادل الثنائي لجامعة الأخوين، كأول طالبة تبادل من جامعة الأخوين (المغرب) في UFV. درست التعلم الآلي ومعالجة اللغة الطبيعية والتمويل، وعملت مساعدة بحث في التعلم الآلي بكلية الحوسبة مع د. راسل كامبل ود. مايك إيفانوف، وقدّمت ورقة بحثية في يوم أبحاث السرطان بفانكوفر.","p3":"أقيس عملي بالنتائج. في KMUTT ببانكوك فحصت 51,837 مركبا ضمن أبحاث أدوية سرطان الثدي (ROC-AUC 0.978 مع Extra Trees) واختصرتها إلى 8 مرشحين، أقواها NPA020664 بطاقة ارتباط −8.96 كيلو كالوري/مول. في U-Investors أدير الذكاء الاصطناعي على 247 صفقة نشطة. ويحقق مساعد RAG لمادة التفاضل والتكامل 2 دقة 94% على بنك تحقق من 50 سؤالا. وقبل ذلك عملت على الصيانة التنبؤية في طاقة المغرب (نحو 35% من كهرباء البلاد)، وعلى الأتمتة في Ravel Future بلشبونة حيث أصبحت القرارات أسرع بنسبة 35%.","p4":"القيادة تهمني بقدر البرمجة. قُبلت في زمالة LeadGreen (الدفعة 4)، برنامج أفريقي للقيادة المناخية ممول بالكامل اختير من بين 6000 متقدم. أسست Bliss Bites، شركة ناشئة في الصناعات الغذائية الزراعية فازت بجائزة أفضل شركة ناشئة في الأخوين سنتين متتاليتين بتمويل كامل من المستثمرين، وPhi Nu، أول جمعية نسائية في الأخوين انضمت إليها 50 عضوة. وفي UFV أطلقت فرع Alpha Pi Phi Cygnet. كما أكتب (جائزة الكاتبة الشابة في سن 16)، وأقدّم الموسيقى باسم DJ Mimi، وألعب كرة القدم داخل القاعة وأمارس السباحة.","headed":"إلى أين أتجه","facts":[{"label":"المدينة الأم","value":"بني تجيت، المغرب"},{"label":"الجامعة","value":"جامعة الأخوين، دفعة ديسمبر 2026"},{"label":"التخصص","value":"الذكاء الاصطناعي والبيانات الضخمة، فرعي أعمال"},{"label":"التميز","value":"منحة استحقاق 60%، قائمة العميد مرتين"},{"label":"التبادل","value":"جامعة فريزر فالي، كندا"},{"label":"اللغات","value":"العربية، الفرنسية (C1)، الإنجليزية (IELTS 7)"}],"accreditation":"عن جامعة الأخوين: أول جامعة غير أمريكية في أفريقيا تعتمدها NECHE، الجهة الأمريكية التي تعتمد هارفارد ومعهد ماساتشوستس للتكنولوجيا وييل (منذ 2017، مجدد حتى 2032). برنامج علوم الحاسوب معتمد من ABET، وكلية الأعمال حاصلة على اعتماد EFMD EPAS، والجامعة معترف بها من وزارة التعليم العالي المغربية."},
+  about: {"kicker":"نبذة","title":"مهندسة، باحثة، مؤسِّسة.","lead":"من بني تجيت في جنوب شرق المغرب إلى مختبرات البحث في كندا وتايلاند، أبني ذكاء اصطناعيا ينجز عملا حقيقيا، وأحمل مجتمعي معي.","p1":"أنا مريم المباركي من بني تجيت في جنوب شرق المغرب. أدرس في السنة الأخيرة من البكالوريوس في علوم الحاسوب بجامعة الأخوين في إفران (2022 إلى ديسمبر 2026)، بتخصص الذكاء الاصطناعي وتحليل البيانات الضخمة وتخصص فرعي في إدارة الأعمال. حاصلة على منحة الاستحقاق (60%) وعلى قائمة العميد في ربيع 2024 وخريف 2025.","p2":"في خريف 2025 قضيت فصلا دراسيا في جامعة فريزر فالي بكولومبيا البريطانية في كندا ضمن برنامج التبادل الثنائي لجامعة الأخوين، كأول طالبة تبادل من جامعة الأخوين (المغرب) في UFV. درست التعلم الآلي ومعالجة اللغة الطبيعية والتمويل، وعملت مساعدة بحث في التعلم الآلي بكلية الحوسبة مع د. راسل كامبل ود. مايك إيفانوف، وقدّمت ورقة بحثية في يوم أبحاث السرطان بفانكوفر.","p3":"أقيس عملي بالنتائج. في KMUTT ببانكوك فحصت 51,837 مركبا ضمن أبحاث أدوية سرطان الثدي (ROC-AUC 0.978 مع Extra Trees) واختصرتها إلى 8 مرشحين، أقواها NPA020664 بطاقة ارتباط −8.96 كيلو كالوري/مول. في U-Investors أدير الذكاء الاصطناعي على 247 صفقة نشطة. ويحقق مساعد RAG لمادة التفاضل والتكامل 2 دقة 94% على بنك تحقق من 50 سؤالا. وقبل ذلك عملت على الصيانة التنبؤية في طاقة المغرب (نحو 35% من كهرباء البلاد)، وعلى الأتمتة في Ravel Future بلشبونة حيث أصبحت القرارات أسرع بنسبة 35%.","p4":"القيادة تهمني بقدر البرمجة. قُبلت في زمالة LeadGreen (الدفعة 4)، برنامج أفريقي للقيادة المناخية ممول بالكامل اختير من بين 6000 متقدم. أسست Bliss Bites، شركة ناشئة في الصناعات الغذائية الزراعية فازت بجائزة أفضل شركة ناشئة في الأخوين سنتين متتاليتين بتمويل كامل من المستثمرين، وPhi Nu، أول جمعية نسائية في الأخوين انضمت إليها 50 عضوة. وفي UFV أطلقت فرع Alpha Pi Phi Cygnet. كما أكتب (جائزة الكاتبة الشابة في سن 16)، وأقدّم الموسيقى باسم DJ Mimi، وألعب كرة القدم داخل القاعة وأمارس السباحة.","headed":"إلى أين أتجه","facts":[{"label":"المدينة الأم","value":"بني تجيت، المغرب"},{"label":"الجامعة","value":"جامعة الأخوين، دفعة ديسمبر 2026"},{"label":"التخصص","value":"الذكاء الاصطناعي والبيانات الضخمة، فرعي أعمال"},{"label":"التميز","value":"منحة استحقاق 60%، قائمة العميد مرتين"},{"label":"التبادل","value":"تبادل ثنائي، جامعة فريزر فالي، كندا"},{"label":"اللغات","value":"العربية، الفرنسية (C1)، الإنجليزية (IELTS 7)"}],"accreditation":"عن جامعة الأخوين: أول جامعة غير أمريكية في أفريقيا تعتمدها NECHE، الجهة الأمريكية التي تعتمد هارفارد ومعهد ماساتشوستس للتكنولوجيا وييل (منذ 2017، مجدد حتى 2032). برنامج علوم الحاسوب معتمد من ABET، وكلية الأعمال حاصلة على اعتماد EFMD EPAS، والجامعة معترف بها من وزارة التعليم العالي المغربية."},
   causes: {"kicker":"قضاياي","titleBefore":"ما أؤمن به. ","titleAccent":"ولمن أبني.","intro":"على التكنولوجيا أن توسّع دائرة من يقود، ومن تُحتسب معرفته.","items":[{"title":"قيادة الشباب","body":"أؤمن أن الشباب مستعدون للقيادة الآن لا لاحقا. أسست Phi Nu، أول جمعية نسائية في الأخوين، لتضم نساء من مناطق وخلفيات مختلفة، ولا سيما من لديهن موارد أو فرص أقل للوصول إلى شبكات الجامعة. وأطلقت فرعا في UFV، وانتُخبت في مجلس الطلبة، وما زلت أفتح الأبواب لمن يأتي بعدي."},{"title":"معارف الشعوب الأصلية","body":"تحمل الشعوب الأصلية معارف بيئية متوارثة عبر أجيال، وهي معرضة للضياع. بنيت AgriVerse للحفاظ عليها: منصة تجمع هذه المعارف مع التعلم الآلي لمساعدة المزارع على اتخاذ قرارات أكثر استدامة. فازت بالمركز الأول في UFV Community Ideation Jam 2025.","link":"/projects/agriverse"},{"title":"المجتمع والشبكة","body":"عبر الزمالات ومختبرات البحث والشركات الناشئة والتطوع، بنيت مجتمعا قويا في المغرب وكندا وتايلاند والبرتغال وشبكة المناخ الأفريقية. أحضر من أجله، ويحضر من أجلي."}]},
   places: {"kicker":"أماكن","titleBefore":"جذوري في المغرب. ","titleAccent":"وتشكّلت حول العالم.","intro":"كل مكان على هذه الخريطة غيّر طريقة عملي.","home":"موطني","items":{"beniTajjit":{"name":"بني تجيت، المغرب","note":"من حيث أتيت"},"ifrane":{"name":"إفران، المغرب","note":"جامعة الأخوين، 2022 إلى 2026"},"abbotsford":{"name":"أبوتسفورد، كندا","note":"تبادل في جامعة فريزر فالي، خريف 2025"},"vancouver":{"name":"فانكوفر، كندا","note":"تقديم بحث في يوم أبحاث السرطان"},"bangkok":{"name":"بانكوك، تايلاند","note":"أبحاث سرطان الثدي في KMUTT، 2026"},"lisbon":{"name":"لشبونة، البرتغال","note":"الذكاء الاصطناعي والأتمتة في Ravel Future"}}},
   authority: "دراسة وعمل وبناء إلى جانب",
@@ -772,13 +774,13 @@ const ar: Dict = {
         ]
       },
       "ufv": {
-        "degree": "فصل تبادل ثنائي: تعلم الآلة ومعالجة اللغة والتمويل",
+        "degree": "فصل تبادل ثنائي في تعلّم الآلة ومعالجة اللغة الطبيعية والتمويل",
         "location": "كولومبيا البريطانية، كندا",
         "dateRange": "سبتمبر إلى ديسمبر 2025",
         "highlights": [
-          "أول طالب تبادل من جامعة الأخوين (المغرب) في UFV",
+          "أول طالبة تبادل ثنائي من جامعة الأخوين (المغرب) في UFV",
           "المركز الأول، UFV Community Ideation Jam 2025",
-          "عرض بحث في BC Cancer Research Day 2025، فانكوفر",
+          "قدّمت بحثا في BC Cancer Research Day 2025، فانكوفر",
           "قائمة العميد مع مرتبة التميّز"
         ]
       }
@@ -808,7 +810,7 @@ const ar: Dict = {
     "Internal CRM System: AI Screening and Sourcing": "ذكاء اصطناعي متكامل لصالح U-Investors، نُشر كنظام ERP داخلي: فرز واستقطاب بالذكاء الاصطناعي، ومساعد RAG فوق أكثر من 1600 شركة ناشئة مدرجة، ولوحات قرارات للشركاء.",
     "darija-gap":     "أداة تقييم الدارجة لـ GPT-5.6. أسبوع بناء OpenAI، 2025.",
     CryptoVault: "لوحة FastAPI على Azure وتقارير PDF آلية.",
-    "Spark Kafka Pipeline": "جاهزية 99%. Spark وKafka وHDFS وHive.",
+    "Spark Kafka Pipeline": "توافر 99%. Spark وKafka وHDFS وHive.",
     ClarityBot: "روبوت تلخيص. Next.js وHuggingFace Transformers وOpenRouter.",
     "Darija Word2Vec": "3 ملايين جملة دارجة. تضمينات Gensim.",
     "Montreal AQI Forecasting": "خفض خطأ 79.9% عن الأساس.",
@@ -875,7 +877,7 @@ const ar: Dict = {
     "Road to Web Summit": "حرم مايكروسوفت في فانكوفر.",
     "UM6P Entrepreneurship Incubator": "تمثيل جامعة الأخوين في المنشأة الحاسوبية الفائقة الوحيدة في أفريقيا ضمن TOP 500.",
     "William Davidson Institute Climate Entrepreneurship Exchange": "جامعة ميشيغان × جامعة الأخوين.",
-    "KMUTT Funded Research Internship Scholarship": "اكتشاف أدوية السرطان في بانكوك. الأولى في الهندسة والتكنولوجيا في تايلاند. المشرفان: د. ثانا سوثيبوتبونغ ود. تيرابان لاوميتاتشيت.",
+    "KMUTT Funded Research Internship Scholarship": "اكتشاف أدوية السرطان في بانكوك. أول مغربية في البرنامج. المشرفان: د. ثانا سوثيبوتبونغ ود. تيرابان لاوميتاتشيت.",
     "Future Young Writer Award": "منحة من مجموعة لانج بلو المدرسية.",
     "MUN Best Delegate, medal from the French Government": "لجنة الناتو حول انعدام الأمن الغذائي، 2021.",
     "Merit Scholarship (60%) & Dean's List": "جامعة الأخوين. قائمة العميد ربيع 2024 وخريف 2025.",
@@ -928,7 +930,7 @@ const ar: Dict = {
         dateRange: "2023 إلى 2025",
         location: "إفران، المغرب",
         detail: "شركة ناشئة في الصناعات الغذائية الزراعية",
-        description: "أسست Bliss Bites، شركة ناشئة في الصناعات الغذائية الزراعية: جائزة أفضل شركة ناشئة في أسبوع ريادة الأعمال بجامعة الأخوين سنتين متتاليتين بتمويل كامل من المستثمرين، ضمن نهائيي Ventures Adventure (17 شركة من بين 537 طالبا في 4 جامعات)، وعُرضت في GITEX Africa 2024، و16 شهادة حكومية من مستثمرين في فرنسا والولايات المتحدة والمغرب والمملكة المتحدة.",
+        description: "أسست Bliss Bites، شركة ناشئة في الصناعات الغذائية الزراعية: جائزة أفضل شركة ناشئة في أسبوع ريادة الأعمال بجامعة الأخوين سنتين متتاليتين بتمويل كامل من المستثمرين، ضمن المرشحين النهائيين في Ventures Adventure (17 شركة من بين 537 طالبا في 4 جامعات)، وعُرضت في GITEX Africa 2024، و16 شهادة حكومية من مستثمرين في فرنسا والولايات المتحدة والمغرب والمملكة المتحدة.",
       },
       phinu: {
         title: "مؤسِّسة",
@@ -963,7 +965,7 @@ const ar: Dict = {
         location: "بانكوك، تايلاند",
         detail: "المشرفان: أ.د. ثانا سوثيبوتبونغ (فيزياء حسابية) وأ.د. تيرابان لاوميتاتشيت (بيولوجيا الأنظمة)",
         description:
-          "51837 مركبا. ROC-AUC 0.978 (Extra Trees)، 0.898 (Random Forest). 8 مرشحين. NPA020664 عند −8.96 كيلو كالوري/مول، ثم ديناميكا GROMACS. الطالبة الجامعية الوحيدة وأول مغربية في البرنامج. ورقة Q1. FIBO.",
+          "فُحص 51,837 مركبا فطريا. ROC-AUC بقيمة 0.978 لـ Extra Trees و0.898 لـ Random Forest، وانتهى الفحص بـ 8 مرشحين. أفضل مركب NPA020664 عند −8.96 كيلو كالوري/مول، ثم محاكاة ديناميكية بـ GROMACS. أول مغربية في مختبر الفيزياء الحاسوبية، والمرأة الوحيدة والأصغر سنا بين الباحثين. ورقة قيد الإعداد لمجلة Q1.",
       },
       ta: {
         title: "مساعدة تدريس",
@@ -976,8 +978,8 @@ const ar: Dict = {
         title: "طالبة تبادل ثنائي",
         dateRange: "سبتمبر إلى ديسمبر 2025",
         location: "كولومبيا البريطانية، كندا",
-        detail: "أول طالب تبادل من جامعة الأخوين (المغرب) في UFV · تعلم آلي ومعالجة لغة وتمويل",
-        description: "فصل في التعلم الآلي ومعالجة اللغة والتمويل كأول طالب تبادل من جامعة الأخوين (المغرب) في UFV. ذكاء الاجتماعات مع د. راسل كامبل، وتخطيط حضري وزراعة مع د. مايك إيفانوف. عرض في يوم أبحاث السرطان 2025 بفانكوفر.",
+        detail: "أول طالبة تبادل ثنائي من جامعة الأخوين (المغرب) في UFV · تعلم آلي ومعالجة لغة وتمويل",
+        description: "فصل في التعلم الآلي ومعالجة اللغة والتمويل كأول طالبة تبادل ثنائي من جامعة الأخوين (المغرب) في UFV. ذكاء الاجتماعات مع د. راسل كامبل، وتخطيط حضري وزراعة مع د. مايك إيفانوف. عرض في يوم أبحاث السرطان 2025 بفانكوفر.",
       },
       "ufv-ra": {
         title: "مهندسة تعلم آلي ومساعدة بحث",
@@ -989,14 +991,14 @@ const ar: Dict = {
         title: "متدربة ذكاء اصطناعي وأتمتة",
         dateRange: "أبريل إلى يونيو 2025",
         location: "لشبونة، البرتغال (عن بُعد)",
-        description: "+35% سرعة القرار. أتمتة Python وSQL ومقارنة نماذج للمواد المستدامة.",
+        description: "قارنتُ نماذج تعلم آلي لتحسين المواد المستدامة، وبنيتُ مسارات بيانات آلية بلغة Python وSQL حسّنت كفاءة اتخاذ القرار بنسبة 35%.",
       },
       "smart-city": {
         title: "متدربة هندسة برمجيات",
         dateRange: "يونيو إلى أغسطس 2024",
         location: "إفران، المغرب",
         detail: "د. حسين كتاني",
-        description: "−30% زمن استرجاع البيانات. منصة React لتخطيط مدينة إفران الذكية.",
+        description: "بنيتُ منصة متكاملة قابلة للتوسع لتخطيط المدن باستخدام React، حسّنت تحليلات التنمية الحضرية وخفّضت زمن استرجاع البيانات بنسبة 30%.",
       },
       taqa: {
         title: "متدربة مهندسة بيانات",
@@ -1070,7 +1072,7 @@ const ar: Dict = {
     acceptedDetails: [
       "مقبولة. اختيار من 6000 متقدم. قيادة مناخية أفريقية ممولة بالكامل.",
       "الدفعة 3، الأخوين × جامعة ميشيغان",
-      "مقبولة لتمثيل جامعة الأخوين. الاختيار من الأخوين فقط. الطبعة 5، جامعة فاروس، الإسكندرية، مصر. برعاية الأخوين.",
+      "مقبولة لتمثيل جامعة الأخوين، وهي الجامعة الوحيدة المختارة. الطبعة 5، جامعة فاروس، الإسكندرية، مصر. برعاية الأخوين.",
     ],
   },
   contact: {
@@ -1276,10 +1278,10 @@ function withCorrectOrigin(copy: Dict, locale: Locale): Dict {
 const story = {
   "en": {
     "about": {
-      "lead": "I'm the first person in my family to graduate from college, and the first woman in my family to work.",
-      "p1": "We didn't have resources, but my father taught me mechanics, electricity, and gardening, raised me like his son, and gave me the belief that I could build anything. He's my inspiration for everything.",
-      "p2": "I'm from El Jadida on Morocco's Atlantic coast. I build AI systems that ship to production, from cancer drug discovery to university-wide infrastructure to venture capital deal flow. I study on a merit scholarship at Al Akhawayn University, spent a semester at the University of the Fraser Valley as AUI's first exchange student to Canada, and have researched in Bangkok, built in Lisbon, and presented in Vancouver.",
-      "p3": "I believe in philanthropy and in developing the people and places that don't get developed first. I defend climate action, sustainable agriculture, and energy access, not as side interests but as the context my technical work serves. I care about who gets access to the tools that matter, because nobody made sure I did.",
+      "lead": "First in my family to graduate college. First woman in my family to work.",
+      "p1": "From El Jadida, a small town on Morocco's Atlantic coast, to building AI systems that ship to production: a cancer drug discovery pipeline screening 300K+ compounds, a RAG assistant for engineering students, and an AI deal flow engine for a venture capital fund.",
+      "p2": "I was the first AUI student on the bilateral exchange to the University of the Fraser Valley, and I have researched in Bangkok, built in Lisbon, and presented in Vancouver.",
+      "p3": "I work on climate, energy access, women's health, and sustainable agriculture. Not side interests. The context my technical work serves.",
       "recommended": "Recommended by six faculty and industry supervisors across three countries."
     },
     "causes": {
@@ -1329,10 +1331,10 @@ const story = {
   },
   "fr": {
     "about": {
-      "lead": "Je suis la première de ma famille à obtenir un diplôme universitaire, et la première femme de ma famille à travailler.",
-      "p1": "Nous n'avions pas de ressources, mais mon père m'a appris la mécanique, l'électricité et le jardinage, m'a élevée comme son fils et m'a donné la conviction que je pouvais tout construire. Il est mon inspiration pour tout.",
-      "p2": "Je viens d'El Jadida, sur la côte atlantique du Maroc. Je construis des systèmes d'IA qui arrivent en production, de la découverte de médicaments contre le cancer à l'infrastructure universitaire, en passant par le deal-flow du capital-risque. J'étudie grâce à une bourse au mérite à l'Université Al Akhawayn, j'ai passé un semestre à l'Université de la Fraser Valley en tant que première étudiante d'échange de l'AUI au Canada, et j'ai fait de la recherche à Bangkok, construit à Lisbonne et présenté à Vancouver.",
-      "p3": "Je crois à la philanthropie et au développement des personnes et des lieux qui ne sont pas développés en premier. Je défends l'action climatique, l'agriculture durable et l'accès à l'énergie, non comme des intérêts secondaires, mais comme le contexte que sert mon travail technique. Je me soucie de qui a accès aux outils qui comptent, parce que personne ne s'est assuré que j'y aie accès.",
+      "lead": "Première de ma famille à obtenir un diplôme universitaire. Première femme de ma famille à travailler.",
+      "p1": "D'El Jadida, petite ville de la côte atlantique du Maroc, à des systèmes d'IA qui arrivent en production : un pipeline de découverte de médicaments contre le cancer qui a criblé plus de 300 000 composés, un assistant RAG pour des étudiants en ingénierie et un moteur d'IA de deal-flow pour un fonds de capital-risque.",
+      "p2": "J'ai été la première étudiante de l'AUI en échange bilatéral à l'Université de la Fraser Valley, et j'ai mené des recherches à Bangkok, développé à Lisbonne et présenté à Vancouver.",
+      "p3": "Je travaille sur le climat, l'accès à l'énergie, la santé des femmes et l'agriculture durable. Pas comme des intérêts secondaires, mais comme le contexte que sert mon travail technique.",
       "recommended": "Recommandée par six enseignants et responsables professionnels dans trois pays."
     },
     "causes": {
@@ -1382,10 +1384,10 @@ const story = {
   },
   "ar": {
     "about": {
-      "lead": "أنا أول شخص في عائلتي يتخرج من الجامعة، وأول امرأة في عائلتي تعمل.",
-      "p1": "لم تكن لدينا موارد، لكن والدي علّمني الميكانيك والكهرباء والبستنة، وربّاني كما يربّي ابنه، وأعطاني الإيمان بأنني أستطيع بناء أي شيء. هو مصدر إلهامي في كل شيء.",
-      "p2": "أنا من الجديدة على الساحل الأطلسي للمغرب. أبني أنظمة ذكاء اصطناعي تصل إلى الإنتاج، من اكتشاف أدوية السرطان إلى البنية التحتية الجامعية إلى تدفق الصفقات في رأس المال المخاطر. أدرس بمنحة تفوق في جامعة الأخوين، وقضيت فصلا في جامعة وادي فريزر كأول طالبة تبادل من الأخوين إلى كندا، وأجريت أبحاثا في بانكوك، وبنيت في لشبونة، وقدمت في فانكوفر.",
-      "p3": "أؤمن بالعمل الخيري وبتنمية الناس والأماكن التي لا تصل إليها التنمية أولا. أدافع عن العمل المناخي والزراعة المستدامة والوصول إلى الطاقة، لا كاهتمامات جانبية، بل كسياق يخدمه عملي التقني. يهمني من يصل إلى الأدوات المهمة، لأن أحدا لم يحرص على أن أصل إليها.",
+      "lead": "أول شخص في عائلتي يتخرج من الجامعة. أول امرأة في عائلتي تعمل.",
+      "p1": "من الجديدة، بلدة صغيرة على الساحل الأطلسي للمغرب، إلى بناء أنظمة ذكاء اصطناعي تصل إلى الإنتاج: خط اكتشاف أدوية للسرطان فحص أكثر من 300 ألف مركب، ومساعد RAG لطلبة الهندسة، ومحرك ذكاء اصطناعي لتدفق الصفقات لصالح صندوق رأس مال مخاطر.",
+      "p2": "كنت أول طالبة من الأخوين في التبادل الثنائي إلى جامعة وادي فريزر، وأجريت أبحاثا في بانكوك، وبنيت في لشبونة، وقدمت في فانكوفر.",
+      "p3": "أعمل على المناخ والوصول إلى الطاقة وصحة المرأة والزراعة المستدامة. ليست اهتمامات جانبية، بل السياق الذي يخدمه عملي التقني.",
       "recommended": "بتوصية من ستة أساتذة ومشرفين مهنيين في ثلاثة بلدان."
     },
     "causes": {
@@ -1465,15 +1467,254 @@ const labels = {
   }
 } as const;
 
+const extras = {
+  "en": {
+    "woman": {
+      "title": "Women's Health & Computational Drug Discovery",
+      "body": "Breast cancer is the most common cancer among women worldwide. At KMUTT in Bangkok, I built a machine learning pipeline that screened 300,000+ compounds against aromatase (CYP19A1), a key target in hormone receptor positive breast cancer, and narrowed them to a short list of candidates. As a woman in AI, this isn't abstract to me: the tools that save women's lives shouldn't wait on slow pipelines when AI can speed them up.",
+      "link": "/projects/ai-drug-discovery",
+      "linkLabel": "See the project"
+    },
+    "agriLabel": "AgriVerse",
+    "next": {
+      "kicker": "What's next",
+      "body": "I'm preparing to pursue graduate studies in AI and machine learning. My research interests are computational biology, NLP for low-resource languages, and AI for sustainable development: building systems that work for the people who need them most.",
+      "recommended": "Recommended by 9+ faculty and industry supervisors across three countries."
+    }
+  },
+  "fr": {
+    "woman": {
+      "title": "Santé des femmes et découverte de médicaments",
+      "body": "Le cancer du sein est le cancer le plus fréquent chez les femmes dans le monde. À KMUTT, à Bangkok, j'ai construit un pipeline de machine learning qui a criblé plus de 300 000 composés contre l'aromatase (CYP19A1), une cible clé du cancer du sein hormonodépendant, pour dégager une courte liste de candidats. En tant que femme dans l'IA, ce n'est pas abstrait pour moi : les outils qui sauvent la vie des femmes ne devraient pas attendre des processus lents quand l'IA peut les accélérer.",
+      "link": "/projects/ai-drug-discovery",
+      "linkLabel": "Voir le projet"
+    },
+    "agriLabel": "AgriVerse",
+    "next": {
+      "kicker": "La suite",
+      "body": "Je me prépare à poursuivre des études supérieures en IA et en machine learning. Mes intérêts de recherche : la biologie computationnelle, le NLP pour les langues peu dotées et l'IA pour le développement durable, avec des systèmes qui servent celles et ceux qui en ont le plus besoin.",
+      "recommended": "Recommandée par plus de 9 enseignants et responsables professionnels dans trois pays."
+    }
+  },
+  "ar": {
+    "woman": {
+      "title": "صحة المرأة واكتشاف الأدوية",
+      "body": "سرطان الثدي هو أكثر أنواع السرطان شيوعا بين النساء في العالم. في KMUTT ببانكوك، بنيت خط معالجة للتعلم الآلي فحص أكثر من 300,000 مركب ضد إنزيم الأروماتاز (CYP19A1)، وهو هدف أساسي في سرطان الثدي الحساس للهرمونات، وانتهى بقائمة قصيرة من المرشحين. وبصفتي امرأة في الذكاء الاصطناعي، فهذا ليس أمرا مجردا بالنسبة لي: الأدوات التي تنقذ حياة النساء لا يجب أن تنتظر مسارات بطيئة بينما يستطيع الذكاء الاصطناعي تسريعها.",
+      "link": "/projects/ai-drug-discovery",
+      "linkLabel": "عرض المشروع"
+    },
+    "agriLabel": "AgriVerse",
+    "next": {
+      "kicker": "الخطوة التالية",
+      "body": "أستعد لمتابعة الدراسات العليا في الذكاء الاصطناعي والتعلم الآلي. تتركز اهتماماتي البحثية في البيولوجيا الحسابية ومعالجة اللغات منخفضة الموارد والذكاء الاصطناعي للتنمية المستدامة، لبناء أنظمة تخدم من هم في أمس الحاجة إليها.",
+      "recommended": "بتوصية من أكثر من 9 أساتذة ومشرفين مهنيين في ثلاثة بلدان."
+    }
+  }
+} as const;
+
+const currently = { en: "Tech Lead at U-Investors · Research Assistant at AUI · Teaching Assistant at AUI", fr: "Tech Lead chez U-Investors · Assistante de recherche à AUI · Assistante d'enseignement à AUI", ar: "قائدة تقنية في U-Investors · مساعدة بحث في الأخوين · مساعدة تدريس في الأخوين" } as const;
+
+const basedIn = { en: "Morocco & North America", fr: "Maroc et Amérique du Nord", ar: "المغرب وأمريكا الشمالية" } as const;
+
+const placeNotes = {
+  "en": {
+    "elJadida": "Where I learned to build from nothing",
+    "ifrane": "4 years, 6 campus roles, 19 projects",
+    "lisbon": "First remote international role",
+    "abbotsford": "First Moroccan bilateral exchange student at UFV",
+    "vancouver": "First time presenting research to an audience",
+    "bangkok": "First Moroccan in a computational physics lab, as the only woman and the youngest researcher"
+  },
+  "fr": {
+    "elJadida": "Là où j'ai appris à construire à partir de rien",
+    "ifrane": "4 ans, 6 rôles sur le campus, 19 projets",
+    "lisbon": "Premier rôle international à distance",
+    "abbotsford": "Première étudiante marocaine en échange bilatéral à l'UFV",
+    "vancouver": "Première fois que je présente mes recherches devant un public",
+    "bangkok": "Première Marocaine dans un laboratoire de physique computationnelle, seule femme et plus jeune chercheuse"
+  },
+  "ar": {
+    "elJadida": "حيث تعلمت أن أبني من لا شيء",
+    "ifrane": "4 سنوات، 6 أدوار في الحرم الجامعي، 19 مشروعا",
+    "lisbon": "أول دور دولي عن بعد",
+    "abbotsford": "أول طالبة مغربية في برنامج التبادل الثنائي في UFV",
+    "vancouver": "أول مرة أقدم فيها بحثي أمام جمهور",
+    "bangkok": "أول مغربية في مختبر الفيزياء الحاسوبية، المرأة الوحيدة والأصغر سنا بين الباحثين"
+  }
+} as const;
+
+const arProjectText = {
+  "taglines": {
+    "ai-drug-discovery": "تعلم آلي ومحاكاة جزيئية لإيجاد أدوية طبيعية مرشحة لسرطان الثدي في الفضاء الكيميائي للفطريات.",
+    "rag-class-assistant": "مساعد RAG للإنتاج لمقرر حساب التفاضل 2، بُني ونُشر داخل OneNote مع استشهادات على مستوى الشريحة لكل إجابة.",
+    "agriverse": "منصة زراعية بالذكاء الاصطناعي تجمع المعرفة البيئية للسكان الأصليين مع التعلم الآلي من أجل زراعة مستدامة.",
+    "delivery2dorms": "منصة توصيل متكاملة وُلدت من الحاجة، وتخدم طلابا حقيقيين.",
+    "propify": "منصة عقارية للأسواق الأفريقية بمنطق الضرائب المغربية وتصنيف الصيانة بالذكاء الاصطناعي وتقييم موثوقية المستأجر.",
+    "bliss-bites": "الشركة الناشئة التي أسستها وأوصلتها من الفكرة إلى التمويل الكامل من المستثمرين.",
+    "the-observer": "محاكاة تفاعلية للفيزياء والاستدلال تستكشف هل تنبثق القوانين العلمية من الملاحظة وحدها في أكوان اصطناعية.",
+    "montreal-aqi-forecasting": "خط تعلم آلي للسلاسل الزمنية للتنبؤ بمؤشر جودة الهواء في مونتريال.",
+    "safelens-ai": "نظام لسلامة مواقع البناء بالرؤية الحاسوبية في الوقت الفعلي.",
+    "darija-word2vec": "تضمينات كلمات مدرّبة للدارجة المغربية، لغة منخفضة الموارد."
+  },
+  "metrics": {
+    "of the initial search space eliminated before lab validation": "من فضاء البحث الأولي استُبعد قبل التحقق المخبري",
+    "compounds screened down to 8 candidates": "مركبا فُحص واختُزل إلى 8 مرشحين",
+    "ROC-AUC, Extra Trees (Random Forest 0.898)": "ROC-AUC لنموذج Extra Trees (وRandom Forest عند 0.898)",
+    "kcal/mol, top hit NPA020664 on PDB 3EQM": "كيلو كالوري/مول، أفضل مركب NPA020664 على PDB 3EQM",
+    "engineering students served": "طالب هندسة يستفيدون منه",
+    "accuracy, 47/50 on a validated question bank": "دقة، 47 من 50 على بنك أسئلة موثّق",
+    "production chunks indexed": "مقطعا مفهرسا في الإنتاج",
+    "hackathon prize": "جائزة الهاكاثون",
+    "Valley farm expansion with UFV Agriculture": "توسع إلى مزارع الوادي مع كلية الزراعة في UFV",
+    "orders fulfilled": "طلبية منفذة",
+    "users": "مستخدم",
+    "average rating": "متوسط التقييم",
+    "from idea to working product": "من الفكرة إلى منتج يعمل",
+    "Best Startup Award, AUI Entrepreneurship Week": "جائزة أفضل شركة ناشئة، أسبوع ريادة الأعمال في الأخوين",
+    "investor funding": "تمويل من المستثمرين",
+    "Ventures Adventure, students across 4 universities": "Ventures Adventure، طلاب من 4 جامعات",
+    "publicly deployed": "منشور للعموم",
+    "error reduction over baseline": "خفض الخطأ مقارنة بالأساس",
+    "mAP@0.5 PPE": "mAP@0.5 لمعدات الوقاية",
+    "FPS live video": "إطارا في الثانية على الفيديو المباشر",
+    "No Hard Hat false negative": "سلبية كاذبة لغياب الخوذة",
+    "of an 8.7M-sentence corpus trained": "من مدونة 8.7 مليون جملة جرى تدريبها",
+    "sentences / min throughput": "جملة في الدقيقة",
+    "total training time": "إجمالي زمن التدريب"
+  }
+} as const;
+
+const arLabels = {
+  "Paper in progress": "ورقة قيد الإعداد",
+  "Live demo": "عرض مباشر",
+  "Live in production": "قيد التشغيل",
+  Live: "مباشر",
+  "Live site": "الموقع المباشر",
+  "Award story": "قصة الجائزة",
+  "BCG X video": "فيديو BCG X",
+  "Ventures Adventure (AUI)": "Ventures Adventure (الأخوين)",
+  "GitHub (front end)": "GitHub (الواجهة الأمامية)",
+  GitHub: "GitHub",
+  More: "المزيد",
+} as const;
+
+const trim = {
+  "en": {
+    "heroTitle": "I build AI that works, in the lab, in the product, and for the people who need it.",
+    "causes": [
+      "First-gen, no resources, scholarship kid. Every system I build carries that.",
+      "LeadGreen Fellow, selected from 6,000. Sustainable energy at TAQA, sustainable agriculture through AgriVerse.",
+      "Founded Phi Nu, Morocco's first university sorority, 50 members. Elected to Student Government.",
+      "Built AgriVerse to pair Indigenous ecological knowledge with ML. 1st place, UFV Community Ideation Jam."
+    ],
+    "woman": "Built an ML pipeline screening 300K+ compounds for breast cancer drug candidates at KMUTT. As a woman in AI, this isn't abstract.",
+    "life": {
+      "kicker": "Also",
+      "titleBefore": "Off the clock.",
+      "titleAccent": "",
+      "items": [
+        {
+          "title": "Writer",
+          "detail": "Future Young Writer Award at 16. Unpublished French novel, Frénésie."
+        },
+        {
+          "title": "Music",
+          "detail": "First female DJ in AUI history. Techno / schranz."
+        },
+        {
+          "title": "Volunteer",
+          "detail": "Lions Club, ALCS, Scholars of Sustenance."
+        }
+      ]
+    }
+  },
+  "fr": {
+    "heroTitle": "Je construis une IA qui fonctionne : en laboratoire, dans le produit et pour les personnes qui en ont besoin.",
+    "causes": [
+      "Première de ma famille à l'université, sans ressources, boursière. Chaque système que je construis porte cela.",
+      "LeadGreen Fellow, sélectionnée parmi 6 000 candidats. Énergie durable chez TAQA, agriculture durable avec AgriVerse.",
+      "Fondatrice de Phi Nu, première sororité universitaire du Maroc, 50 membres. Élue à l'Association des étudiants.",
+      "J'ai créé AgriVerse pour associer savoirs écologiques autochtones et machine learning. 1re place au UFV Community Ideation Jam."
+    ],
+    "woman": "J'ai construit un pipeline de machine learning qui a criblé plus de 300 000 composés pour trouver des candidats médicaments contre le cancer du sein à KMUTT. En tant que femme dans l'IA, ce n'est pas abstrait.",
+    "life": {
+      "kicker": "Aussi",
+      "titleBefore": "Hors du bureau.",
+      "titleAccent": "",
+      "items": [
+        {
+          "title": "Autrice",
+          "detail": "Future Young Writer Award à 16 ans. Roman français inédit, Frénésie."
+        },
+        {
+          "title": "Musique",
+          "detail": "Première DJ femme de l'histoire de l'AUI. Techno / schranz."
+        },
+        {
+          "title": "Bénévolat",
+          "detail": "Lions Club, ALCS, Scholars of Sustenance."
+        }
+      ]
+    }
+  },
+  "ar": {
+    "heroTitle": "أبني ذكاء اصطناعيا يعمل: في المختبر، وفي المنتج، ولمن يحتاجون إليه.",
+    "causes": [
+      "أول جامعية في عائلتي، بلا موارد، وبمنحة. كل نظام أبنيه يحمل ذلك.",
+      "زميلة LeadGreen، اختيرت من بين 6000 متقدم. الطاقة المستدامة في TAQA والزراعة المستدامة عبر AgriVerse.",
+      "أسست Phi Nu، أول جمعية نسائية جامعية في المغرب، 50 عضوة. انتُخبت في اتحاد الطلبة.",
+      "بنيت AgriVerse لجمع المعرفة البيئية للسكان الأصليين مع التعلم الآلي. المركز الأول في UFV Community Ideation Jam."
+    ],
+    "woman": "بنيت خط معالجة للتعلم الآلي فحص أكثر من 300,000 مركب لاكتشاف أدوية سرطان الثدي في KMUTT. وبصفتي امرأة في الذكاء الاصطناعي، فهذا ليس أمرا مجردا.",
+    "life": {
+      "kicker": "أيضا",
+      "titleBefore": "خارج العمل.",
+      "titleAccent": "",
+      "items": [
+        {
+          "title": "كاتبة",
+          "detail": "جائزة الكاتب الشاب المستقبلي في سن 16. رواية فرنسية غير منشورة، Frénésie."
+        },
+        {
+          "title": "الموسيقى",
+          "detail": "أول DJ امرأة في تاريخ الأخوين. تكنو / شرانز."
+        },
+        {
+          "title": "التطوع",
+          "detail": "نادي الأسود، ALCS، Scholars of Sustenance."
+        }
+      ]
+    }
+  }
+} as const;
+
 function withStory(copy: Dict, locale: Locale): Dict {
+  const ex = extras[locale];
+  const tr = trim[locale];
   const st = story[locale];
   return {
     ...copy,
-    about: { ...copy.about, ...st.about, p1: "", p3: "", p4: "" },
+    about: { ...copy.about, ...st.about, p4: "", recommended: "" },
     nav: { ...copy.nav, Story: labels[locale].nav },
     story: { ...labels[locale], quote: st.about.p1, belief: st.about.p3 },
-    causes: { ...copy.causes, intro: st.causes.intro, items: st.causes.items.map((i) => ({ ...i })) },
-    life: { ...copy.life, intro: st.life.intro, items: st.life.items.map((i) => ({ ...i })), closing: st.life.closing },
+    causes: {
+      ...copy.causes,
+      intro: st.causes.intro,
+      items: [
+        ...st.causes.items.map((i, k) => ({ ...i, body: tr.causes[k], ...("link" in i ? { linkLabel: ex.agriLabel } : {}) })),
+        { ...ex.woman, body: tr.woman },
+      ],
+    },
+    next: ex.next,
+    projectText: locale === "ar" ? { taglines: { ...arProjectText.taglines }, metrics: { ...arProjectText.metrics }, labels: { ...arLabels } } : undefined,
+    places: {
+      ...copy.places,
+      items: Object.fromEntries(
+        Object.entries(copy.places.items).map(([id, item]) => [id, { ...item, note: (placeNotes[locale] as Record<string, string>)[id] ?? item.note }]),
+      ),
+    },
+    hero: { ...copy.hero, title: tr.heroTitle, facts: copy.hero.facts.map((fact, index) => (index === 1 ? { ...fact, value: basedIn[locale] } : index === 0 ? { ...fact, value: currently[locale] } : fact)) },
+    life: { ...copy.life, kicker: tr.life.kicker, titleBefore: tr.life.titleBefore, titleAccent: tr.life.titleAccent, intro: "", items: tr.life.items.map((i) => ({ ...i })), closing: "" },
     recordDetails: {
       ...copy.recordDetails,
       "ML Virtual Screening for Cancer Drug Discovery": st.records.kmutt,

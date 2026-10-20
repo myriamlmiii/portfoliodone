@@ -36,7 +36,7 @@ export const experience: readonly ExperienceRole[] = [
     description:
       "Full research assistantship with a dedicated grant. Building and evaluating a RAG class assistant for Calculus II: hybrid BM25 + dense retrieval with RRF, BAAI/bge-reranker-v2-m3 cross-encoder rerank, HyDE, and dual-engine math OCR (EasyOCR + GOT-OCR2). Deployed for 600 engineering students at 94% accuracy (47/50 on a validated question bank) over 1,183 indexed chunks. Co-authoring the paper and a PIF Spring 2027 grant proposal. Microsoft Graph API, Python, FastAPI, FAISS, Groq.",
     bullets: [
-      "Solo-engineered a production RAG assistant over a professor's OneNote notebooks through the Microsoft Graph API, with slide-level citations on every answer.",
+      "Engineered a production RAG assistant over a professor's OneNote notebooks through the Microsoft Graph API, with slide-level citations on every answer.",
       "Hybrid BM25 and dense retrieval with Reciprocal Rank Fusion, bge cross-encoder reranking, HyDE query rewriting, and dual math OCR (EasyOCR and GOT-OCR2).",
       "Built the full-stack pipeline: retrieval, LLM generation with provider failover, and a OneNote add-in. Co-authoring the research paper and a PIF Spring 2027 grant proposal (72,000 MAD).",
     ],
@@ -62,7 +62,7 @@ export const experience: readonly ExperienceRole[] = [
       "Designed an end-to-end ML virtual screening pipeline for new aromatase (CYP19A1) inhibitors in breast cancer drug discovery, trained on 5,308 curated bioactivity compounds.",
       "Random Forest beat the Liu et al. 2025 benchmark, and Extra Trees performed best across the MeFSAT fungal library.",
       "Validated the top hit, NPA020664, by docking on PDB 3EQM and a full molecular dynamics run (GROMACS, CHARMM36, VMD, PyMOL). Co-writing a paper for a Q1 journal.",
-      "Only undergraduate and first Moroccan in the program, alongside Master's and PhD students, using high-performance GPU resources.",
+      "First Moroccan in KMUTT's computational physics research lab, and the only woman and the youngest researcher on the team; the others were Master's students. Worked with high-performance GPU resources.",
     ],
     metrics: [
       { value: "51,837", label: "compounds screened" },
@@ -142,6 +142,7 @@ export const experience: readonly ExperienceRole[] = [
   },
   {
     id: "blissbites",
+    href: "https://aui.ma/news/ventures-adventure-al-akhawayn-university-boosts-regional-entrepreneurial-spirit",
     dateRange: "2023 to 2025",
     title: "Founder",
     org: "Bliss Bites",

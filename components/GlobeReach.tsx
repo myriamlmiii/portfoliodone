@@ -44,7 +44,7 @@ export function GlobeReach({
   }, [theme]);
 
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex w-full flex-col items-center gap-6">
       {colors && near ? (
         <div className={className}>
           <GlobeCanvas accent={colors.accent} core={colors.core} activeId={activeId} onSelect={onSelect} />

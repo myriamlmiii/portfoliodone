@@ -60,14 +60,14 @@ export function Hero() {
 
           <motion.h1
             {...fade(0.06)}
-            className="font-display mt-6 text-[clamp(4.25rem,14.5vw,13.5rem)] leading-[0.84] tracking-[0.005em] text-ink lg:mt-10 lg:text-[clamp(7rem,13.2vw,13.5rem)]"
+            className="font-display mt-6 text-[clamp(4.25rem,14.5vw,13.5rem)] leading-[0.84] tracking-[0.005em] text-ink lg:mt-10 lg:-ms-6 lg:text-[clamp(7rem,13.2vw,13.5rem)]"
           >
             Meriem
             <br />
-            <span className="lg:ms-[0.35em]">Lmoubariki.</span>
+            <span>Lmoubariki.</span>
           </motion.h1>
 
-          <motion.p {...fade(0.14)} className="mt-8 max-w-[22rem] text-[11px] font-medium uppercase leading-[1.9] tracking-[0.2em] text-muted lg:mt-12">
+          <motion.p {...fade(0.14)} className="mt-8 max-w-[22rem] text-[11px] font-medium uppercase leading-[1.9] tracking-[0.2em] text-muted lg:mt-10">
             {t.hero.title}
           </motion.p>
 
@@ -107,11 +107,17 @@ export function Hero() {
             </span>
           </motion.div>
 
-          <motion.dl {...fade(0.3)} className="mt-14 grid max-w-md gap-6 text-start sm:grid-cols-2 lg:mt-24">
+          <motion.dl {...fade(0.3)} className="mt-12 grid max-w-xl gap-x-10 gap-y-6 text-start sm:grid-cols-[1.5fr_1fr] lg:mt-16">
             {t.hero.facts.map((fact) => (
               <div key={fact.label} className="border-t border-line pt-3">
-                <dt className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-muted">{fact.label}</dt>
-                <dd className="mt-1.5 text-[13px] leading-snug text-ink/90">{fact.value}</dd>
+                <dt className="text-xs font-medium uppercase tracking-[0.18em] text-accent">{fact.label}</dt>
+                <dd className="mt-2 space-y-1 text-base font-medium leading-snug tracking-[-0.005em] text-ink">
+                  {fact.value.split(" · ").map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </dd>
               </div>
             ))}
           </motion.dl>

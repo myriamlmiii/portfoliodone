@@ -295,6 +295,20 @@ html[lang="ar"] .type-section-title {
 }
 
 html[lang="ar"] body,
+html[lang="ar"] *:not(code):not(.font-mono) {
+  letter-spacing: 0 !important;
+}
+
+html[lang="ar"] .font-mono {
+  letter-spacing: 0.02em !important;
+}
+
+html[lang="ar"] p,
+html[lang="ar"] li,
+html[lang="ar"] dd {
+  line-height: 1.95;
+}
+
 html[lang="ar"] .font-display {
   font-family: var(--font-arabic), Inter, sans-serif;
 }
@@ -326,7 +340,9 @@ button {
 .container-content {
   width: 100%;
   max-width: 1280px;
-  margin-inline: auto;
+  /* sits a little left of centre on wide screens */
+  margin-inline-start: max(0px, calc((100% - 1280px) / 2 - 3vw));
+  margin-inline-end: auto;
   padding-inline: 20px;
 }
 
@@ -337,14 +353,10 @@ button {
 }
 
 .section-pad {
-  padding-block: 5rem;
+  padding-block: clamp(4.5rem, 8vw, 7rem);
 }
 
 @media (min-width: 768px) {
-  .section-pad {
-    padding-block: 7rem;
-  }
-
   .section-heading {
     margin-bottom: 3.5rem;
   }

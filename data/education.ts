@@ -25,7 +25,7 @@ export const education: readonly EducationEntry[] = [
     logo: "/logos/ufv.svg",
     logoTone: "dark",
     highlights: [
-      "First exchange student from AUI (Morocco) at UFV",
+      "First bilateral exchange student from AUI (Morocco) at UFV",
       "1st place, UFV Community Ideation Jam 2025",
       "Presented research at BC Cancer Research Day 2025, Vancouver",
       "Dean's List with Distinction",

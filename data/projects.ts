@@ -68,9 +68,9 @@ export const projects: readonly Project[] = [
     featured: true,
     category: "Applied AI, AUI",
     title: "RAG Class Assistant",
-    tagline: "A production RAG assistant for Calculus II, built solo and deployed inside OneNote, with slide-level citations for every answer.",
+    tagline: "A production RAG assistant for Calculus II, built and deployed inside OneNote, with slide-level citations for every answer.",
     outcome:
-      "An end-to-end retrieval-augmented generation system, solo-engineered and deployed as university infrastructure for 600 engineering students in Al Akhawayn University's Calculus II course. It answers with exact chapter, section, and slide citations at 94% accuracy (47/50 on a validated question bank) and runs inside Microsoft OneNote as a native task-pane add-in. Built under Prof. Sofiane Grira as both a production deployment and an active research project: a paper on hybrid retrieval and cross-encoder reranking for mathematical educational content is in progress, alongside a PIF Spring 2027 grant proposal (72,000 MAD).",
+      "An end-to-end retrieval-augmented generation system, engineered and deployed as university infrastructure for 600 engineering students in Al Akhawayn University's Calculus II course. It answers with exact chapter, section, and slide citations at 94% accuracy (47/50 on a validated question bank) and runs inside Microsoft OneNote as a native task-pane add-in. Built under Prof. Sofiane Grira as both a production deployment and an active research project: a paper on hybrid retrieval and cross-encoder reranking for mathematical educational content is in progress, alongside a PIF Spring 2027 grant proposal (72,000 MAD).",
     tags: ["RAG", "FAISS", "BM25", "Cross-Encoder Reranking", "HyDE", "EasyOCR", "GOT-OCR2", "Office.js", "Microsoft Graph API", "FastAPI", "Groq"],
     image: "/images/projects/rag-class-assistant.png",
     poster: "/images/projects/rag-class-assistant.png",
@@ -86,7 +86,7 @@ export const projects: readonly Project[] = [
     solution:
       "A production-grade RAG pipeline that ingests, indexes, and retrieves mathematical content, delivering answers with exact chapter, section, and slide references, deployed directly inside Microsoft OneNote as a native task-pane add-in.",
     impact:
-      "Built entirely solo, from the dual OCR math extraction pipeline to the hybrid retrieval engine, the OneNote add-in, and the security-hardened API, and deployed as real university infrastructure rather than a class project. Now scaling from free-tier prototyping to a paid Groq tier for the full engineering department. The paper with Dr. Grira will formalize the retrieval methodology, evaluation framework, and findings.",
+      "Built end to end, from the dual OCR math extraction pipeline to the hybrid retrieval engine, the OneNote add-in, and the security-hardened API, and deployed as real university infrastructure rather than a class project. Now scaling from free-tier prototyping to a paid Groq tier for the full engineering department. The paper with Dr. Grira will formalize the retrieval methodology, evaluation framework, and findings.",
     stack: [
       "Python",
       "FastAPI (CSP, rate limiting, cookie isolation)",
