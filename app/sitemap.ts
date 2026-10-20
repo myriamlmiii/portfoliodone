@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { projects } from "@/data/projects";
+import { SITE_URL } from "@/data/site";
 
-const BASE = "https://meriemlmoubariki.com";
+const BASE = SITE_URL;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

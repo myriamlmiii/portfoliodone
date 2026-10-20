@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { booking } from "@/data/booking";
+import { SITE_HOST } from "@/data/site";
 import { deliver } from "@/lib/mail";
 
 function clean(value: unknown, max: number) {
@@ -57,7 +58,7 @@ export async function POST(request: Request) {
       `Timezone: ${booking.timezone}`,
       `Topic: ${topic || "Intro conversation"}`,
       "",
-      "Requested from meriemlmoubariki.com",
+      `Requested from ${SITE_HOST}`,
       "",
     ].join("\n"),
     replyTo: email,

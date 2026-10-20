@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { SITE_HOST } from "@/data/site";
 
 export const alt = "Meriem Lmoubariki, builder of systems";
 export const size = { width: 1200, height: 630 };
@@ -26,7 +27,7 @@ export default function OpengraphImage() {
           <div style={{ fontSize: 132, fontWeight: 700, lineHeight: 1, letterSpacing: -3 }}>Meriem Lmoubariki</div>
           <div style={{ marginTop: 24, fontSize: 44, color: "#aeb5b4" }}>Builder of systems.</div>
         </div>
-        <div style={{ fontSize: 26, color: "#7c8684" }}>meriemlmoubariki.com</div>
+        <div style={{ fontSize: 26, color: "#7c8684" }}>{SITE_HOST}</div>
       </div>
     ),
     size

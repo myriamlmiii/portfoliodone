@@ -11,11 +11,12 @@ import { LenisProvider } from "@/components/LenisProvider";
 import { AICharacter } from "@/components/chat/AICharacter";
 import { AmbientBackground } from "@/components/AmbientBackground";
 import { PreferencesProvider } from "@/components/Preferences";
+import { SITE_URL } from "@/data/site";
 
 const arabic = Noto_Sans_Arabic({ subsets: ["arabic"], weight: ["400", "600", "700"], variable: "--font-arabic" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://meriemlmoubariki.com"),
+  metadataBase: new URL(SITE_URL),
   title: "Meriem Lmoubariki | AI Engineer & Researcher in Morocco",
   description:
     "Meriem Lmoubariki is an AI engineer and researcher based in Morocco, working across applied AI, computational research, and data-intensive systems.",
