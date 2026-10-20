@@ -1,6 +1,5 @@
 /** Paste a Calendly or Cal.com URL here later. Until then, the on-site picker emails you. */
 export const booking = {
-  email: "lmeriem28@gmail.com",
   durationMinutes: 30,
   timezone: "Africa/Casablanca",
   timezoneLabel: "Morocco time",

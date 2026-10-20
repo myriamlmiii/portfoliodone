@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { moreProjects, projects } from "@/data/projects";
 import type { ProjectArea } from "@/types";
 import { Media, visibleMetrics } from "./ProjectMedia";
@@ -27,7 +27,6 @@ const others = [
 export function Work() {
   const { t } = usePreferences();
   const [filter, setFilter] = useState<Filter>("all");
-  const [showMore, setShowMore] = useState(false);
   const match = (areas: readonly ProjectArea[]) => filter === "all" || areas.includes(filter);
   const shownFeatured = featured.filter((project) => match(project.areas ?? []));
   const shownOthers = others.filter((item) => match(item.areas));
@@ -61,23 +60,7 @@ export function Work() {
         {shownFeatured.length > 0 && <ProjectStack key={filter} projects={shownFeatured} />}
 
         {shownOthers.length > 0 && (
-          <div className="mt-12">
-            <button
-              type="button"
-              aria-expanded={showMore}
-              aria-controls="more-projects"
-              onClick={() => setShowMore((v) => !v)}
-              className="interactive-target mx-auto flex items-center gap-2 rounded-full border border-line bg-surface px-6 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent"
-            >
-              {showMore ? t.work.lessLabel : t.work.moreLabel}
-              <span className="tabular text-xs text-muted">{shownOthers.length}</span>
-              <ChevronDown size={16} className={`transition-transform ${showMore ? "rotate-180" : ""}`} aria-hidden="true" />
-            </button>
-          </div>
-        )}
-
-        {shownOthers.length > 0 && showMore && (
-          <div id="more-projects" className="mt-10">
+          <div id="more-projects" className="mt-12">
             <h3 className="mb-6 text-sm font-medium text-muted">{t.work.also}</h3>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {shownOthers.map((item, index) => {

@@ -19,7 +19,7 @@ export default function OpengraphImage() {
           color: "#f2f3ef",
         }}
       >
-        <div style={{ fontSize: 28, letterSpacing: 6, color: "#2dd4bf", textTransform: "uppercase" }}>
+        <div style={{ fontSize: 28, letterSpacing: 6, color: "#60a5fa", textTransform: "uppercase" }}>
           AI engineer · Researcher · Founder
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>

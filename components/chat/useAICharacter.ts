@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { emailsInline } from "@/data/contact";
 import type { ChatMessage } from "@/lib/chat";
 
 const SECTION_IDS = ["top", "about", "work", "experience", "education", "record", "places", "vision", "causes", "contact"];
@@ -58,7 +59,7 @@ export function useAICharacter() {
         }
       } catch (error) {
         if ((error as Error).name !== "AbortError") {
-          setMessages([...history, { role: "assistant", content: "Something went wrong. Please try again, or email lmeriem28@gmail.com." }]);
+          setMessages([...history, { role: "assistant", content: `Something went wrong. Please try again, or email ${emailsInline}.` }]);
         }
       } finally {
         setPending(false);

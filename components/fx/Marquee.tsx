@@ -37,7 +37,8 @@ export function Marquee({ top, bottom }: { top: readonly string[]; bottom: reado
       raf = requestAnimationFrame(tick);
     };
     // Row 2 starts at -half so it can travel right without a gap.
-    rows.current[1] && (offsets[1] = -rows.current[1]!.scrollWidth / 2);
+    const second = rows.current[1];
+    if (second) offsets[1] = -second.scrollWidth / 2;
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, []);

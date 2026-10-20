@@ -22,7 +22,8 @@ function render(lang: Lang) {
       audioStream.on("end", () => {
         tts.close();
         const audio = Buffer.concat(chunks);
-        audio.length ? resolve(audio) : reject(new Error("empty audio"));
+        if (audio.length) resolve(audio);
+        else reject(new Error("empty audio"));
       });
       audioStream.on("error", reject);
     } catch (e) {

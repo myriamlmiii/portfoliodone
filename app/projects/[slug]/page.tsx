@@ -9,6 +9,9 @@ import { SHOW_PENDING } from "@/lib/pending";
 import { PendingBadge, StatusBadge } from "@/components/PendingBadge";
 import { ProjectCover } from "@/components/ProjectCover";
 
+// Unknown slugs get a real 404 instead of a streamed 200 shell.
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }

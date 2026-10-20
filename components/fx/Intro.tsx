@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { markIntroDone } from "@/lib/intro";
 import { lerp } from "@/lib/store";
 import { useScrollApi } from "../LenisProvider";
+import { usePreferences } from "../Preferences";
 
 const EASE = [0.76, 0, 0.24, 1] as const;
 const MIN_MS = 1800;
@@ -16,6 +17,7 @@ const MAX_MS = 7000;
  */
 export function Intro() {
   const { setScrollLocked } = useScrollApi();
+  const { locale } = usePreferences();
   const [visible, setVisible] = useState(true);
   const [pct, setPct] = useState(0);
 
@@ -76,7 +78,7 @@ export function Intro() {
             transition={{ duration: 0.7, ease: EASE }}
           >
             <p className="font-mono text-xs text-accent tabular">REEL 01 · {String(pct).padStart(3, "0")}</p>
-            <p className="intro-title mt-6 max-w-full font-display uppercase text-ink">A Meriem Lmoubariki Portfolio</p>
+            <p className="intro-title mt-6 max-w-full font-display uppercase text-ink">{locale === "ar" ? "معرض أعمال مريم المباركي" : locale === "fr" ? "Portfolio de Meriem Lmoubariki" : "A Meriem Lmoubariki Portfolio"}</p>
             <div className="mt-10 h-px w-[min(60vw,22rem)] bg-line/60">
               <div className="h-full origin-left bg-accent shadow-[0_0_10px_rgb(var(--accent))]" style={{ transform: `scaleX(${pct / 100})` }} />
             </div>

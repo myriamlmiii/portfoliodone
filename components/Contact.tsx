@@ -1,17 +1,18 @@
 "use client";
 
-import { ArrowUpRight, CalendarDays, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowUpRight, CalendarDays, GraduationCap, Github, Linkedin, Mail } from "lucide-react";
+import { contact } from "@/data/contact";
 import { Reveal } from "./Reveal";
 import { usePreferences } from "./Preferences";
 
-const EMAIL = "lmeriem28@gmail.com";
 const CALENDLY = "https://calendly.com/meriem-lmoubariki/30min";
 
 export function Contact() {
   const { t } = usePreferences();
 
   const links = [
-    { href: `mailto:${EMAIL}`, icon: Mail, label: EMAIL, note: t.contact.intro, external: false },
+    { href: `mailto:${contact.email}`, icon: Mail, label: contact.email, note: t.contact.intro, external: false },
+    { href: `mailto:${contact.academicEmail}`, icon: GraduationCap, label: contact.academicEmail, note: "University email (Al Akhawayn)", external: false },
     { href: CALENDLY, icon: CalendarDays, label: t.contact.meeting, note: t.contact.meetingNote, external: true },
     { href: "https://linkedin.com/in/meriem-lmoubariki-591710351", icon: Linkedin, label: "LinkedIn", note: "Professional profile", external: true },
     { href: "https://github.com/myriamlmiii", icon: Github, label: "GitHub", note: "github.com/myriamlmiii", external: true },

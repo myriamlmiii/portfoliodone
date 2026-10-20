@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { booking } from "@/data/booking";
+import { deliver } from "@/lib/mail";
 
 function clean(value: unknown, max: number) {
   return String(value ?? "").replace(/\s+/g, " ").trim().slice(0, max);
@@ -35,9 +36,10 @@ export async function POST(request: Request) {
 
   const [year, month, day] = date.split("-").map(Number);
   const when = new Date(Date.UTC(year, month - 1, day));
-  const today = new Date();
-  const todayUtc = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
-  if (Number.isNaN(when.getTime()) || when.getTime() < todayUtc) {
+  // "Today" in the booking timezone (en-CA formats as YYYY-MM-DD), so the server's own timezone never matters.
+  const today = new Intl.DateTimeFormat("en-CA", { timeZone: booking.timezone }).format(new Date());
+  // Date.UTC rolls 2026-02-31 over to March, so also require the date to survive a round trip.
+  if (Number.isNaN(when.getTime()) || when.toISOString().slice(0, 10) !== date || date < today) {
     return NextResponse.json({ ok: false, error: "date" }, { status: 400 });
   }
   const weekday = when.getUTCDay();
@@ -45,9 +47,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "date" }, { status: 400 });
   }
 
-  const subject = encodeURIComponent(`Meeting request, ${name}, ${date} ${time}`);
-  const body = encodeURIComponent(
-    [
+  const result = await deliver({
+    subject: `Meeting request, ${name}, ${date} ${time}`,
+    text: [
       `Name: ${name}`,
       `Email: ${email}`,
       `Date: ${date}`,
@@ -57,11 +59,9 @@ export async function POST(request: Request) {
       "",
       "Requested from meriemlmoubariki.com",
       "",
-    ].join("\n")
-  );
-
-  return NextResponse.json({
-    ok: true,
-    mailto: `mailto:${booking.email}?subject=${subject}&body=${body}`,
+    ].join("\n"),
+    replyTo: email,
   });
+
+  return NextResponse.json({ ok: true, ...result });
 }

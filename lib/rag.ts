@@ -1,3 +1,4 @@
+import { emailsInline } from "@/data/contact";
 import { education } from "@/data/education";
 import { experience } from "@/data/experience";
 import { projects } from "@/data/projects";
@@ -10,7 +11,7 @@ import { record } from "@/data/record";
  */
 export type Chunk = { id: string; source: string; text: string };
 
-const EMAIL = "lmeriem28@gmail.com";
+const EMAIL = emailsInline;
 
 const profile: Chunk[] = [
   {

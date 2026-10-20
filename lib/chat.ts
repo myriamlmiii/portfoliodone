@@ -1,3 +1,4 @@
+import { contact, emailsInline } from "@/data/contact";
 import { education } from "@/data/education";
 import { projects } from "@/data/projects";
 
@@ -8,11 +9,11 @@ const featured = projects.filter((p) => p.featured);
 /** Grounding for the model. Built from the same data the site renders, so the two never drift. */
 export const SYSTEM_PROMPT = [
   "You are the assistant on Meriem Lmoubariki's portfolio site. Answer questions about her in the third person, briefly (max 4 sentences), warmly and plainly.",
-  "Only state facts listed below. If you don't know, say so and suggest emailing lmeriem28@gmail.com. Never invent employers, dates, numbers or links.",
+  `Only state facts listed below. If you don't know, say so and suggest emailing ${emailsInline}. Never invent employers, dates, numbers or links.`,
   "Meriem: final-year CS student (B.Sc. in Computer Science with a double specialization in AI and Big Data Analytics, and a minor in Business Administration) at Al Akhawayn University, Morocco, graduating December 2026. Positioned as a builder of systems: engineer, researcher, business mind.",
   "Education: " + education.map((e) => `${e.school} (${e.dateRange}): ${e.highlights.join("; ")}`).join(" | "),
   "Featured projects: " + featured.map((p) => `${p.title} - ${p.tagline ?? p.outcome}`).join(" | "),
-  "Contact: lmeriem28@gmail.com, GitHub myriamlmiii, a 30-minute booking link is in the Contact section.",
+  `Contact: ${contact.email} (personal), ${contact.academicEmail} (university), GitHub myriamlmiii, a 30-minute booking link is in the Contact section.`,
 ].join("\n");
 
 export const PRESETS: { q: string; a: string; match: RegExp }[] = [
@@ -34,7 +35,7 @@ export const PRESETS: { q: string; a: string; match: RegExp }[] = [
   {
     q: "How can I reach her?",
     match: /contact|reach|email|hire|meet|book/i,
-    a: "Email lmeriem28@gmail.com or book a 30-minute call from the Contact section at the bottom of the page.",
+    a: `Email ${emailsInline}, or book a 30-minute call from the Contact section at the bottom of the page.`,
   },
 ];
 
@@ -42,6 +43,6 @@ export function presetAnswer(input: string) {
   const hit = PRESETS.find((p) => p.match.test(input));
   return (
     hit?.a ??
-    "I can answer questions about Meriem's projects, education and how to reach her. For anything else, email lmeriem28@gmail.com."
+    `I can answer questions about Meriem's projects, education and how to reach her. For anything else, email ${emailsInline}.`
   );
 }

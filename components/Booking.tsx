@@ -61,12 +61,12 @@ export function Booking() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, date, time, topic }),
       });
-      const data = (await response.json()) as { ok?: boolean; mailto?: string };
-      if (!response.ok || !data.ok || !data.mailto) {
+      const data = (await response.json()) as { ok?: boolean; sent?: boolean; mailto?: string };
+      if (!response.ok || !data.ok || (!data.sent && !data.mailto)) {
         setStatus("error");
         return;
       }
-      window.location.href = data.mailto;
+      if (!data.sent && data.mailto) window.location.href = data.mailto;
       setStatus("sent");
     } catch {
       setStatus("error");

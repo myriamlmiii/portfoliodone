@@ -3,9 +3,9 @@
 import { motion, useReducedMotion } from "framer-motion";
 
 const GLOWS = [
-  { cls: "left-[-8rem] top-[8%] h-[32rem] w-[32rem] bg-teal-400", delay: 0, dur: 9 },
+  { cls: "left-[-8rem] top-[8%] h-[32rem] w-[32rem] bg-blue-400", delay: 0, dur: 9 },
   { cls: "right-[-10rem] top-[42%] h-[36rem] w-[36rem] bg-blue-700", delay: 2, dur: 10 },
-  { cls: "bottom-[-10rem] left-[25%] h-[28rem] w-[28rem] bg-cyan-500", delay: 4, dur: 8 },
+  { cls: "bottom-[-10rem] left-[25%] h-[28rem] w-[28rem] bg-sky-500", delay: 4, dur: 8 },
 ] as const;
 
 /** Large, heavily blurred circles that slowly breathe. Static under reduced motion; dark theme only (see CSS). */

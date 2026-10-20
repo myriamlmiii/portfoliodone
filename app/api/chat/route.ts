@@ -9,24 +9,33 @@ const MAX_MESSAGES = 8;
 const MAX_CHARS = 600;
 const WINDOW_MS = 60_000;
 const MAX_PER_WINDOW = 10;
+const MAX_GLOBAL_PER_WINDOW = 120;
 
 // Best-effort per-instance limiter; swap for a shared store (e.g. Upstash) if traffic warrants.
 const hits = new Map<string, number[]>();
 
-function limited(ip: string) {
+function limited(ip: string, max = MAX_PER_WINDOW) {
   const now = Date.now();
+  // Drop stale entries so the map cannot grow without bound.
+  if (hits.size > 5000) {
+    for (const [key, times] of hits) if (now - (times.at(-1) ?? 0) >= WINDOW_MS) hits.delete(key);
+  }
   const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
   recent.push(now);
   hits.set(ip, recent);
-  return recent.length > MAX_PER_WINDOW;
+  return recent.length > max;
 }
 
 const text = (body: string, status = 200) =>
   new Response(body, { status, headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" } });
 
 export async function POST(req: NextRequest) {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
-  if (limited(ip)) return text("You're sending messages quickly. Please try again in a minute.", 429);
+  // The leftmost X-Forwarded-For entry is whatever the client sent, so it is trivially spoofed. Prefer the
+  // header set by the platform proxy, then the rightmost entry (the one the nearest proxy appended).
+  const forwarded = req.headers.get("x-forwarded-for")?.split(",").map((s) => s.trim()).filter(Boolean);
+  const ip = req.headers.get("x-real-ip") ?? forwarded?.at(-1) ?? "local";
+  // A global cap too, so rotating addresses cannot run up the API bill.
+  if (limited(ip) || limited("*", MAX_GLOBAL_PER_WINDOW)) return text("You're sending messages quickly. Please try again in a minute.", 429);
 
   let payload: { messages?: ChatMessage[]; section?: string };
   try {

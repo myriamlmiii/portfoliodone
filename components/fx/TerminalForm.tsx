@@ -13,6 +13,7 @@ const field =
 export function TerminalForm() {
   const [state, setState] = useState<State>("idle");
   const [error, setError] = useState("");
+  const [sent, setSent] = useState(false);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -25,16 +26,17 @@ export function TerminalForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: form.get("name"), email: form.get("email"), message: form.get("message") }),
       });
-      const data = (await res.json()) as { ok: boolean; mailto?: string; error?: string };
-      if (!data.ok || !data.mailto) {
+      const data = (await res.json()) as { ok: boolean; sent?: boolean; mailto?: string; error?: string };
+      if (!data.ok || (!data.sent && !data.mailto)) {
         setError(
           data.error === "name" ? "Sender name is too short." : data.error === "email" ? "That channel address does not look valid." : "Spec needs at least 10 characters.",
         );
         setState("error");
         return;
       }
+      setSent(Boolean(data.sent));
       setState("done");
-      window.location.href = data.mailto;
+      if (!data.sent && data.mailto) window.location.href = data.mailto;
     } catch {
       setError("Transmission failed. Try again, or use the email link.");
       setState("error");
@@ -60,7 +62,7 @@ export function TerminalForm() {
               <Check size={26} />
             </span>
             <p className="mt-5 font-display text-3xl text-ink">SIGNAL RECEIVED</p>
-            <p className="type-meta mt-2 max-w-[34ch] text-muted">Your mail app should open with the message drafted. Press send to finish.</p>
+            <p className="type-meta mt-2 max-w-[34ch] text-muted">{sent ? "Your message has been delivered. I will reply by email." : "Your mail app should open with the message drafted. Press send to finish."}</p>
           </motion.div>
         ) : (
           <motion.form key="form" onSubmit={onSubmit} exit={{ opacity: 0 }} className="mt-6 space-y-6" noValidate>

@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-
-const TO = "lmeriem28@gmail.com";
+import { deliver } from "@/lib/mail";
 
 function clean(value: unknown, max: number) {
   return String(value ?? "").replace(/\s+/g, " ").trim().slice(0, max);
@@ -29,11 +28,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "message" }, { status: 400 });
   }
 
-  const subject = encodeURIComponent(`Portfolio, ${name}`);
-  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}\n`);
-
-  return NextResponse.json({
-    ok: true,
-    mailto: `mailto:${TO}?subject=${subject}&body=${body}`,
+  const result = await deliver({
+    subject: `Portfolio, ${name}`,
+    text: `Name: ${name}\nEmail: ${email}\n\n${message}\n`,
+    replyTo: email,
   });
+
+  return NextResponse.json({ ok: true, ...result });
 }

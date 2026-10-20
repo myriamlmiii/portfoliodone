@@ -9,18 +9,18 @@ import { usePreferences } from "./Preferences";
 const PLACES = ["Morocco", "Canada", "Portugal", "Thailand"] as const;
 
 const LABELS = {
-  en: { role: "Builder of systems", built: "Systems built", studied: "Studied at", from: "From", thanks: "Thanks for scrolling." },
-  fr: { role: "Bâtisseuse de systèmes", built: "Systèmes construits", studied: "Études à", from: "Depuis", thanks: "Merci d'avoir défilé jusqu'ici." },
+  en: { role: "Builder of systems", built: "Systems built", studied: "Studied at", from: "From", thanks: "Thanks for reading." },
+  fr: { role: "Bâtisseuse de systèmes", built: "Systèmes construits", studied: "Études à", from: "Depuis", thanks: "Merci d'avoir lu." },
   ar: { role: "بانية أنظمة", built: "أنظمة بُنيت", studied: "الدراسة في", from: "من", thanks: "شكرا لأنك وصلت إلى هنا." },
 } as const;
 
-function Block({ label, lines }: { label: string; lines: readonly string[] }) {
+function Block({ label, lines, ar }: { label: string; lines: readonly string[]; ar: boolean }) {
   return (
     <div className="text-center">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">{label}</p>
+      <p className={`font-mono text-accent ${ar ? "text-sm" : "text-xs uppercase tracking-[0.2em]"}`}>{label}</p>
       <ul className="mt-4 space-y-1.5">
         {lines.map((line) => (
-          <li key={line} className="font-display text-[clamp(1.5rem,3.2vw,2.25rem)] leading-tight text-ink">
+          <li key={line} className={`font-display leading-tight text-ink ${ar ? "text-[clamp(1.25rem,2.6vw,1.75rem)]" : "text-[clamp(1.5rem,3.2vw,2.25rem)]"}`}>
             {line}
           </li>
         ))}
@@ -32,6 +32,7 @@ function Block({ label, lines }: { label: string; lines: readonly string[] }) {
 function useCredits() {
   const { t, locale } = usePreferences();
   const labels = LABELS[locale as keyof typeof LABELS] ?? LABELS.en;
+  const ar = locale === "ar";
   const built = projects.filter((project) => project.featured).map((project) => project.title);
   const schools = education.map((entry) => entry.school.replace(/\s*\(.*\)$/, ""));
   const places = PLACES.map((place) => t.countries[place] ?? place);
@@ -39,12 +40,12 @@ function useCredits() {
   const content = (
     <div className="mx-auto flex max-w-2xl flex-col gap-16 px-6 py-16">
       <div className="text-center">
-        <h2 className="font-display text-[clamp(3rem,8vw,6rem)] leading-none text-ink">Meriem Lmoubariki</h2>
-        <p className="mt-3 font-mono text-xs uppercase tracking-[0.2em] text-muted">{labels.role}</p>
+        <h2 className={`font-display leading-none text-ink ${ar ? "text-[clamp(2.25rem,6vw,4.25rem)] leading-tight" : "text-[clamp(3rem,8vw,6rem)]"}`}>{ar ? "مريم المباركي" : "Meriem Lmoubariki"}</h2>
+        <p className={`mt-3 font-mono text-xs text-muted ${ar ? "text-sm" : "uppercase tracking-[0.2em]"}`}>{labels.role}</p>
       </div>
-      <Block label={labels.built} lines={built} />
-      <Block label={labels.studied} lines={schools} />
-      <Block label={labels.from} lines={places} />
+      <Block label={labels.built} lines={built} ar={ar} />
+      <Block label={labels.studied} lines={schools} ar={ar} />
+      <Block label={labels.from} lines={places} ar={ar} />
       <p className="pb-6 text-center text-sm text-muted">{labels.thanks}</p>
     </div>
   );

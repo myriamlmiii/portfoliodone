@@ -239,7 +239,6 @@ function useTalk(locale: keyof typeof LANG) {
       void audioCtx.current?.close();
       audioCtx.current = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const toggle = () => {
@@ -404,15 +403,8 @@ function Face({ speaking, mouth, queue, drive }: { speaking: boolean; mouth: Mut
 export function CharacterVideo() {
   const { locale } = usePreferences();
   const talk = useTalk(locale);
-  const [hasVideo, setHasVideo] = useState(false);
 
-  useEffect(() => {
-    fetch("/video/hero.mp4", { method: "HEAD" })
-      .then((r) => setHasVideo(r.ok && (r.headers.get("content-type") ?? "").startsWith("video")))
-      .catch(() => setHasVideo(false));
-  }, []);
-
-  if (hasVideo) return <HeroClip />;
+  if (process.env.NEXT_PUBLIC_HERO_VIDEO) return <HeroClip />;
 
   return (
     <figure className="relative aspect-[4/5] overflow-hidden">
@@ -431,7 +423,7 @@ export function CharacterVideo() {
         </p>
       )}
       <div className="absolute end-3 top-3 z-10 flex items-center gap-2">
-        <span className="font-mono text-[11px] uppercase tracking-wider text-white">AI Meriem</span>
+        <span className="font-mono text-[11px] uppercase tracking-wider text-white">{locale === "ar" ? "مريم الذكية" : locale === "fr" ? "Meriem IA" : "AI Meriem"}</span>
         {talk.supported && (
           <button
             type="button"
@@ -440,7 +432,9 @@ export function CharacterVideo() {
             className="inline-flex h-9 items-center gap-1.5 rounded-full bg-accent px-3 text-xs font-medium text-canvas hover:opacity-90"
           >
             {talk.speaking ? <Square size={14} /> : <Mic size={14} />}
-            {talk.speaking ? "Stop" : "Hear me"}
+            {talk.speaking
+              ? locale === "ar" ? "إيقاف" : locale === "fr" ? "Arrêter" : "Stop"
+              : locale === "ar" ? "استمع إليّ" : locale === "fr" ? "Écoute-moi" : "Hear me"}
           </button>
         )}
       </div>

@@ -18,7 +18,8 @@ const fade = (delay: number) => ({
  * caption-style line under it, and understated text links instead of filled buttons.
  */
 export function Hero() {
-  const { t } = usePreferences();
+  const { t, locale } = usePreferences();
+  const ar = locale === "ar";
   const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
@@ -60,11 +61,11 @@ export function Hero() {
 
           <motion.h1
             {...fade(0.06)}
-            className="font-display mt-6 text-[clamp(4.25rem,14.5vw,13.5rem)] leading-[0.84] tracking-[0.005em] text-ink lg:mt-10 lg:-ms-6 lg:text-[clamp(7rem,13.2vw,13.5rem)]"
+            className={`font-display mt-6 text-ink lg:mt-10 ${ar ? "text-[clamp(3.25rem,10vw,8rem)] leading-[1.15] lg:text-[clamp(5rem,9vw,9rem)]" : "text-[clamp(4.25rem,14.5vw,13.5rem)] leading-[0.84] tracking-[0.005em] lg:-ms-6 lg:text-[clamp(7rem,13.2vw,13.5rem)]"}`}
           >
-            Meriem
+            {ar ? "مريم" : "Meriem"}
             <br />
-            <span>Lmoubariki.</span>
+            <span>{ar ? "المباركي." : "Lmoubariki."}</span>
           </motion.h1>
 
           <motion.p {...fade(0.14)} className="mt-8 max-w-[22rem] text-[11px] font-medium uppercase leading-[1.9] tracking-[0.2em] text-muted lg:mt-10">

@@ -1,35 +1,42 @@
-# SafeLens AI
+# Meriem Lmoubariki: Portfolio
 
-![Status](https://img.shields.io/badge/status-demo-ready-brightgreen)
-![Type](https://img.shields.io/badge/type-computer-vision-blue)
-![Use%20Case](https://img.shields.io/badge/use-case-site-safety-orange)
+Personal portfolio built with Next.js 15 (App Router), React 19, Tailwind CSS, Framer Motion and react-three-fiber. The site is trilingual (English, French, Arabic with RTL) and has dark and light themes.
 
-## Demo
+## Getting started
 
-<video src="./demo/safelens-ai-demo.mp4" width="100%" controls playsinline muted>
-  Your browser does not support the video tag.
-</video>
+```
+npm install
+npm run dev        # http://localhost:3000
+npm run typecheck  # tsc --noEmit
+npm run lint       # eslint .
+npm run build && npm start
+```
 
-This demo shows the end-to-end SafeLens AI workflow for construction-site safety monitoring, including live video analysis, PPE compliance checks, and hazard detection. It highlights the system’s core decision support flow: detect unsafe conditions in real time, surface the relevant safety issue, and support faster intervention for on-site teams.
+## Structure
 
-## Overview
+| Path | Purpose |
+|---|---|
+| `app/` | Routes: home page, `/projects/[slug]` case studies, `robots.ts`, `sitemap.ts`, OG image and API routes |
+| `app/api/chat` | Site assistant. Retrieval over the site's own data (`lib/rag.ts`); streams from Anthropic when `ANTHROPIC_API_KEY` is set, otherwise answers extractively |
+| `app/api/tts` | Neural voice for the hero introduction (`msedge-tts`), cached per language |
+| `app/api/contact`, `app/api/booking` | Validate the form, then email both inboxes via Resend when configured, else return a `mailto:` link. Nothing is stored |
+| `components/` | Page sections; `fx/`, `three/`, `globe/` hold the visual effects |
+| `data/` | Content (projects, experience, education, skills, ...) |
+| `lib/` | i18n strings, RAG, hooks, theme and store helpers |
 
-SafeLens AI is a computer-vision system designed to improve construction-site safety by identifying missing personal protective equipment and hazardous conditions from live or recorded footage. The project combines object detection, operational monitoring, and visual alerting to support safer work environments and faster response to risk.
+## Environment
 
-## Key Features
+| Variable | Required | Purpose |
+|---|---|---|
+| `ANTHROPIC_API_KEY` | No | Enables generated chat answers; without it the assistant falls back to extractive answers |
+| `RESEND_API_KEY` | No | Makes the contact and booking forms send email from the server to both inboxes; without it they open a pre-filled `mailto:` draft instead |
+| `MAIL_FROM` | No | Sender for server-sent mail (default `Portfolio <onboarding@resend.dev>`; use a verified domain in production) |
 
-- PPE detection for workers and equipment
-- Hazard identification for unsafe site conditions
-- Real-time monitoring workflow for visual review and intervention
-- Lightweight, deployment-oriented inference pipeline for operational use
+Contact addresses live in `data/contact.ts`.
 
-## Project Context
+## Hero character
 
-SafeLens AI was developed to demonstrate how AI can support industrial safety at scale, with a particular focus on construction environments where rapid risk detection can prevent injuries and improve compliance.
-
-## Hero video character
-
-`components/CharacterVideo.tsx` (hero) shows a 3D, photo-textured AI version of Meriem (`public/photos/talk.webp`, background removed) that introduces herself out loud with lip-sync, using the browser voice. If `public/video/hero.mp4` exists, that real clip is used instead.
+`components/CharacterVideo.tsx` shows a photo-textured AI version of Meriem (`public/photos/talk.webp`) that introduces herself out loud with lip-sync. If `public/video/hero.mp4` exists, that real clip is used instead.
 
 Rebuild the clip from a new intro video (needs ffmpeg, ffprobe and numpy):
 
