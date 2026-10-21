@@ -256,6 +256,7 @@ export const projects: readonly Project[] = [
     outcome:
       "Bliss Bites is an agrifood startup I founded at Al Akhawayn University. It won the Best Startup Award at AUI Entrepreneurship Week two years in a row with 100% investor funding, was selected for Ventures Adventure, and was exhibited on the GITEX Africa 2024 expo floor.",
     tags: ["Entrepreneurship", "Agrifood", "Pitching"],
+    video: "/demo/blissbites.mp4",
     year: "2023",
     org: "Bliss Bites",
     secondaryHref: "https://aui.ma/news/ventures-adventure-al-akhawayn-university-boosts-regional-entrepreneurial-spirit",

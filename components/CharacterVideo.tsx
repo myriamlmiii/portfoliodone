@@ -74,7 +74,7 @@ const VISEME_SHAPE: Record<string, [number, number]> = {
 };
 
 /**
- * Introduction voice. Plays a soft neural voice rendered by /api/tts (same in every browser) and reads the
+ * Introduction voice. Plays a soft neural voice pre-rendered to /audio (same in every browser, run scripts/render-intro.mjs after editing the text) and reads the
  * lip shapes from the audio itself. If that is unavailable it falls back to the browser's own speech engine,
  * lip-synced from word boundaries. Starts by itself on the first visit: right away if the browser allows
  * audio, otherwise on the visitor's first click, tap or key press.
@@ -186,7 +186,7 @@ function useTalk(locale: keyof typeof LANG) {
   start.current = () => {
     stopAll();
     const id = run.current;
-    const el = new Audio(`/api/tts?lang=${localeRef.current}&v=${INTRO[localeRef.current].length}`);
+    const el = new Audio(`/audio/intro-${localeRef.current}.mp3?v=${INTRO[localeRef.current].length}`);
     el.preload = "auto";
     audio.current = el;
     el.onplaying = () => {
