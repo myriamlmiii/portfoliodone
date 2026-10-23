@@ -37,6 +37,7 @@ export async function POST(req: NextRequest) {
   // A global cap too, so rotating addresses cannot run up the API bill.
   if (limited(ip) || limited("*", MAX_GLOBAL_PER_WINDOW)) return text("You're sending messages quickly. Please try again in a minute.", 429);
 
+  if (Number(req.headers.get("content-length") ?? 0) > 20_000) return text("Request too large.", 413);
   let payload: { messages?: ChatMessage[]; section?: string };
   try {
     payload = await req.json();

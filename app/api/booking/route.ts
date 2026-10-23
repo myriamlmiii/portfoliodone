@@ -2,12 +2,16 @@ import { NextResponse } from "next/server";
 import { booking } from "@/data/booking";
 import { SITE_HOST } from "@/data/site";
 import { deliver } from "@/lib/mail";
+import { rateLimited, tooLarge } from "@/lib/rateLimit";
 
 function clean(value: unknown, max: number) {
   return String(value ?? "").replace(/\s+/g, " ").trim().slice(0, max);
 }
 
 export async function POST(request: Request) {
+  if (tooLarge(request)) return NextResponse.json({ ok: false, error: "invalid" }, { status: 413 });
+  if (rateLimited(request, "mail", 5, 10 * 60_000)) return NextResponse.json({ ok: false, error: "rate" }, { status: 429 });
+
   let payload: { name?: unknown; email?: unknown; date?: unknown; time?: unknown; topic?: unknown };
 
   try {

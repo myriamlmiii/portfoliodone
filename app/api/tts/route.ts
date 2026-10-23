@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import { MsEdgeTTS, OUTPUT_FORMAT } from "msedge-tts";
 import { INTRO } from "@/lib/introText";
+import { rateLimited } from "@/lib/rateLimit";
 
 export const runtime = "nodejs";
 
@@ -40,6 +41,7 @@ for (const lang of Object.keys(VOICES) as Lang[]) {
 }
 
 export async function GET(req: NextRequest) {
+  if (rateLimited(req, "tts", 30)) return new Response("Too many requests", { status: 429 });
   const lang = req.nextUrl.searchParams.get("lang") as Lang | null;
   if (!lang || !(lang in VOICES)) return new Response("Unknown language", { status: 400 });
 
