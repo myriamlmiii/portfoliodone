@@ -1,9 +1,12 @@
 /**
- * Spoken welcome, kept short (about ten seconds) and written to be heard. Numbers are spelled out.
+ * Spoken welcome, kept short and written to be heard.
+ * Warm tone, no clichés. Points to LinkedIn and email at the close.
  * Arabic is Modern Standard with light diacritics so the voice reads it correctly.
  */
 export const INTRO = {
-  en: "Hey, I'm Meriem — welcome! I work at the intersection of engineering, business, and applied AI. From cancer drug research to building production systems across companies and startups, I love solving real problems. I'll be your guide here — explore my work, and if you have any questions, the chatbot or my email are right here for you.",
-  fr: "Salut, je suis Meriem — bienvenue ! Je travaille au croisement de l'ingénierie, du business et de l'IA appliquée. De la recherche anticancéreuse à la construction de systèmes en entreprise et en startup, j'aime résoudre de vrais problèmes. Je serai votre guide ici — explorez mon travail, et pour toute question, le chatbot ou mon e-mail sont à votre disposition.",
-  ar: "أَهْلًا، أَنَا مَرْيَم — أَهْلًا بِكُمْ! أَعْمَلُ عِنْدَ تَقَاطُعِ الْهَنْدَسَةِ وَالْأَعْمَالِ وَالذَّكَاءِ الاصْطِنَاعِيِّ التَّطْبِيقِيِّ. مِنْ أَبْحَاثِ أَدْوِيَةِ السَّرَطَانِ إِلَى بِنَاءِ أَنْظِمَةٍ فِي شَرِكَاتٍ وَمَشَارِيعَ نَاشِئَةٍ، أُحِبُّ حَلَّ الْمُشْكِلَاتِ الْحَقِيقِيَّةِ. سَأَكُونُ دَلِيلَكُمْ هُنَا — تَصَفَّحُوا أَعْمَالِي، وَلِأَيِّ سُؤَالٍ الْمُسَاعِدُ الذَّكِيُّ أَوْ بَرِيدِي فِي خِدْمَتِكُمْ.",
+  en: "Hey, I'm Meriem — welcome! I've spent my time across engineering, business, and applied AI, and what drives me is simple: I love solving real-world problems. The kind that actually make someone's day better. I've built AI in the lab, in products, and for the people who need it. Have a look around — and if you're curious, my chatbot is right here. You can also check out my LinkedIn or send me an email to get in touch.",
+
+  fr: "Salut, je suis Meriem — bienvenue ! J'ai évolué entre l'ingénierie, le business et l'IA appliquée, et ce qui me motive est simple : j'adore résoudre de vrais problèmes. Ceux qui améliorent vraiment la journée de quelqu'un. J'ai construit de l'IA en laboratoire, dans des produits, et pour les personnes qui en ont besoin. Explorez mon travail — et si la curiosité vous pique, mon chatbot est juste là. Vous pouvez aussi consulter mon LinkedIn ou m'envoyer un email pour me contacter.",
+
+  ar: "مرحبًا، أنا مريم — أهلًا بك! عملتُ بين الهندسة والأعمال والذكاء الاصطناعي التطبيقي، وما يحرّكني بسيط: أحبّ حلّ المشكلات الواقعية. تلك التي تُحسّن يوم شخصٍ ما فعلًا. بنيتُ أنظمة ذكاء اصطناعي في المختبر، وفي المنتجات، ومن أجل الأشخاص الذين يحتاجون إليها. استكشف أعمالي — وإن كنت فضوليًا، فروبوت المحادثة هنا من أجلك. يمكنك أيضًا الاطلاع على حسابي على لينكدإن أو مراسلتي عبر البريد الإلكتروني للتواصل.",
 } as const;
