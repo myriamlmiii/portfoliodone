@@ -16,8 +16,8 @@ function render(lang: Lang) {
     try {
       const tts = new MsEdgeTTS();
       await tts.setMetadata(VOICES[lang], OUTPUT_FORMAT.AUDIO_24KHZ_48KBITRATE_MONO_MP3);
-      // Slightly slower and lower than default reads as calm and warm rather than bright and rushed.
-      const { audioStream } = tts.toStream(INTRO[lang], { rate: "-16%", pitch: "+6Hz", volume: "-14%" });
+      // A touch faster and higher than default reads as upbeat and enthusiastic.
+      const { audioStream } = tts.toStream(INTRO[lang], { rate: "+6%", pitch: "+14Hz", volume: "+0%" });
       const chunks: Buffer[] = [];
       audioStream.on("data", (c: Buffer) => chunks.push(c));
       audioStream.on("end", () => {
